@@ -1,6 +1,11 @@
 --index-url https://pypi.python.org/simple/
 
-# can also override locations of dependencies to point to github
+# Following packages are necessary to build the custom latest dev branch of sklearn
+cython
+NumPy>=1.6.1
+SciPy>=0.9
+# note, can also use github locations (with -e to allow reinstalling, need egg name to let module now what is installed)
 -e git+https://github.com/scikit-learn/scikit-learn.git#egg=sklearn-1.8
+
 # install the local developed module, including its listed dependencies
 -e .
