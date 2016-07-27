@@ -3,11 +3,11 @@ from setuptools import setup
 setup(
     name='bdranalytics',
     version='0.1',
-    license='within_BDR_only',
+    license='Apache License 2.0',
     author='geroos',
     author_email='gerben.oostra@bigdatarepublic.nl',
     url='http://www.bigdatarepublic.nl',
-    long_description="README.txt",
+    long_description="README.md",
     packages=['bdranalytics', 'bdranalytics.images'],
     include_package_data=True,
     package_data={'bdranalytics': ['data/*.dat'],
