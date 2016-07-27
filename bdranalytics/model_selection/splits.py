@@ -9,6 +9,8 @@ class GrowingWindow(with_metaclass(ABCMeta)):
     """Growing Window cross validator
 
     Provides train/test indices to split data in train/test sets.
+    Divides the data in n_folds+1 slices.
+    For split i [1..n_folds], slices [0..i} are train, slice i is test
 
     Parameters:
         n_folds : int, default=3
@@ -42,7 +44,8 @@ class GrowingWindow(with_metaclass(ABCMeta)):
         test : ndarray
             The testing set indices for that split.
         """
-        n_slices = _num_samples(X) + 1
+        n = _num_samples(X)
+        n_slices = self.n_folds + 1
         # loop from the first 2 folds to the total number of folds
         for i in range(2, n_slices + 1):
             # the split is the percentage at which to split the folds into train
