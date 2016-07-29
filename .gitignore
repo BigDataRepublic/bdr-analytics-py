@@ -2,3 +2,5 @@
 /dist
 /.idea
 *.iml
+*.pyc
+.eggs

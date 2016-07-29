@@ -17,6 +17,9 @@ setup(
                   'bdranalytics.images': ['bdr.gif']},
     description="Our analytics library to quickly get our data scientists up to speed",
     install_requires=[
-        'sklearn>=1.18'
-    ]
+        #'scikit-learn-0.18.dev0'
+    ],
+    #dependency_links=['https://github.com/scikit-learn/scikit-learn/tarball/master#egg=scikit-learn-0.18.dev0'],
+    setup_requires = ['pytest-runner'],
+    tests_require = ['pytest'],
 )

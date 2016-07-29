@@ -2,7 +2,6 @@ import numpy as np
 from abc import ABCMeta
 from sklearn.externals.six import with_metaclass
 from sklearn.utils.validation import _num_samples
-from sklearn.model_selection._split import _build_repr
 
 
 class GrowingWindow(with_metaclass(ABCMeta)):

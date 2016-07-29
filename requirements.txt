@@ -4,8 +4,11 @@
 cython
 NumPy>=1.6.1
 SciPy>=0.9
+
 # note, can also use github locations (with -e to allow reinstalling, need egg name to let module now what is installed)
--e git+https://github.com/scikit-learn/scikit-learn.git#egg=sklearn-1.8
+# either having it implicit (NOT defined in setup.py) and define it here
+#  or having it explit (defined in setup.py including git repo) and NOT define it here
+-e git+https://github.com/scikit-learn/scikit-learn.git#egg=scikit-learn-0.18.dev0
 
 # install the local developed module, including its listed dependencies
 -e .
