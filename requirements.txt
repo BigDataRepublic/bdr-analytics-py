@@ -1,14 +1,13 @@
 --index-url https://pypi.python.org/simple/
 
-# Following packages are necessary to build the custom latest dev branch of sklearn
-cython
-NumPy>=1.6.1
-SciPy>=0.9
-
-# note, can also use github locations (with -e to allow reinstalling, need egg name to let module now what is installed)
-# either having it implicit (NOT defined in setup.py) and define it here
-#  or having it explit (defined in setup.py including git repo) and NOT define it here
--e git+https://github.com/scikit-learn/scikit-learn.git#egg=scikit-learn-0.18.dev0
+# Install all requirements for the module
+-f requirements-dev.txt
 
 # install the local developed module, including its listed dependencies
 -e .
+
+# Install additional packages for notebooks
+jupyter
+matplotlib
+pandas
+statsmodels

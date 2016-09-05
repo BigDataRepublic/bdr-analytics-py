@@ -4,3 +4,4 @@
 *.iml
 *.pyc
 .eggs
+/src

@@ -1,0 +1,10 @@
+name: bdranalytics-dev
+dependencies:
+- python=2.7
+- NumPy>=1.6.1
+- SciPy>=0.9
+- pytest
+- pip
+- pip:
+  - pytest-runner
+  - -f requirements-dev.txt

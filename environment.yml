@@ -1,0 +1,14 @@
+name: bdranalytics
+dependencies:
+- python=2.7
+- NumPy>=1.6.1
+- SciPy>=0.9
+- pytest
+- jupyter
+- matplotlib
+- pandas
+- statsmodels
+- pip
+- pip:
+  - pytest-runner
+  - -f requirements.txt

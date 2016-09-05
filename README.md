@@ -4,7 +4,13 @@ Our analytics library to quickly get our data scientists up to speed, on the pyt
 ## Recommended setup
 If you need an environment including this module, the recommended way to go is:
 
- 1. Optional but recommended, create a virtual env for your work:
+
+  1. Get the most recent codebase (including concrete requirements):
+  > git clone git@github.com:BigDataRepublic/bdr-analytics-py.git
+
+  > cd bdr-analytics-py
+  
+  2.  For pip: Optional but recommended, create a virtual env for your work:
   > pyenv install 2.7.11
 
   > pyenv virtualenv 2.7.11 bdranalytics
@@ -12,15 +18,23 @@ If you need an environment including this module, the recommended way to go is:
   > pyenv activate bdranalytics
 
   > pip install --upgrade pip
-
- 2. Get the most recent codebase (including concrete requirements):
-  > git clone git@github.com:BigDataRepublic/bdr-analytics-py.git
-
-  > cd bdr-analytics-py
-
- 3. Install the module, it's dependencies and requirements.
+  
+  Install the module, it's dependencies and requirements.
   
   > pip install -r requirements.txt
+
+ 2.  For conda: Optional but recommended, configure a virtual env for your work:  
+ 
+  To create the environment and install all requirements:
+  > conda env create -f environment.yml
+  
+  To load the environment
+  > source activate bdraanalytics
+  
+  If the environment has been updated, can update the environment with:
+  > conda env update --name=bdranalytics -f environment.yml
+
+
 
 ## Setup details and alternative setups
 This package has dependencies and requirements:
