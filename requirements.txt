@@ -2,7 +2,7 @@
 --index-url https://pypi.python.org/simple/
 
 # Install all requirements for the module
--f requirements-dev.txt
+-r requirements-dev.txt
 
 # install the local developed module, including its listed dependencies
 -e .

@@ -8,4 +8,4 @@ dependencies:
 - pip
 - pip:
   - pytest-runner
-  - -f requirements-dev.txt
+  - -rrequirements-dev.txt
