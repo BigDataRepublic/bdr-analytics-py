@@ -1,3 +1,4 @@
+## Requirements for using this module (the module, includings its requirements, and relevant packages)
 --index-url https://pypi.python.org/simple/
 
 # Install all requirements for the module
