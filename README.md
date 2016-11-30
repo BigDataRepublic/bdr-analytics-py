@@ -99,6 +99,19 @@ This package has dependencies and requirements:
   * dependencies will be always be installed through a pip install of the module / setup.py
   * requirements are required before installing the dependencies. For example, scikit-learn requies numpy.
 
+### Setting up an environment
+
+To create the development environment:
+
+  > conda env create -f environment-dev.yml
+  
+  > source activate bdranalytics-dev
+  
+### Running the test
+
+To run all tests:
+> python setup.py test
+
 ### Creating a package dist
 
 To create a dist from a local checkout (when developing on this module):
