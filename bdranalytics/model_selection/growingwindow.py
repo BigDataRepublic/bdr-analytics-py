@@ -174,3 +174,8 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
             test_index = index[test_interval_bool]
 
             yield train_index, test_index
+
+    def get_n_splits(self, X, y=None, labels=None):
+        if X is None:
+            raise ValueError("The X parameter should not be None")
+        return self.n_folds
