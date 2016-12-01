@@ -104,7 +104,7 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
     """Growing Window cross-validator based on time intervals"""
 
     def __init__(self, test_start_date, timestamps='index', test_end_date=None,
-                 test_size='1M', train_size=None):
+                 test_size='30 days', train_size=None):
 
         self.test_start_date = pd.to_datetime(test_start_date)
         self.test_end_date = pd.to_datetime(test_end_date)
