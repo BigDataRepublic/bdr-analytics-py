@@ -126,6 +126,7 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
 
         # infer test interval end date if not specified
         # has to be done here to work with timestamps from DataFrame index
+        # NOTE: test_end_date is NOT included
         if self.test_end_date is None:
             # can be overridden for reuse
             self.test_end_date = max(timestamps)
@@ -146,8 +147,7 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
         intervals = zip(intervals_start[:-1], intervals_start[1:])
 
         # number of folds
-        # not returned!!!
-        # move to separate function that computes intervals and returns self
+        # FIXME: move above to separate function that computes intervals and returns self
         self.n_folds = len(intervals)
 
         # extract first sample for unlimited train size
@@ -166,7 +166,7 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
                                                timestamps))
 
             test_interval_bool = np.array(map(lambda date:
-                                              test_start <= date <= test_end,
+                                              test_start <= date < test_end,
                                               timestamps))
 
             # convert boolean to integer indices

@@ -4,7 +4,7 @@ import unittest
 import pandas as pd
 
 
-def create_time_series_data_set(start_date, n_rows=1000):
+def create_time_series_data_set(start_date=pd.datetime(year=2000, month=1, day=1), n_rows=100):
 
     end_date = start_date + pd.Timedelta(days=n_rows-1)
 
@@ -38,19 +38,58 @@ class TestGrowingWindow(unittest.TestCase):
 
 class TestIntervalGrowingWindow(unittest.TestCase):
 
-    def test_split(self):
+    def test_split_on_index(self):
 
-        X, y = create_time_series_data_set(start_date=pd.datetime(year=2000, month=1, day=1))
+        X, y = create_time_series_data_set()
 
         cv = IntervalGrowingWindow(
-            timestamps='index',
+            test_start_date=pd.datetime(year=2000, month=2, day=1),
+            test_end_date=pd.datetime(year=2000, month=3, day=1),
+            test_size='7D')
+
+        self.assertTrue(len(list(cv.split(X, y))) == 4)
+
+    def test_split_on_array(self):
+
+        X, y = create_time_series_data_set()
+
+        cv = IntervalGrowingWindow(
+            timestamps=X.index.values,
+            test_start_date=pd.datetime(year=2000, month=2, day=1),
+            test_end_date=pd.datetime(year=2000, month=3, day=1),
+            test_size='7D')
+
+        self.assertTrue(len(list(cv.split(X, y))) == 4)
+
+    def test_split_test_size(self):
+
+        X, y = create_time_series_data_set()
+
+        test_size_in_days = 7
+
+        cv = IntervalGrowingWindow(
+            test_start_date=pd.datetime(year=2000, month=2, day=1),
+            test_end_date=pd.datetime(year=2000, month=3, day=1),
+            test_size='{:d}D'.format(test_size_in_days))
+
+        for _, test in cv.split(X, y):
+            self.assertTrue(len(test) == test_size_in_days)
+
+    def test_split_with_train_size(self):
+
+        X, y = create_time_series_data_set()
+
+        train_size_in_days = 14
+
+        cv = IntervalGrowingWindow(
             test_start_date=pd.datetime(year=2000, month=2, day=1),
             test_end_date=pd.datetime(year=2000, month=3, day=1),
             test_size='7D',
-            train_size='14D')
+            train_size='{:d}D'.format(train_size_in_days))
 
-        for train, test in cv.split(X):
-            print train, test
+        for train, _ in cv.split(X, y):
+            self.assertTrue(len(train) == train_size_in_days)
 
-        self.assertTrue(1 == 6)
+
+
 
