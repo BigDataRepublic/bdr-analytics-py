@@ -2,6 +2,7 @@ import numpy as np
 from abc import ABCMeta
 from sklearn.externals.six import with_metaclass
 from sklearn.utils.validation import _num_samples
+import pandas as pd
 
 
 class GrowingWindow(with_metaclass(ABCMeta)):
@@ -99,3 +100,77 @@ class GrowingWindow(with_metaclass(ABCMeta)):
         return self.n_folds
 
 
+class IntervalGrowingWindow(with_metaclass(ABCMeta)):
+    """Growing Window cross-validator based on time intervals"""
+
+    def __init__(self, test_start_date, timestamps='index', test_end_date=None,
+                 test_size='1M', train_size=None):
+
+        self.test_start_date = pd.to_datetime(test_start_date)
+        self.test_end_date = pd.to_datetime(test_end_date)
+        self.test_size = pd.to_timedelta(test_size)
+        self.train_size = pd.to_timedelta(train_size)
+        self.n_folds = None
+
+        self.timestamps = timestamps
+        if timestamps is not 'index':
+            self.timestamps = pd.to_datetime(timestamps)
+
+    def split(self, X, y=None, labels=None):
+        """Generate indices to split data into training and test sets based on time stamps"""
+
+        # extract timestamps from DataFrame index, if needed
+        timestamps = self.timestamps
+        if timestamps is 'index':
+            timestamps = pd.to_datetime(X.index.values)
+
+        # infer test interval end date if not specified
+        # has to be done here to work with timestamps from DataFrame index
+        if self.test_end_date is None:
+            # can be overridden for reuse
+            self.test_end_date = max(timestamps)
+
+        # number of samples
+        n = _num_samples(X)
+
+        # list of indices, to convert booleans later on
+        index = np.arange(n)
+
+        # determine start date of the test intervals
+        intervals_start = pd.to_datetime(pd.date_range(self.test_start_date,
+                                         self.test_end_date,
+                                         freq=self.test_size)
+                                         .values)
+
+        # convert to (start, end) tuples
+        intervals = zip(intervals_start[:-1], intervals_start[1:])
+
+        # number of folds
+        # not returned!!!
+        # move to separate function that computes intervals and returns self
+        self.n_folds = len(intervals)
+
+        # extract first sample for unlimited train size
+        first_sample_date = min(timestamps)
+
+        # loop over each interval
+        for test_start, test_end in intervals:
+
+            if self.train_size is not None:
+                train_start = test_start - self.train_size
+            else:
+                train_start = first_sample_date
+
+            train_interval_bool = np.array(map(lambda date:
+                                               train_start <= date < test_start,
+                                               timestamps))
+
+            test_interval_bool = np.array(map(lambda date:
+                                              test_start <= date <= test_end,
+                                              timestamps))
+
+            # convert boolean to integer indices
+            train_index = index[train_interval_bool]
+            test_index = index[test_interval_bool]
+
+            yield train_index, test_index
