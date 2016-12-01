@@ -116,13 +116,7 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
         if timestamps is not 'index':
             self.timestamps = pd.to_datetime(timestamps)
 
-    def split(self, X, y=None, labels=None):
-        """Generate indices to split data into training and test sets based on time stamps"""
-
-        # extract timestamps from DataFrame index, if needed
-        timestamps = self.timestamps
-        if timestamps is 'index':
-            timestamps = pd.to_datetime(X.index.values)
+    def generate_intervals(self, timestamps):
 
         # infer test interval end date if not specified
         # has to be done here to work with timestamps from DataFrame index
@@ -131,27 +125,35 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
             # can be overridden for reuse
             self.test_end_date = max(timestamps)
 
-        # number of samples
-        n = _num_samples(X)
-
-        # list of indices, to convert booleans later on
-        index = np.arange(n)
-
         # determine start date of the test intervals
         intervals_start = pd.to_datetime(pd.date_range(self.test_start_date,
-                                         self.test_end_date,
-                                         freq=self.test_size)
+                                                       self.test_end_date,
+                                                       freq=self.test_size)
                                          .values)
 
         # convert to (start, end) tuples
         intervals = zip(intervals_start[:-1], intervals_start[1:])
 
-        # number of folds
-        # FIXME: move above to separate function that computes intervals and returns self
-        self.n_folds = len(intervals)
+        return intervals
+
+    def split(self, X, y=None, labels=None):
+        """Generate indices to split data into training and test sets based on time stamps"""
+
+        # extract timestamps from DataFrame index, if needed
+        timestamps = self.timestamps
+        if timestamps is 'index':
+            timestamps = pd.to_datetime(X.index.values)
+
+        intervals = self.generate_intervals(timestamps)
 
         # extract first sample for unlimited train size
         first_sample_date = min(timestamps)
+
+        # number of samples
+        n = _num_samples(X)
+
+        # list of indices, to convert booleans later on
+        index = np.arange(n)
 
         # loop over each interval
         for test_start, test_end in intervals:
@@ -178,4 +180,15 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
     def get_n_splits(self, X, y=None, labels=None):
         if X is None:
             raise ValueError("The X parameter should not be None")
+
+        # extract timestamps from DataFrame index, if needed
+        timestamps = self.timestamps
+        if timestamps is 'index':
+            timestamps = pd.to_datetime(X.index.values)
+
+        intervals = self.generate_intervals(timestamps)
+
+        # compute number of folds
+        self.n_folds = len(intervals)
+
         return self.n_folds

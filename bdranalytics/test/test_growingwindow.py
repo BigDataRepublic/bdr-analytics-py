@@ -90,6 +90,17 @@ class TestIntervalGrowingWindow(unittest.TestCase):
         for train, _ in cv.split(X, y):
             self.assertTrue(len(train) == train_size_in_days)
 
+    def test_n_splits(self):
+
+        X, y = create_time_series_data_set()
+
+        cv = IntervalGrowingWindow(
+            test_start_date=pd.datetime(year=2000, month=2, day=1),
+            test_end_date=pd.datetime(year=2000, month=3, day=1),
+            test_size='7D')
+
+        self.assertTrue(cv.get_n_splits(X) == 4)
+
 
 
 
