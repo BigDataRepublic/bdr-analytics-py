@@ -5,6 +5,36 @@ Our analytics library to quickly get our data scientists up to speed, on the pyt
 
 There are different ways to include this package in your environment:
 
+### As pip requirement within your PIP requirements.txt
+
+Add the following to your pip `requirements.txt`:
+
+```
+-e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
+```
+  
+Note that this will download the sources to be able to install it. You can safely remove it after installation.
+
+### As pip requirement within your conda environment.yml
+
+Add the following to your conda environment.yaml:
+
+```
+- python=2.7
+- NumPy>=1.6.1
+- SciPy>=0.9
+- scikit-learn>=0.18
+- pip
+- pip:
+  - -rrequirements-dev.txt
+```
+And create a `requirements.txt` containing:
+```
+-e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
+```
+  
+Note that this will download the sources to be able to install it. You can safely remove it after installation.
+
 ### PIP Without git checkout
 This is a simple way to use this package. Especially if you do not plan to edit it during your current project.
 
@@ -14,6 +44,7 @@ To install the package without checking it out (to use this module):
 
     > pip install -e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
     
+Note that this will download the sources to be able to install it. You can safely remove it after installation.
 ### PIP With git checkout
 This first downloads the package, and then installs it. This is especially useful if you want to make some changes in this package during your project.
 
@@ -36,6 +67,7 @@ To install the package without checking it out (to use this module):
 
     > pip install -e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
 
+Note that this will download the sources to be able to install it. You can safely remove it after installation.
 ### Conda with git checkout: Recommended
 This is the recommended way, as all dependencies are automatically installed.
 
