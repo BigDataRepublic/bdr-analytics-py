@@ -110,7 +110,6 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
         self.test_end_date = pd.to_datetime(test_end_date)
         self.test_size = pd.to_timedelta(test_size)
         self.train_size = pd.to_timedelta(train_size)
-        self.n_folds = None
 
         self.timestamps = timestamps
         if timestamps is not 'index':
@@ -136,14 +135,20 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
 
         return intervals
 
+    def get_timeseries(self, X):
+        """Returns the numpy array of timestamps for the given dataset"""
+        if self.timestamps is 'index':
+            return pd.to_datetime(X.index.values)
+        else:
+            return self.timestamps
+
     def split(self, X, y=None, labels=None):
         """Generate indices to split data into training and test sets based on time stamps"""
+        if X is None:
+            raise ValueError("The X parameter should not be None")
 
         # extract timestamps from DataFrame index, if needed
-        timestamps = self.timestamps
-        if timestamps is 'index':
-            timestamps = pd.to_datetime(X.index.values)
-
+        timestamps = self.get_timeseries(X)
         intervals = self.generate_intervals(timestamps)
 
         # extract first sample for unlimited train size
@@ -182,13 +187,9 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
             raise ValueError("The X parameter should not be None")
 
         # extract timestamps from DataFrame index, if needed
-        timestamps = self.timestamps
-        if timestamps is 'index':
-            timestamps = pd.to_datetime(X.index.values)
-
+        timestamps = self.get_timeseries(X)
         intervals = self.generate_intervals(timestamps)
 
         # compute number of folds
-        self.n_folds = len(intervals)
+        return len(intervals)
 
-        return self.n_folds
