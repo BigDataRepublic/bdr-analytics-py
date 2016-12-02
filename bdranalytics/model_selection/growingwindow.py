@@ -2,6 +2,7 @@ import numpy as np
 from abc import ABCMeta
 from sklearn.externals.six import with_metaclass
 from sklearn.utils.validation import _num_samples
+import pandas as pd
 
 
 class GrowingWindow(with_metaclass(ABCMeta)):
@@ -98,4 +99,97 @@ class GrowingWindow(with_metaclass(ABCMeta)):
             raise ValueError("The X parameter should not be None")
         return self.n_folds
 
+
+class IntervalGrowingWindow(with_metaclass(ABCMeta)):
+    """Growing Window cross-validator based on time intervals"""
+
+    def __init__(self, test_start_date, timestamps='index', test_end_date=None,
+                 test_size='30 days', train_size=None):
+
+        self.test_start_date = pd.to_datetime(test_start_date)
+        self.test_end_date = pd.to_datetime(test_end_date)
+        self.test_size = pd.to_timedelta(test_size)
+        self.train_size = pd.to_timedelta(train_size)
+
+        self.timestamps = timestamps
+        if timestamps is not 'index':
+            self.timestamps = pd.to_datetime(timestamps)
+
+    def generate_intervals(self, timestamps):
+
+        # infer test interval end date if not specified
+        # has to be done here to work with timestamps from DataFrame index
+        # NOTE: test_end_date is NOT included
+        if self.test_end_date is None:
+            # can be overridden for reuse
+            self.test_end_date = max(timestamps)
+
+        # determine start date of the test intervals
+        intervals_start = pd.to_datetime(pd.date_range(self.test_start_date,
+                                                       self.test_end_date,
+                                                       freq=self.test_size)
+                                         .values)
+
+        # convert to (start, end) tuples
+        intervals = zip(intervals_start[:-1], intervals_start[1:])
+
+        return intervals
+
+    def get_timeseries(self, X):
+        """Returns the numpy array of timestamps for the given dataset"""
+        if self.timestamps is 'index':
+            return pd.to_datetime(X.index.values)
+        else:
+            return self.timestamps
+
+    def split(self, X, y=None, labels=None):
+        """Generate indices to split data into training and test sets based on time stamps"""
+        if X is None:
+            raise ValueError("The X parameter should not be None")
+
+        # extract timestamps from DataFrame index, if needed
+        timestamps = self.get_timeseries(X)
+        intervals = self.generate_intervals(timestamps)
+
+        # extract first sample for unlimited train size
+        first_sample_date = min(timestamps)
+
+        # number of samples
+        n = _num_samples(X)
+
+        # list of indices, to convert booleans later on
+        index = np.arange(n)
+
+        # loop over each interval
+        for test_start, test_end in intervals:
+
+            if self.train_size is not None:
+                train_start = test_start - self.train_size
+            else:
+                train_start = first_sample_date
+
+            train_interval_bool = np.array(map(lambda date:
+                                               train_start <= date < test_start,
+                                               timestamps))
+
+            test_interval_bool = np.array(map(lambda date:
+                                              test_start <= date < test_end,
+                                              timestamps))
+
+            # convert boolean to integer indices
+            train_index = index[train_interval_bool]
+            test_index = index[test_interval_bool]
+
+            yield train_index, test_index
+
+    def get_n_splits(self, X, y=None, labels=None):
+        if X is None:
+            raise ValueError("The X parameter should not be None")
+
+        # extract timestamps from DataFrame index, if needed
+        timestamps = self.get_timeseries(X)
+        intervals = self.generate_intervals(timestamps)
+
+        # compute number of folds
+        return len(intervals)
 
