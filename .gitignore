@@ -5,3 +5,6 @@
 *.pyc
 .eggs
 /src
+.cache
+.ipynb_checkpoints
+/build
