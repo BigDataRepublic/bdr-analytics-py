@@ -1,8 +1,8 @@
 name: bdranalytics-dev
 dependencies:
 - python=2.7
-- NumPy>=1.6.1
-- SciPy>=0.9
+- numpy>=1.6.1
+- scipy>=0.9
 - scikit-learn>=0.18
 - pytest
 - pip
