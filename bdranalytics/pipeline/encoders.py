@@ -10,7 +10,7 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
     """
 
     def __init__(self, verbose=0, cols=None, return_df=True,
-                 smooth=0.5, fillna=0):
+                 smooth=0.5, fillna=0, dependent_variable_values=None):
         """
         :param smooth: value for additive smoothing, to prevent divide by zero
         """
@@ -24,11 +24,15 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
         self.cols = cols
         self.smooth = smooth
         self.fillna = fillna
+        self.dependent_variable_values = dependent_variable_values
 
     def fit(self, X, y):
 
         if not isinstance(X, pd.DataFrame):
             raise TypeError('Input should be an instance of pandas.DataFrame()')
+
+        if self.dependent_variable_values is not None:
+            y = self.dependent_variable_values
 
         df = X[self.cols].copy()
         y_col_index = len(df.columns) + 1
