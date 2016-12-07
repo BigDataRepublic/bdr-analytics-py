@@ -91,7 +91,7 @@ To install the package including both its requiremets and dependencies:
     
     This will create an environment named `bdranalytics`
     
-## A more elaborate setup description
+### A more elaborate setup description
 
 If you need an environment including this module, the recommended way to go is:
 
@@ -123,6 +123,23 @@ If you need an environment including this module, the recommended way to go is:
   
   If the environment has been updated, can update the environment with:
   > conda env update --name=bdranalytics -f environment.yml
+
+## Using the Spark notebooks
+Some notebooks in the `notebooks` folder use spark. Check the [spark documentation](http://spark.apache.org/docs/2.0.1/programming-guide.html) for running jupyter with a spark contet.
+
+But in short, for **windows**
+```
+set PYSPARK_DRIVER_PYTHON_OPTS=notebook
+set PYSPARK_DRIVER_PYTHON=jupyter
+[spark_install_dir]\bin\pyspark
+```
+
+And for **nix**
+```
+export PYSPARK_DRIVER_PYTHON_OPTS=notebook
+export PYSPARK_DRIVER_PYTHON=jupyter
+[spark_install_dir]/bin/pyspark
+```
 
 ## Development on this package
 
