@@ -5,6 +5,7 @@ dependencies:
 - scipy>=0.9
 - scikit-learn>=0.18
 - pytest
+- nose
 - pip
 - pip:
   - pytest-runner

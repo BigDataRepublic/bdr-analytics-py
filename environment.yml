@@ -9,6 +9,7 @@ dependencies:
 - matplotlib
 - pandas
 - statsmodels
+- nose
 - pip
 - pip:
   - pytest-runner

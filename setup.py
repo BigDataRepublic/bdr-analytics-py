@@ -24,6 +24,6 @@ setup(
         "scikit-learn>=0.18"
     ],
     #dependency_links=['https://github.com/scikit-learn/scikit-learn/tarball/master#egg=scikit-learn-0.18.dev0'],
-    setup_requires = ['pytest-runner'],
-    tests_require = ['pytest'],
+    test_suite = 'nose.collector',
+    tests_require = ['nose'],
 )
