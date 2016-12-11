@@ -47,7 +47,7 @@ class PdWindowTransformer(BaseEstimator, TransformerMixin):
         return self.fit(X, y).transform(X)
 
 
-class PdFeatureUnion():
+class PdFeatureUnion(BaseEstimator, TransformerMixin):
     def __init__(self, union):
         self.union = union
 
@@ -61,7 +61,7 @@ class PdFeatureUnion():
         return self.fit(X, y).transform(X)
 
 
-class PdFeatureChain():
+class PdFeatureChain(BaseEstimator, TransformerMixin):
     def __init__(self, chain):
         self.chain = chain
 
