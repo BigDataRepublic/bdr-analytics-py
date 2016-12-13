@@ -11,7 +11,8 @@ setup(
     packages=['bdranalytics',
               'bdranalytics.images',
               'bdranalytics.model_selection',
-              'bdranalytics.pipeline'],
+              'bdranalytics.pipeline',
+              'bdranalytics.pandaspipeline'],
     include_package_data=True,
     package_data={'bdranalytics': ['data/*.dat'],
                   'bdranalytics.images': ['bdr.gif']},
@@ -20,9 +21,10 @@ setup(
         #'scikit-learn-0.18.dev0'
         "numpy>=1.6.1",
         "scipy>=0.9",
-        "scikit-learn>=0.18"
+        "scikit-learn>=0.18",
+        "pandas"
     ],
     #dependency_links=['https://github.com/scikit-learn/scikit-learn/tarball/master#egg=scikit-learn-0.18.dev0'],
-    setup_requires = ['pytest-runner'],
-    tests_require = ['pytest'],
+    test_suite = 'nose.collector',
+    tests_require = ['nose'],
 )
