@@ -5,6 +5,7 @@ NumPy>=1.6.1
 SciPy>=0.9
 scikit-learn>=0.18
 nose
+pandas
 
 # note, can also use github locations (with -e to allow reinstalling, need egg name to let module now what is installed)
 # either having it implicit (NOT defined in setup.py) and define it here

@@ -4,6 +4,7 @@ dependencies:
 - numpy>=1.6.1
 - scipy>=0.9
 - scikit-learn>=0.18
+- pandas
 - pytest
 - nose
 - pip
