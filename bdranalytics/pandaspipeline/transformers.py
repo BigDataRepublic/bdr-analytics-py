@@ -1,4 +1,3 @@
-from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.base import BaseEstimator, TransformerMixin
 import pandas as pd
 
@@ -22,20 +21,20 @@ class PdLagTransformer(BaseEstimator, TransformerMixin):
             return self.do_transform(pd.DataFrame(X))
 
     def fit_transform(self, X, y=None, **fit_params):
-        return self.fit(X, y).transform(X)
+        return self.fit(X, y, **fit_params).transform(X)
 
 
 class PdWindowTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, window, func):
-        self.window = window
+    def __init__(self, func, **rolling_params):
         self.func = func
+        self.rolling_params = rolling_params
 
     def fit(self, X, y=None, **fit_params):
         return self
 
     def do_transform(self, dataframe):
-        return (self.func(dataframe.rolling(self.window))
-                .rename(columns=lambda c: "{}_window{}".format(c, self.window)))
+        return (self.func(dataframe.rolling(**self.rolling_params))
+                .rename(columns=lambda c: "{}_{}".format(c, "".join(["{}{}".format(k,v) for k, v in self.rolling_params.items()]))))
 
     def transform(self, X):
         try:
@@ -44,7 +43,7 @@ class PdWindowTransformer(BaseEstimator, TransformerMixin):
             return self.do_transform(pd.DataFrame(X))
 
     def fit_transform(self, X, y=None, **fit_params):
-        return self.fit(X, y).transform(X)
+        return self.fit(X, y, **fit_params).transform(X)
 
 
 class PdFeatureUnion(BaseEstimator, TransformerMixin):
@@ -58,12 +57,12 @@ class PdFeatureUnion(BaseEstimator, TransformerMixin):
         return pd.concat([one.transform(X) for one in self.union], axis=1, join_axes=[X.index])
 
     def fit_transform(self, X, y=None, **fit_params):
-        return self.fit(X, y).transform(X)
+        return self.fit(X, y, **fit_params).transform(X)
 
 
 class PdFeatureChain(BaseEstimator, TransformerMixin):
-    def __init__(self, chain):
-        self.chain = chain
+    def __init__(self, steps):
+        self.chain = steps
 
     def fit(self, X, y=None, **fit_params):
         return self
@@ -75,4 +74,4 @@ class PdFeatureChain(BaseEstimator, TransformerMixin):
         return result
 
     def fit_transform(self, X, y=None, **fit_params):
-        return self.fit(X, y).transform(X)
+        return self.fit(X, y, **fit_params).transform(X)
