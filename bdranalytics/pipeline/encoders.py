@@ -99,3 +99,34 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
             out = df
 
         return out
+
+
+class ColumnSelector(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        return X[self.columns]
+
+
+class StringIndexer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.dictionaries = dict()
+        self.columns = list()
+
+    def fit(self, X, y=None):
+        self.columns = X.columns.values
+        for col in self.columns:
+            categories = np.unique(X[col])
+            self.dictionaries[col] = dict(zip(categories, range(len(categories))))
+        return self
+
+    def transform(self, X):
+        column_array = []
+        for col in self.columns:
+            transformed_column = X[col].apply(lambda x: self.dictionaries[col].get(x, len(self.columns) + 1))
+            column_array.append(transformed_column.values.reshape(-1, 1))
+        return np.hstack(column_array)
