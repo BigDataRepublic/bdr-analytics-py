@@ -47,7 +47,7 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
         # get the totals per class
         total_positive, total_negative = get_totals(y)
         if self.verbose:
-            print "total positives {:.0f}, total negatives {:.0f}".format(total_positive, total_negative)
+            print("total positives {:.0f}, total negatives {:.0f}".format(total_positive, total_negative))
 
         def compute_bucket_woe(x):
             bucket_positive, bucket_negative = get_totals(x)
@@ -58,7 +58,7 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
         for col in self.cols:
 
             if self.verbose:
-                print "computing weight of evidence for column {:s}".format(col)
+                print("computing weight of evidence for column {:s}".format(col))
 
             stat[col] = ((df.groupby(col)[y_col_index].agg(compute_bucket_woe)
                          + np.log(total_negative / total_positive)).to_dict())
@@ -78,7 +78,7 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
         for col in self.cols:
 
             if self.verbose:
-                print "transforming categorical column {:s}".format(col)
+                print("transforming categorical column {:s}".format(col))
 
             stat = pd.DataFrame.from_dict(self.stat[col], orient='index')
 
@@ -88,8 +88,8 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
 
             # fill missing values with
             if self.verbose:
-                print "{:.0f} NaNs in transformed data".format(ser.isnull().sum())
-                print "{:.4f} mean weight of evidence".format(ser.mean())
+                print("{:.0f} NaNs in transformed data".format(ser.isnull().sum()))
+                print("{:.4f} mean weight of evidence".format(ser.mean()))
 
             df[col] = np.array(ser.fillna(self.fillna))
 
