@@ -127,6 +127,8 @@ class StringIndexer(BaseEstimator, TransformerMixin):
     def transform(self, X):
         column_array = []
         for col in self.columns:
-            transformed_column = X[col].apply(lambda x: self.dictionaries[col].get(x, len(self.columns) + 1))
+            dictionary = self.dictionaries[col]
+            na_value = len(dictionary) + 1
+            transformed_column = X[col].apply(lambda x: dictionary.get(x, na_value))
             column_array.append(transformed_column.values.reshape(-1, 1))
         return np.hstack(column_array)
