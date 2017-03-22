@@ -104,7 +104,7 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
     """Growing Window cross-validator based on time intervals"""
 
     def __init__(self, test_start_date, timestamps='index', test_end_date=None,
-                 test_size='30 days', train_size=None):
+                 test_size=None, train_size=None):
 
         self.test_start_date = pd.to_datetime(test_start_date)
         self.test_end_date = pd.to_datetime(test_end_date)
@@ -131,7 +131,7 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
                                          .values)
 
         # convert to (start, end) tuples
-        intervals = zip(intervals_start[:-1], intervals_start[1:])
+        intervals = list(zip(intervals_start[:-1], intervals_start[1:]))
 
         return intervals
 
@@ -168,13 +168,13 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
             else:
                 train_start = first_sample_date
 
-            train_interval_bool = np.array(map(lambda date:
-                                               train_start <= date < test_start,
-                                               timestamps))
+            train_interval_bool = np.array(list(map(lambda date:
+                                                    train_start <= date < test_start,
+                                                    timestamps)))
 
-            test_interval_bool = np.array(map(lambda date:
-                                              test_start <= date < test_end,
-                                              timestamps))
+            test_interval_bool = np.array(list(map(lambda date:
+                                                   test_start <= date < test_end,
+                                                   timestamps)))
 
             # convert boolean to integer indices
             train_index = index[train_interval_bool]

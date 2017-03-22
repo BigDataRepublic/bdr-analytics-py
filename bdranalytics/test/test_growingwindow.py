@@ -53,11 +53,13 @@ class TestIntervalGrowingWindow(unittest.TestCase):
 
         X, y = create_time_series_data_set()
 
+        test_size_in_days = 7
+
         cv = IntervalGrowingWindow(
             timestamps=X.index.values,
             test_start_date=pd.datetime(year=2000, month=2, day=1),
             test_end_date=pd.datetime(year=2000, month=3, day=1),
-            test_size='7D')
+            test_size=pd.Timedelta(days=test_size_in_days))
 
         self.assertTrue(len(list(cv.split(X, y))) == 4)
 
@@ -70,7 +72,7 @@ class TestIntervalGrowingWindow(unittest.TestCase):
         cv = IntervalGrowingWindow(
             test_start_date=pd.datetime(year=2000, month=2, day=1),
             test_end_date=pd.datetime(year=2000, month=3, day=1),
-            test_size='{:d}D'.format(test_size_in_days))
+            test_size=pd.Timedelta(days=test_size_in_days))
 
         for _, test in cv.split(X, y):
             self.assertTrue(len(test) == test_size_in_days)
@@ -84,8 +86,8 @@ class TestIntervalGrowingWindow(unittest.TestCase):
         cv = IntervalGrowingWindow(
             test_start_date=pd.datetime(year=2000, month=2, day=1),
             test_end_date=pd.datetime(year=2000, month=3, day=1),
-            test_size='7D',
-            train_size='{:d}D'.format(train_size_in_days))
+            test_size=pd.Timedelta(days=7),
+            train_size=pd.Timedelta(days=train_size_in_days))
 
         for train, _ in cv.split(X, y):
             self.assertTrue(len(train) == train_size_in_days)
@@ -97,7 +99,7 @@ class TestIntervalGrowingWindow(unittest.TestCase):
         cv = IntervalGrowingWindow(
             test_start_date=pd.datetime(year=2000, month=2, day=1),
             test_end_date=pd.datetime(year=2000, month=3, day=1),
-            test_size='7D')
+            test_size=pd.Timedelta(days=7))
 
         self.assertTrue(cv.get_n_splits(X) == 4)
 
