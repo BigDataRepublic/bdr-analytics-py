@@ -3,7 +3,7 @@ from sklearn.metrics import (confusion_matrix, accuracy_score, roc_curve, auc, p
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from imblearn.metrics import classification_report_imbalanced
+# from imblearn.metrics import classification_report_imbalanced  # adds new dependecy!
 import numpy as np
 
 primary_color = plt.rcParams['axes.prop_cycle'].by_key()['color'][0]
@@ -20,8 +20,8 @@ def plot_confusion_matrix(y_true, y_pred_bin, target_names=default_names):
     plt.show()
 
 
-def print_classification_report(y_true, y_pred_bin, target_names=default_names):
-    print(classification_report_imbalanced(y_true, y_pred_bin, target_names=target_names, digits=3))
+# def print_classification_report(y_true, y_pred_bin, target_names=default_names):
+#     print(classification_report_imbalanced(y_true, y_pred_bin, target_names=target_names, digits=3))
 
 
 def plot_accuracy(y_true, y_pred):
