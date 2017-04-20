@@ -126,3 +126,15 @@ def plot_benefits(y_true, y_pred, benefit_func=None, recalibrate=False, ax=None)
     if recalibrate:
         y_pred_bin = (y_pred > thresholds[i_max]) * 1.
         return y_pred_bin
+
+
+def subplot_evaluation_curves(y_true, y_pred, benefit_func=None, figsize=(12, 8)):
+    fig, axarr = plt.subplots(2, 2, figsize=figsize)
+    fig.subplots_adjust(hspace=0.4, wspace=0.3)
+    plt.sca(axarr[0, 0])
+    plot_roc_curve(y_true, y_pred)
+    plt.sca(axarr[0, 1])
+    plot_pr_curve(y_true, y_pred)
+    plt.sca(axarr[1, 0])
+    plot_accuracy(y_true, y_pred)
+    plot_benefits(y_true, y_pred, ax=axarr[1, 1], benefit_func=benefit_func)
