@@ -47,29 +47,26 @@ class PdWindowTransformer(BaseEstimator, TransformerMixin):
 
 
 class PdFeatureUnion(BaseEstimator, TransformerMixin):
-    def __init__(self, union):
-        self.union = union
+    def __init__(self, transformer_list, n_jobs = 1, transformer_weights= None):
+        self.transformer_list = transformer_list
 
     def fit(self, X, y=None, **fit_params):
-        return PdFeatureUnion([one.fit(X, y) for one in self.union])
+        return PdFeatureUnion([(name, one.fit(X, y)) for name, one in self.transformer_list])
 
     def transform(self, X):
-        return pd.concat([one.transform(X) for one in self.union], axis=1, join_axes=[X.index])
-
-    def fit_transform(self, X, y=None, **fit_params):
-        return self.fit(X, y, **fit_params).transform(X)
+        return pd.concat([pd.DataFrame(one.transform(X), index=X.index) for _, one in self.transformer_list], axis=1, join_axes=[X.index])
 
 
 class PdFeatureChain(BaseEstimator, TransformerMixin):
-    def __init__(self, steps):
-        self.chain = steps
+    def __init__(self, transformer_list, n_jobs = 1, transformer_weights = None):
+        self.transformer_list = transformer_list
 
     def fit(self, X, y=None, **fit_params):
         return self
 
     def transform(self, X, y=None, **fit_params):
         result = X
-        for element in self.chain:
+        for name, element in self.transformer_list:
             result = element.fit_transform(result, y)
         return result
 

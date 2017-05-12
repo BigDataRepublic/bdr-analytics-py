@@ -38,8 +38,9 @@ class TestLagTransformer(unittest.TestCase):
     def test_featureunion(self):
         orig_data = pd.DataFrame(data=np.arange(15).reshape(5, 3), columns=["col1", "col2", "col3"])
         result = PdFeatureUnion([
-            PdLagTransformer(1),
-            PdWindowTransformer(lambda window: window.max(), window = 2)]).fit_transform(orig_data)
+            ('lag', PdLagTransformer(1)),
+            ('window', PdWindowTransformer(lambda window: window.max(), window = 2))]
+        ).fit_transform(orig_data)
         np.testing.assert_array_equal(result.columns,
                                       ["col1_lag1", "col2_lag1", "col3_lag1", "col1_window2", "col2_window2",
                                        "col3_window2"])
@@ -58,8 +59,8 @@ class TestLagTransformer(unittest.TestCase):
     def test_featurechain(self):
         orig_data = pd.DataFrame(data=np.arange(15).reshape(5, 3), columns=["col1", "col2", "col3"])
         result = PdFeatureChain([
-            PdLagTransformer(1),
-            PdWindowTransformer(lambda window: window.max(), window = 2)]).fit_transform(orig_data)
+            ('lag', PdLagTransformer(1)),
+            ('window', PdWindowTransformer(lambda window: window.max(), window = 2))]).fit_transform(orig_data)
         np.testing.assert_array_equal(result.columns,
                                       ["col1_lag1_window2", "col2_lag1_window2", "col3_lag1_window2"])
         np.testing.assert_array_equal(
