@@ -5,6 +5,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline, FeatureUnion, make_pipeline
 from bdranalytics.pipeline.encoders import ColumnSelector, StringIndexer
 
+
 def format_colname(prefix, suffix):
     return "{:s}_{:s}".format(prefix, suffix)
 
