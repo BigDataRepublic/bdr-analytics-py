@@ -132,3 +132,69 @@ class StringIndexer(BaseEstimator, TransformerMixin):
             transformed_column = X[col].apply(lambda x: dictionary.get(x, na_value))
             column_array.append(transformed_column.values.reshape(-1, 1))
         return np.hstack(column_array)
+
+
+class LeaveOneOutEncoder(BaseEstimator, TransformerMixin):
+    def __init__(self, with_stdevs=True):
+
+        self.with_stdevs = with_stdevs
+        self.means = {}
+        self.stdevs = {}
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        df = X.copy()
+        for col in self.means.keys():
+
+            mean_col_name = "{:s}_MEAN".format(col)
+            df[mean_col_name] = df.merge(pd.DataFrame(self.means[col]),
+                                         how='left', left_on=[col], right_index=True)['y']
+            if self.with_stdevs:
+                std_col_name = "{:s}_STD".format(col)
+                df[std_col_name] = df.merge(pd.DataFrame(self.stdevs[col]),
+                                            how='left', left_on=[col], right_index=True)['y']
+
+            df.drop(col, axis=1, inplace=True)
+
+        return df
+
+    def fit_transform(self, X, y):
+        """will be used during pipeline fit"""
+        df = X.copy()
+        df['y'] = y
+        for col in df.columns.difference(['y']):
+
+            mean_col_name = "{:s}_MEAN".format(col)
+
+            grouped = df.groupby(col)['y']
+
+            self.means[col] = grouped.mean()
+            df[mean_col_name] = grouped.transform(self._loo_means)
+
+            if self.with_stdevs:
+                std_col_name = "{:s}_STD".format(col)
+                self.stdevs[col] = grouped.std()
+                df[std_col_name] = grouped.transform(self._loo_stdevs)
+
+            df.drop(col, axis=1, inplace=True)
+
+        df.drop('y', axis=1, inplace=True)
+        return df
+
+    def _loo_means(self, s):
+        n = len(s)
+        loo_means = (s.sum() - s) / (n - 1)
+        return loo_means * np.random.normal(loc=1.0, scale=0.01, size=n)
+
+    def _loo_stdevs(self, s):
+        n = len(s)
+        if n > 1:
+            loo_means = self._loo_means(s)
+            sum_of_sq = n * s.std() ** 2
+            loo_stdevs = np.sqrt(abs((sum_of_sq - (s - s.mean()) * (s - loo_means))) / (n - 1))
+        else:
+            loo_stdevs = np.array([0])
+
+        return loo_stdevs * np.random.normal(loc=1.0, scale=0.01, size=n)
