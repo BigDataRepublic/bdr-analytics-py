@@ -51,8 +51,9 @@ class PdWindowTransformer(BaseEstimator, TransformerMixin):
 class PdFeatureUnion(BaseEstimator, TransformerMixin):
     """Concatenates the result of multiple transformers"""
 
-    def __init__(self, transformer_list, n_jobs=1, transformer_weights=None):
+    def __init__(self, transformer_list, n_jobs=1, transformer_weights=None, debug=False):
         self.transformer_list = transformer_list
+        self.debug = debug
 
     def fit(self, X, y=None, **fit_params):
         fit_params_steps = dict((name, {}) for name, step in self.transformer_list
@@ -78,9 +79,20 @@ class PdFeatureUnion(BaseEstimator, TransformerMixin):
                                       "Returned {} while original is {}".format(name, len(Xt), len(X))
             yield Xt
 
+    def _print_columns(self, xts):
+        for xt in xts:
+            print(xt.columns)
+            print("\r\n")
+
     def transform(self, X):
         xts = list(self.transformgen(X))
-        return pd.concat(xts, axis=1, verify_integrity=True, join_axes=None)
+        if self.debug:
+            self._print_columns(xts)
+        try:
+            return pd.concat(xts, axis=1, verify_integrity=True, join_axes=None)
+        except:
+            self._print_columns(xts)
+            raise
 
 
 class PdFeatureChain(BaseEstimator, TransformerMixin):
