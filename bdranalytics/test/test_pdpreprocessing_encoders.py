@@ -1,4 +1,4 @@
-from bdranalytics.pdpreprocessing.encoders import date_to_dateparts, dateparts_to_circular
+from bdranalytics.pdpreprocessing.encoders import date_to_dateparts, date_to_cyclical
 from bdranalytics.pdpreprocessing.encoders import DateCyclicalEncoding, DateOneHotEncoding
 import unittest
 import pandas as pd
@@ -10,7 +10,7 @@ class TestDatePartitioner(unittest.TestCase):
         orig_data = pd.DataFrame(data=np.arange(
             np.datetime64('2011-07-11'), np.datetime64('2011-07-18')
             ).reshape(7, 1), columns=["thedate"])
-        splitted_data = date_to_dateparts(orig_data, 'thedate', 'prefix')
+        splitted_data = date_to_dateparts(orig_data, 'thedate', new_col_name_prefix='prefix')
 
         expected_columns = ["prefix_{}".format(x) for x in ["DAY", "DAY_OF_WEEK", "HOUR", "MINUTE", "MONTH", "SECOND"]]
         # no additional columns
@@ -26,8 +26,7 @@ class TestDatePartitioner(unittest.TestCase):
         orig_data = pd.DataFrame(data=np.arange(
             np.datetime64('2011-07-11'), np.datetime64('2011-07-18')
         ).reshape(7, 1), columns=["thedate"])
-        splitted_data = date_to_dateparts(orig_data, 'thedate', 'prefix')
-        circular_data = dateparts_to_circular(splitted_data, 'prefix')
+        circular_data = date_to_cyclical(orig_data, 'thedate', new_col_name_prefix= 'prefix')
 
         intermediate_columns = ["prefix_{}".format(x) for x in ["DAY", "DAY_OF_WEEK", "HOUR", "MINUTE", "MONTH", "SECOND"]]
         expected_columns = ["{}_{}".format(x, y) for y in ["COS","SIN"] for x in intermediate_columns]
@@ -35,11 +34,12 @@ class TestDatePartitioner(unittest.TestCase):
         np.testing.assert_array_equal(list(set(circular_data.columns)-set(expected_columns)), list())
         # no missing columns
         np.testing.assert_array_equal(list(set(expected_columns)-set(circular_data.columns)), list())
+        # correct result compared to just splitting the columns
+        splitted_data = date_to_dateparts(orig_data, 'thedate', 'prefix')
         sin_columns = ["{}_{}".format(x, y) for y in ["SIN"] for x in intermediate_columns]
         np.testing.assert_array_equal(circular_data.loc[:, sin_columns], np.sin(splitted_data.loc[:, intermediate_columns] / (2.0*np.pi*np.array([31, 7, 24, 60, 12, 60]))))
         cos_columns = ["{}_{}".format(x, y) for y in ["COS"] for x in intermediate_columns]
         np.testing.assert_array_equal(circular_data.loc[:, cos_columns], np.cos(splitted_data.loc[:, intermediate_columns] / (2.0*np.pi*np.array([31, 7, 24, 60, 12, 60]))))
-
 
     def test_dateonehotencoding(self):
         orig_data = pd.DataFrame(data=np.arange(

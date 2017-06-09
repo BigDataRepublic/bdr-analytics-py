@@ -1,47 +1,72 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.pipeline import Pipeline, FeatureUnion, make_pipeline
-from bdranalytics.pipeline.encoders import ColumnSelector, StringIndexer
+
+from bdranalytics.pipeline.encoders import StringIndexer
 
 
 def format_colname(prefix, suffix):
     return "{:s}_{:s}".format(prefix, suffix)
 
 
-def date_to_dateparts(df, col_name, new_col_name_prefix=None):
+"""A dictionary to get a date part cardinality given a general name"""
+__date_part_cardinality = {
+    "MONTH": 12,
+    "DAY": 31,
+    "DAY_OF_WEEK": 7,
+    "HOUR": 24,
+    "MINUTE": 60,
+    "SECOND": 60
+}
+
+"""A dictionary to get a date part extractor given a general name"""
+__date_part_funcs = {
+    "MONTH": lambda x: x.month,
+    "DAY": lambda x: x.day,
+    "DAY_OF_WEEK": lambda x: x.dayofweek,
+    "HOUR": lambda x: x.hour,
+    "MINUTE": lambda x: x.minute,
+    "SECOND": lambda x: x.second
+}
+
+
+def date_to_dateparts(df, col_name, parts=list(__date_part_funcs.keys()), new_col_name_prefix=None):
     if new_col_name_prefix is None:
         new_col_name_prefix = col_name
-    return pd.DataFrame({format_colname(new_col_name_prefix, "MONTH"): df[col_name].apply(lambda x: x.month),
-                         format_colname(new_col_name_prefix, "DAY"): df[col_name].apply(lambda x: x.day),
-                         format_colname(new_col_name_prefix, "DAY_OF_WEEK"): df[col_name].apply(lambda x: x.dayofweek),
-                         format_colname(new_col_name_prefix, "HOUR"): df[col_name].apply(lambda x: x.hour),
-                         format_colname(new_col_name_prefix, "MINUTE"): df[col_name].apply(lambda x: x.minute),
-                         format_colname(new_col_name_prefix, "SECOND"): df[col_name].apply(lambda x: x.second)
-                         }, index=df.index)
+    for part in parts:
+        assert part in list(__date_part_funcs.keys())
+    return pd.DataFrame({
+                            format_colname(new_col_name_prefix, part):
+                                df[col_name].apply(__date_part_funcs.get(part))
+                            for part in parts}
+                        , index=df.index)
+
+
+def date_to_cyclical(df, col_name, parts=list(__date_part_funcs.keys()), new_col_name_prefix=None):
+    if new_col_name_prefix is None:
+        new_col_name_prefix = col_name
+    for part in parts:
+        assert part in list(__date_part_funcs.keys())
+    names = [format_colname(new_col_name_prefix, part) for part in parts]
+    names_sin = ["{:s}_SIN".format(name) for name in names]
+    names_cos = ["{:s}_COS".format(name) for name in names]
+    values = [df[col_name].apply(__date_part_funcs.get(part)) /
+              (2.0 * np.pi * __date_part_cardinality.get(part)) for part in parts]
+    values_sin = [col.apply(np.sin) for col in values]
+    values_cos = [col.apply(np.cos) for col in values]
+    result = pd.concat(values_sin + values_cos, axis=1)
+    result.columns = names_sin + names_cos
+    return result
 
 
 def to_circular_variable(df, col_name, cardinality):
     return pd.DataFrame({
-            # note that np.sin(df[col_name] / float(cardinalilty...)) gives different values, probably rounding
-            "{:s}_SIN".format(col_name) : df[col_name].apply(lambda x: np.sin(x / float(cardinality * 2 * np.pi))),
-            "{:s}_COS".format(col_name) : df[col_name].apply(lambda x: np.cos(x / float(cardinality * 2 * np.pi)))
-        }, index=df.index)
-
-
-def dateparts_to_circular(df, col_prefix):
-    intermediate_columns = [format_colname(col_prefix, x) for x in ["DAY", "DAY_OF_WEEK", "HOUR", "MINUTE", "MONTH", "SECOND"]]
-    radial = df.loc[:, intermediate_columns] / (2.0*np.pi*np.array([31, 7, 24, 60, 12, 60]))
-    df_sin = np.sin(radial)
-    df_sin.columns = ["{}_{}".format(x, y) for y in ["SIN"] for x in intermediate_columns]
-    df_cos = np.cos(radial)
-    df_cos.columns = ["{}_{}".format(x, y) for y in ["COS"] for x in intermediate_columns]
-    return pd.concat(
-        [
-            df_sin,
-            df_cos
-        ], axis=1)
+        # note that np.sin(df[col_name] / float(cardinalilty...)) gives different values, probably rounding
+        "{:s}_SIN".format(col_name): df[col_name].apply(lambda x: np.sin(x / float(cardinality * 2 * np.pi))),
+        "{:s}_COS".format(col_name): df[col_name].apply(lambda x: np.cos(x / float(cardinality * 2 * np.pi)))
+    }, index=df.index)
 
 
 class DateOneHotEncoding(BaseEstimator, TransformerMixin):
@@ -51,8 +76,16 @@ class DateOneHotEncoding(BaseEstimator, TransformerMixin):
     To be used by sklearn pipelines
     """
 
-    def __init__(self, date_columns, new_column_names=None, drop=True):
+    def __init__(self, date_columns, parts=list(["DAY", "DAY_OF_WEEK", "HOUR", "MINUTE", "MONTH", "SECOND"]),
+                 new_column_names=None, drop=True):
+        """
+        :param date_columns: the column names of the date columns to be expanded in one hot encodings
+        :param new_column_names: the names to use as prefix for the generated column names
+        :param drop: whether or not to drop the original column
+        :param parts: the parts to extract from the date columns, and to then transform into one-hot encodings
+        """
         self.drop = drop
+        self.parts = parts
         if new_column_names is None:
             self.new_column_names = date_columns
         else:
@@ -68,7 +101,7 @@ class DateOneHotEncoding(BaseEstimator, TransformerMixin):
         assert (len(self.date_columns) == len(self.new_column_names))
 
     def all_to_parts(self, X):
-        parts = [date_to_dateparts(X, old_name, new_name)
+        parts = [date_to_dateparts(X, old_name, self.parts, new_name)
                  for old_name, new_name in zip(self.date_columns, self.new_column_names)]
         result = pd.concat(parts, axis=1, join_axes=[X.index])
         return result
@@ -104,7 +137,15 @@ class DateCyclicalEncoding(BaseEstimator, TransformerMixin):
     To be used by sklearn pipelines
     """
 
-    def __init__(self, date_columns, new_column_names=None, drop=True):
+    def __init__(self, date_columns, parts=list(["DAY", "DAY_OF_WEEK", "HOUR", "MINUTE", "MONTH", "SECOND"]),
+                 new_column_names=None, drop=True):
+        """
+        :param date_columns: the column names of the date columns to be expanded in one hot encodings
+        :param new_column_names: the names to use as prefix for the generated column names
+        :param drop: whether or not to drop the original column
+        :param parts: the parts to extract from the date columns, and to then transform into one-hot encodings
+        """
+        self.parts = parts
         self.drop = drop
         if new_column_names is None:
             self.new_column_names = date_columns
@@ -114,9 +155,7 @@ class DateCyclicalEncoding(BaseEstimator, TransformerMixin):
         assert (len(self.date_columns) == len(self.new_column_names))
 
     def all_to_cyclical_parts(self, X):
-        parts = [dateparts_to_circular(
-            date_to_dateparts(X, old_name, new_name),
-            new_name)
+        parts = [date_to_cyclical(X, old_name, self.parts, new_name)
                  for old_name, new_name in zip(self.date_columns, self.new_column_names)]
         return pd.concat(parts, axis=1, join_axes=[X.index])
 
