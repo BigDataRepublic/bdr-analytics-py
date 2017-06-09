@@ -52,7 +52,7 @@ class DateOneHotEncoding(BaseEstimator, TransformerMixin):
     """
 
     def __init__(self, date_columns, new_column_names=None, drop=True):
-        self.drop_date_columns = drop
+        self.drop = drop
         if new_column_names is None:
             self.new_column_names = date_columns
         else:
@@ -92,7 +92,7 @@ class DateOneHotEncoding(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         new_columns = self.transform_one_hots(X)
-        old_columns = X.drop(self.date_columns, axis=1, inplace=False) if self.drop_date_columns else X
+        old_columns = X.drop(self.date_columns, axis=1, inplace=False) if self.drop else X
 
         return pd.concat([old_columns, new_columns], axis=1, join_axes=[X.index])
 
@@ -105,7 +105,7 @@ class DateCyclicalEncoding(BaseEstimator, TransformerMixin):
     """
 
     def __init__(self, date_columns, new_column_names=None, drop=True):
-        self.drop_date_columns = drop
+        self.drop = drop
         if new_column_names is None:
             self.new_column_names = date_columns
         else:
@@ -125,5 +125,5 @@ class DateCyclicalEncoding(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         new_columns = self.all_to_cyclical_parts(X)
-        old_columns = X.drop(self.date_columns, axis=1, inplace=False) if self.drop_date_columns else X
+        old_columns = X.drop(self.date_columns, axis=1, inplace=False) if self.drop else X
         return pd.concat([old_columns, new_columns], axis=1, join_axes=[X.index])
