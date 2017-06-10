@@ -36,7 +36,8 @@ def date_to_dateparts(df, col_name, parts=list(__date_part_funcs.keys()), new_co
     if new_col_name_prefix is None:
         new_col_name_prefix = col_name
     for part in parts:
-        assert part in list(__date_part_funcs.keys())
+        assert part in list(__date_part_funcs.keys()), \
+            "part '{}' is not known. Available are {}".format(part, ", ".join(list(__date_part_funcs.keys())))
     return pd.DataFrame({
                             format_colname(new_col_name_prefix, part):
                                 df[col_name].apply(__date_part_funcs.get(part))
@@ -48,7 +49,8 @@ def date_to_cyclical(df, col_name, parts=list(__date_part_funcs.keys()), new_col
     if new_col_name_prefix is None:
         new_col_name_prefix = col_name
     for part in parts:
-        assert part in list(__date_part_funcs.keys())
+        assert part in list(__date_part_funcs.keys()), \
+            "part '{}' is not known. Available are {}".format(part, ", ".join(list(__date_part_funcs.keys())))
     names = [format_colname(new_col_name_prefix, part) for part in parts]
     names_sin = ["{:s}_SIN".format(name) for name in names]
     names_cos = ["{:s}_COS".format(name) for name in names]
@@ -98,7 +100,8 @@ class DateOneHotEncoding(BaseEstimator, TransformerMixin):
             ('labeler', StringIndexer()),
             ('encoder', self.one_hot_encoding_model)
         ])
-        assert (len(self.date_columns) == len(self.new_column_names))
+        assert (len(self.date_columns) == len(self.new_column_names)), \
+            "length of new column names is not equal to given column names"
 
     def all_to_parts(self, X):
         parts = [date_to_dateparts(X, old_name, self.parts, new_name)

@@ -1,8 +1,10 @@
-from bdranalytics.pdpreprocessing.encoders import date_to_dateparts, date_to_cyclical
-from bdranalytics.pdpreprocessing.encoders import DateCyclicalEncoding, DateOneHotEncoding
 import unittest
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+
+from bdranalytics.pdpreprocessing.encoders import DateCyclicalEncoding, DateOneHotEncoding
+from bdranalytics.pdpreprocessing.encoders import date_to_dateparts, date_to_cyclical
 
 
 class TestDatePartitioner(unittest.TestCase):
@@ -35,7 +37,7 @@ class TestDatePartitioner(unittest.TestCase):
         # no missing columns
         np.testing.assert_array_equal(list(set(expected_columns)-set(circular_data.columns)), list())
         # correct result compared to just splitting the columns
-        splitted_data = date_to_dateparts(orig_data, 'thedate', 'prefix')
+        splitted_data = date_to_dateparts(orig_data, 'thedate', new_col_name_prefix='prefix')
         sin_columns = ["{}_{}".format(x, y) for y in ["SIN"] for x in intermediate_columns]
         np.testing.assert_array_equal(circular_data.loc[:, sin_columns], np.sin(splitted_data.loc[:, intermediate_columns] / (2.0*np.pi*np.array([31, 7, 24, 60, 12, 60]))))
         cos_columns = ["{}_{}".format(x, y) for y in ["COS"] for x in intermediate_columns]
