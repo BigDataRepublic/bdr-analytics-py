@@ -109,7 +109,11 @@ class ColumnSelector(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        return X[self.columns]
+        try:
+            return X[self.columns]
+        except:
+            print("Could not find selected columns {:s} in available columns {:s}".format(self.columns, X.columns))
+            raise
 
 
 class StringIndexer(BaseEstimator, TransformerMixin):
