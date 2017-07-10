@@ -10,7 +10,7 @@ There are different ways to include this package in your environment:
 Add the following to your pip `requirements.txt`:
 
 ```
--e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
+-e git+ssh://git@github.com/BigDataRepublic/bdr-analytics-py.git#egg=bdranalytics-0.1
 ```
   
 Note that this will download the sources to be able to install it. You can safely remove it after installation.
@@ -30,7 +30,7 @@ Add the following to your conda environment.yaml:
 ```
 And create a `requirements.txt` containing:
 ```
--e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
+-e git+ssh://git@github.com/BigDataRepublic/bdr-analytics-py.git#egg=bdranalytics-0.1
 ```
   
 Note that this will download the sources to be able to install it. You can safely remove it after installation.
@@ -42,7 +42,7 @@ To install the package without checking it out (to use this module):
   * First check `requirements-dev.txt` and install the correct requirements (like sklearn), including their dependencies.
   * Then install the bdr-analytics-py including dependencies:
 
-    > pip install -e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
+    > pip install -e git+ssh://git@github.com/BigDataRepublic/bdr-analytics-py.git#egg=bdranalytics-0.1
     
 Note that this will download the sources to be able to install it. You can safely remove it after installation.
 ### PIP With git checkout
@@ -65,7 +65,7 @@ To install the package without checking it out (to use this module):
   * First check `environment.yml` and install the correct requirements (like sklearn), including their dependencies.
   * Then install the bdr-analytics-py including dependencies:
 
-    > pip install -e git+ssh://git@github.com/BigDataRepublic/bdr-analytics.git#egg=bdranalytics-0.1
+    > pip install -e git+ssh://git@github.com/BigDataRepublic/bdr-analytics-py.git#egg=bdranalytics-0.1
 
 Note that this will download the sources to be able to install it. You can safely remove it after installation.
 ### Conda with git checkout: Recommended
