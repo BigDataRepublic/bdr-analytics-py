@@ -1,5 +1,9 @@
 name: bdranalytics
 dependencies:
+- cmake
+- boost
+- tensorflow
+- pkgconfig
 - python=2.7
 - numpy>=1.6.1
 - scipy>=0.9
@@ -9,7 +13,10 @@ dependencies:
 - matplotlib
 - pandas
 - statsmodels
+- conda-forge::xgboost=0.6a2
+- seaborn
 - pip
 - pip:
+  - pandas_profiling
   - pytest-runner
   - -rrequirements.txt
