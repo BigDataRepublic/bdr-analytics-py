@@ -1,8 +1,9 @@
-import unittest
-import random
-import pandas as pd
 import numpy as np
-from bdranalytics.pipeline.encoders import WeightOfEvidenceEncoder
+import pandas as pd
+import random
+import unittest
+
+from bdranalytics.sklearn.preprocessing import WeightOfEvidenceEncoder
 
 
 class TestEncoders(unittest.TestCase):

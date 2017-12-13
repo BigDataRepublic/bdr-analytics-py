@@ -1,13 +1,13 @@
 name: bdranalytics-dev
+# This environment is designed to work ON the bdranalytics module: it includes its dependencies, but not bdranalytics itself.
 dependencies:
 - python=2.7
-- numpy>=1.6.1
-- scipy>=0.9
-- scikit-learn>=0.18
-- pandas
-- pytest
-- nose
+- cmake
+- boost
+- pkgconfig
+- jupyter
+- tensorflow
+- conda-forge::xgboost=0.6a2
 - pip
 - pip:
-  - pytest-runner
   - -rrequirements-dev.txt
