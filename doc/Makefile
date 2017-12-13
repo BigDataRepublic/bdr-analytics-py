@@ -12,9 +12,28 @@ BUILDDIR      = _build
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help Makefile clean
+
+clean:
+	rm -R source
+	rm -R _build
+
+# This target depends on all .py files in bdranalytics folder
+# Thus if any one changed, also the api doc will be updated
+# If there are py files for which no apidoc is created, using -f does not work: 
+# None of the apidocs will be updated (nothing changed), but the py file will be newer (as there is no corresponding api doc file)
+# Therefore we remove the source dir first
+#source: ../bdranalytics
+source:	$(shell find ../bdranalytics -type f -name '*.py')
+	-rm -R source
+	sphinx-apidoc -f -o source/ -H "$(SPHINXPROJ)" ../bdranalytics
+
+../bdranalytics: ;
+
+# the previous source depends on .py files, for which we have no tasks to do
+%.py: ;
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
+%: Makefile source
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

@@ -159,11 +159,13 @@ To create the development environment:
 ### Running the test
 
 To run all tests:
+> source activate bdranalytics-dev
 > python setup.py test
 
 ### Creating a package dist
 
 To create a dist from a local checkout (when developing on this module):
+> source activate bdranalytics-dev
 > python setup.py sdist
 
 ### Running the installation script
@@ -171,4 +173,11 @@ This uses the setup.py script directly, useful for testing how the dist will be 
 
 To just install the package and main dependencies from a local checkout (when going to use this module):
 > python setup.py install
+
+### Creating the sphinx documentation
+
+To update html files:
+> source activate bdranalytics-dev
+> cd doc
+> make html
 

@@ -8,3 +8,5 @@
 .cache
 .ipynb_checkpoints
 /build
+doc/_build
+doc/source

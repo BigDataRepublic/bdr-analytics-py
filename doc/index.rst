@@ -9,13 +9,8 @@ Welcome to bdr-analytics-py's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   :ref: source/modules
 
-.. automodule:: bdranalytics
-    :members:
- 
-.. autoclass:: bdranalytics.sklearn.preprocessing.ScaledRegressor
-    :members:
+   source/modules
 
 
 Indices and tables
