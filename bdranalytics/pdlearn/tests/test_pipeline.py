@@ -4,7 +4,7 @@ import unittest
 from sklearn.pipeline import FeatureUnion, Pipeline
 
 from bdranalytics.pdlearn.pipeline import PdFeatureUnion, PdFeatureChain
-from bdranalytics.pdlearn.preprocessing import PdLagTransformer, PdWindowTransformer, PdFeatureUnion
+from bdranalytics.pdlearn.preprocessing import PdLagTransformer, PdWindowTransformer
 
 
 class TestLagTransformer(unittest.TestCase):
