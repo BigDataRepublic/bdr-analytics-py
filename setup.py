@@ -25,7 +25,8 @@ setup(
         "pandas",
         "seaborn",
         "matplotlib",
-        "pandas_profiling"
+        "pandas_profiling",
+        "tensorboard"
     ],
     test_suite='nose.collector',
     tests_require=['nose',
