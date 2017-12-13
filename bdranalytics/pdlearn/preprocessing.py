@@ -4,7 +4,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
-from bdranalytics.pipeline.encoders import StringIndexer
+from bdranalytics.sklearn.preprocessing import StringIndexer
 
 
 def format_colname(prefix, suffix):
@@ -169,3 +169,48 @@ class DateCyclicalEncoding(BaseEstimator, TransformerMixin):
         new_columns = self.all_to_cyclical_parts(X)
         old_columns = X.drop(self.date_columns, axis=1, inplace=False) if self.drop else X
         return pd.concat([old_columns, new_columns], axis=1, join_axes=[X.index])
+
+
+# like sklearn's transformers, but then on pandas DataFrame
+class PdLagTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, lag):
+        self.lag = lag
+
+    def fit(self, X, y=None, **fit_params):
+        return self
+
+    def do_transform(self, dataframe):
+        return (dataframe.shift(self.lag)
+            .rename(columns=lambda c: "{}_lag{}".format(c, self.lag)))
+
+    def transform(self, X):
+        try:
+            return self.do_transform(X)
+        except AttributeError:
+            return self.do_transform(pd.DataFrame(X))
+
+    def fit_transform(self, X, y=None, **fit_params):
+        return self.fit(X, y, **fit_params).transform(X)
+
+
+class PdWindowTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, func, **rolling_params):
+        self.func = func
+        self.rolling_params = rolling_params
+
+    def fit(self, X, y=None, **fit_params):
+        return self
+
+    def do_transform(self, dataframe):
+        return (self.func(dataframe.rolling(**self.rolling_params))
+            .rename(columns=lambda c: "{}_{}".format(c, "".join(
+            ["{}{}".format(k, v) for k, v in self.rolling_params.items()]))))
+
+    def transform(self, X):
+        try:
+            return self.do_transform(X)
+        except AttributeError:
+            return self.do_transform(pd.DataFrame(X))
+
+    def fit_transform(self, X, y=None, **fit_params):
+        return self.fit(X, y, **fit_params).transform(X)

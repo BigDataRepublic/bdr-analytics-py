@@ -1,7 +1,8 @@
-from bdranalytics.model_selection.growingwindow import GrowingWindow, IntervalGrowingWindow
 import numpy as np
-import unittest
 import pandas as pd
+import unittest
+
+from bdranalytics.sklearn.model_selection import GrowingWindow, IntervalGrowingWindow
 
 
 def create_time_series_data_set(start_date=pd.datetime(year=2000, month=1, day=1), n_rows=100):
@@ -31,7 +32,7 @@ class TestGrowingWindow(unittest.TestCase):
         for train, test in GrowingWindow(4).split(np.arange(15).reshape(5,3), np.arange(5)):
             assert len(test) == 1
 
-    def test_n_splits_testsize(self):
+    def test_n_splits_testsize2(self):
         for i, (train, test) in zip(range(4), GrowingWindow(4).split(np.arange(15).reshape(5,3), np.arange(5))):
             assert len(train) == i+1
 

@@ -1,10 +1,10 @@
-from sklearn.metrics import (confusion_matrix, accuracy_score, roc_curve, auc, precision_recall_curve,
-                             average_precision_score)
-import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 # from imblearn.metrics import classification_report_imbalanced  # adds new dependecy!
 import numpy as np
+import pandas as pd
+import seaborn as sns
+from sklearn.metrics import (confusion_matrix, accuracy_score, roc_curve, auc, precision_recall_curve,
+                             average_precision_score)
 
 primary_color = plt.rcParams['axes.prop_cycle'].by_key()['color'][0]
 
@@ -119,7 +119,7 @@ def plot_benefits(y_true, y_pred, benefit_func=None, recalibrate=False, ax=None)
     ax2.legend(labels=['TP', 'FP'], loc="upper right")
     ax1.set_title('Benefits across thresholds')
     ax1.legend(labels=['benefit'], loc="center right")
-    ax1.grid(1);
+    ax1.grid(1)
     ax2.grid(0)
 
     # recalibrate threshold based on benefits (optional, should still be around 0.5)

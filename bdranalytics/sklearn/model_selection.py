@@ -1,8 +1,8 @@
 import numpy as np
+import pandas as pd
 from abc import ABCMeta
 from sklearn.externals.six import with_metaclass
 from sklearn.utils.validation import _num_samples
-import pandas as pd
 
 
 class GrowingWindow(with_metaclass(ABCMeta)):
