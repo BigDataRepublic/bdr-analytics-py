@@ -17,7 +17,8 @@ class TestEncoding(unittest.TestCase):
 
             self.assertTrue(numeric)
 
-    def create_dataset(self, n_rows=1000):
+    @staticmethod
+    def create_dataset(n_rows=1000):
         """
         Creates a data set with some categorical variables
         """

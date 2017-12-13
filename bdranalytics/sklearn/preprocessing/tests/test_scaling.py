@@ -1,7 +1,6 @@
 import unittest
 
 import numpy as np
-import pandas as pd
 from sklearn.dummy import DummyRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -16,8 +15,7 @@ class TestPreprocessing(unittest.TestCase):
         """
         Creates a data set with only numerical data
         """
-        ds = np.random.rand(n_rows, 2)
-        X = pd.DataFrame(ds, columns=['c1', 'c2'])
+        X = np.random.rand(n_rows, 2)
         y = np.random.rand(n_rows)
         return X, y
 
@@ -48,7 +46,7 @@ class TestPreprocessing(unittest.TestCase):
         predictor = DummyRegressor(strategy="constant", constant=predictor_constant)
         scaler = StandardScaler()
         pipeline = Pipeline([("predict", ScaledRegressor(scaler, predictor))])
-        pipeline.set_params(predict__model__constant=0)
+        pipeline.set_params(predict__estimator__constant=0)
         y_hat = pipeline.fit(X, y).predict(X)
         np.allclose(y_hat, np.repeat(y_mean, len(y)))
 
