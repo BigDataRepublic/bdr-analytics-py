@@ -1,14 +1,6 @@
-## Requirements for using this module (the module, includings its requirements, and relevant packages)
---index-url https://pypi.python.org/simple/
-
-# Install all requirements for the module
--r requirements-dev.txt
-
-# install the local developed module, including its listed dependencies
+# This environment is designed to work WITH the bdranalytics module: it includes the module including its dependencies
+# If you want to use pip to install the module, instead of by building straight from the setup.py
+# By including the module, the module including all its dependencies will be installed
+# This therefore makes it easy to include the module into your own environment
+# We use the --editable flag such that you can reinstall the package after you modified it
 -e .
-
-# Install additional packages for notebooks
-jupyter
-matplotlib
-pandas
-statsmodels

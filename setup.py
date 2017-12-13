@@ -18,11 +18,16 @@ setup(
                   'bdranalytics.images': ['bdr.gif']},
     description="Our analytics library to quickly get our data scientists up to speed",
     install_requires=[
-        "numpy>=1.6.1",
-        "scipy>=0.9",
+        "NumPy>=1.6.1",
+        "SciPy>=0.9",
         "scikit-learn>=0.18",
-        "pandas"
+        "pandas",
+        "seaborn",
+        "matplotlib",
+        "pandas_profiling"
     ],
-    test_suite = 'nose.collector',
-    tests_require = ['nose'],
+    test_suite='nose.collector',
+    tests_require=['nose',
+                   "pytest",
+                   "pytest-runner"]
 )

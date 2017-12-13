@@ -1,22 +1,13 @@
 name: bdranalytics
+# This environment is designed to work WITH the bdranalytics module: it includes the module including its dependencies
 dependencies:
+- python=2.7
 - cmake
 - boost
-- tensorflow
 - pkgconfig
-- python=2.7
-- numpy>=1.6.1
-- scipy>=0.9
-- scikit-learn>=0.18
-- pytest
 - jupyter
-- matplotlib
-- pandas
-- statsmodels
+- tensorflow
 - conda-forge::xgboost=0.6a2
-- seaborn
 - pip
 - pip:
-  - pandas_profiling
-  - pytest-runner
   - -rrequirements.txt
