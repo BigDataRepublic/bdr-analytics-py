@@ -12,3 +12,4 @@ nose
 pytest
 pytest-runner
 sphinx
+sphinx_rtd_theme
