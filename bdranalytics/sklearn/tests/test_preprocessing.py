@@ -95,7 +95,6 @@ class TestPreprocessing(unittest.TestCase):
         predictor_constant = 3
         predictor = DummyRegressor(strategy="constant", constant=predictor_constant)
         y_hat = Pipeline([("predict", predictor)]).fit(X, y).predict(X)
-        print(y_hat)
         np.allclose(y_hat, np.repeat(predictor_constant, len(y)))
 
     def test_scaled_target(self):
@@ -105,12 +104,22 @@ class TestPreprocessing(unittest.TestCase):
         predictor = DummyRegressor(strategy="constant", constant=predictor_constant)
         scaler = StandardScaler()
         y_hat = Pipeline([("predict", ScaledRegressor(scaler, predictor))]).fit(X, y).predict(X)
-        print(y_hat)
+        np.allclose(y_hat, np.repeat(y_mean, len(y)))
+
+    def test_scaled_target_with_set_params(self):
+        X, y = self.create_regression_dataset(n_rows=20)
+        y_mean = np.mean(y)
+        predictor_constant = 10  # 0 will be multiplied by std , and then added to the mean
+        predictor = DummyRegressor(strategy="constant", constant=predictor_constant)
+        scaler = StandardScaler()
+        pipeline = Pipeline([("predict", ScaledRegressor(scaler, predictor))])
+        pipeline.set_params(predict__model__constant=0)
+        y_hat = pipeline.fit(X, y).predict(X)
         np.allclose(y_hat, np.repeat(y_mean, len(y)))
 
 
 class ScaledRegressor(BaseEstimator, RegressorMixin):
-    def __init__(self, scaler, model, *args, **kwargs):
+    def __init__(self, scaler, model):
         self.model = model
         self.scaler = scaler
 
@@ -124,7 +133,6 @@ class ScaledRegressor(BaseEstimator, RegressorMixin):
 
     def fit(self, X, y):
         y_scaled = self.scaler.fit_transform(self._to_matrix(y))
-        print(y_scaled)
         self.model.fit(X, self._to_vector(y_scaled))
 
     def predict(self, X):
