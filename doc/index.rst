@@ -11,6 +11,7 @@ Welcome to bdr-analytics-py's documentation!
    :caption: Contents:
 
    source/modules
+   test.md
 
 
 Indices and tables
