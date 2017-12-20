@@ -10,8 +10,8 @@ Welcome to bdr-analytics-py's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   intro
    source/modules
-   test.md
 
 
 Indices and tables
