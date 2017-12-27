@@ -177,6 +177,8 @@ To just install the package and main dependencies from a local checkout (when go
 ### Creating the sphinx documentation
 
 To update html files:
-> source activate bdranalytics-dev
-> cd doc
-> make clean && make source && make html
+```
+source activate bdranalytics-dev
+cd doc
+make clean && make source && make html
+```
