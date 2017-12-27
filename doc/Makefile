@@ -1,4 +1,4 @@
-# Minimal makefile for Sphinx documentation
+# Makefile for Sphinx documentation
 #
 
 # You can set these variables from the command line.
@@ -8,6 +8,9 @@ SPHINXPROJ    = bdr-analytics-py
 SOURCEDIR     = .
 BUILDDIR      = _build
 
+# Internal variables.
+ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
@@ -15,25 +18,22 @@ help:
 .PHONY: help Makefile clean
 
 clean:
-	rm -R source
-	rm -R _build
+	rm -Rf source
+	rm -Rf $(BUILDDIR)
 
 # This target depends on all .py files in bdranalytics folder
 # Thus if any one changed, also the api doc will be updated
-# If there are py files for which no apidoc is created, using -f does not work: 
-# None of the apidocs will be updated (nothing changed), but the py file will be newer (as there is no corresponding api doc file)
+# If there are py files for which no apidoc is created, using -f does not work:
+# None of the apidocs will be updated (nothing changed), but the py file will
+# be newer (as there is no corresponding api doc file)
 # Therefore we remove the source dir first
 #source: ../bdranalytics
 source:	$(shell find ../bdranalytics -type f -name '*.py')
 	-rm -R source
-	sphinx-apidoc -f -o source/ -H "$(SPHINXPROJ)" ../bdranalytics
+	sphinx-apidoc -f -M -o source/ -H "$(SPHINXPROJ)" ../bdranalytics
 
-../bdranalytics: ;
-
-# the previous source depends on .py files, for which we have no tasks to do
-%.py: ;
-
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile source
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+html:
+	mkdir -p $(BUILDDIR)/html $(BUILDDIR)/doctrees
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in build/html."
