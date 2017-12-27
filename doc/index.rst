@@ -1,22 +1,15 @@
-.. bdr-analytics-py documentation master file, created by
-   sphinx-quickstart on Wed Dec 13 15:51:35 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to bdr-analytics-py's documentation!
 ============================================
 
+bdr-analytics-py is a collection of tools to simplify data science.
+
+Contents
+--------
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
 
-   intro
-   source/modules
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   source/bdranalytics.images
+   source/bdranalytics.keras
+   source/bdranalytics.pdlearn
+   source/bdranalytics.plot
+   source/bdranalytics.sklearn

@@ -30,7 +30,7 @@ clean:
 #source: ../bdranalytics
 source:	$(shell find ../bdranalytics -type f -name '*.py')
 	-rm -R source
-	sphinx-apidoc -f -M -o source/ -H "$(SPHINXPROJ)" ../bdranalytics
+	sphinx-apidoc -f -M -T -o source/ -H "$(SPHINXPROJ)" ../bdranalytics
 
 html:
 	mkdir -p $(BUILDDIR)/html $(BUILDDIR)/doctrees
