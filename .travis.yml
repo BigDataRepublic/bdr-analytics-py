@@ -10,7 +10,7 @@ install: "pip install -r requirements-dev.txt"
 script: nosetests
 script: cd doc && make html
 after_success:
-  - pwd && ls -la && doc/push.sh
+  - ./push.sh
 env:
   global:
     - secure: "XOuMaoQ8tpJYK27pBcNy7JyExfgBIUjMYv6GdiO43ODC/2O6KVjfGbD0lHxWy2kgFHlXl3K5/Z5+p6eaDWoLpztUDz1BfTNB2oXINy5PiPE8MYKWp9UTf27k77zvEKL6RhPfP5Dy7M8YwxC4Bi0CkMa8aoopcKazHQI9eKF9WoE3wW4Ky3imMBNiNjEDCB3bi1pgTGUOtnQkm1N1r6FPTRkLqQlwDgQDYgc9/IubeUTreRbMQcPz3B22/qshgq4Df/yu6a1FODlqRPi9OMmSfTblEv1koOF7IZQBQY9xX7KDsLbOx7N03QM4VoEW0KPyt3RCSmccF4Lvv32wVY+FYzSuq8RwNUld0QFkCCFlOqBHagvXsdbBthj2rFE9jmTFGip+1KkeqovePQhb1w8jepCyJckHQRs6IPZobElKIdJ5/Ut+3wSV2y+Er19kRx5moP4Mnox3Z4+53qhV82WSYngHnPhKG2SxwoAQLx6Xogp5jv/s3cNu5mAlxRFeCmLCEKy01GPe7+zK49VT6ZUVHhbCZdJ7eKsdInNHJvhBb/9uIChRSsDwUuvXyJBfguKg5P8wEaSDe0iXz7ZC4OHTnmwColXOFr6IzQN4cpQHgtmuYBZiKUwTQ1xZPNJ03AWzPGHq1sdvAs9JuY2jDSGquUi+bg/cH0fEWXE6CFE4We8="
