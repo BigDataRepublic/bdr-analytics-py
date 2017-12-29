@@ -29,7 +29,7 @@ clean:
 # Therefore we remove the source dir first
 #source: ../bdranalytics
 source:	$(shell find ../bdranalytics -type f -name '*.py')
-	-rm -R source
+	-rm -Rf source
 	sphinx-apidoc -f -M -T -o source/ -H "$(SPHINXPROJ)" ../bdranalytics
 
 html: Makefile source
