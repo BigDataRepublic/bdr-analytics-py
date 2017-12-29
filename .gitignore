@@ -1,10 +1,24 @@
+# Documentation
+doc/_build
+doc/source
+
+# Python / Anaconda
 *.egg-info
-/dist
-/.idea
+.eggs
 *.iml
 *.pyc
-.eggs
-/src
-.cache
-.ipynb_checkpoints
+
+# IntelliJ / PyCharm
+/.idea
 /build
+/src
+/dist
+
+# Jupyter notebook
+.ipynb_checkpoints
+
+# Joblib
+.cache
+
+# OS X
+.DS_Store

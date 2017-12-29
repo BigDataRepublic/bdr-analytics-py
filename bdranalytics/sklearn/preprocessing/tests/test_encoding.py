@@ -1,12 +1,13 @@
-import numpy as np
-import pandas as pd
 import random
 import unittest
+
+import numpy as np
+import pandas as pd
 
 from bdranalytics.sklearn.preprocessing import WeightOfEvidenceEncoder
 
 
-class TestEncoders(unittest.TestCase):
+class TestEncoding(unittest.TestCase):
 
     def verify_numeric(self, X_test):
         for dt in X_test.dtypes:
@@ -16,18 +17,19 @@ class TestEncoders(unittest.TestCase):
 
             self.assertTrue(numeric)
 
-    def create_dataset(self, n_rows=1000):
+    @staticmethod
+    def create_dataset(n_rows=1000):
         """
         Creates a data set with some categorical variables
         """
         ds = [[
-                  random.random(),
-                  random.random(),
-                  random.choice(['A', 'B', 'C']),
-                  random.choice(['A', 'B', 'C']),
-                  random.choice(['A', 'B', 'C', None]),
-                  random.choice(['A', 'B', 'C'])
-              ] for _ in range(n_rows)]
+            random.random(),
+            random.random(),
+            random.choice(['A', 'B', 'C']),
+            random.choice(['A', 'B', 'C']),
+            random.choice(['A', 'B', 'C', None]),
+            random.choice(['A', 'B', 'C'])
+        ] for _ in range(n_rows)]
 
         X = pd.DataFrame(ds, columns=['c1', 'c2', 'c3', 'c4', 'c5', 'c6'])
         y = np.random.randint(2, size=(n_rows,))
@@ -71,7 +73,6 @@ class TestEncoders(unittest.TestCase):
                                           dependent_variable_values=y_train)
         enc_ext.fit(X_train, y_train)
         self.assertTrue(np.array_equal(output_array_enc_np, enc_ext.transform(X_test)) is True)
-
 
 
 if __name__ == '__main__':
