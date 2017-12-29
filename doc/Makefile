@@ -32,7 +32,7 @@ source:	$(shell find ../bdranalytics -type f -name '*.py')
 	-rm -R source
 	sphinx-apidoc -f -M -T -o source/ -H "$(SPHINXPROJ)" ../bdranalytics
 
-html:
+html: Makefile source
 	mkdir -p $(BUILDDIR)/html $(BUILDDIR)/doctrees
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
