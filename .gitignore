@@ -22,3 +22,8 @@ doc/source
 
 # OS X
 .DS_Store
+
+# Tensorflow
+
+tensorboardlog
+notebooks/logs/

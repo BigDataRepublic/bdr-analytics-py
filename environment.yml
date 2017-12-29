@@ -4,9 +4,10 @@ dependencies:
 - python=2.7
 - cmake
 - boost
+- tensorflow
+- keras
 - pkgconfig
 - jupyter
-- tensorflow
 - conda-forge::xgboost=0.6a2
 - pip
 - pip:
