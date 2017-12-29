@@ -1,0 +1,27 @@
+bdranalytics\.plot package
+==========================
+
+.. automodule:: bdranalytics.plot
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bdranalytics.plot.tests
+
+Submodules
+----------
+
+bdranalytics\.plot\.classification module
+-----------------------------------------
+
+.. automodule:: bdranalytics.plot.classification
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

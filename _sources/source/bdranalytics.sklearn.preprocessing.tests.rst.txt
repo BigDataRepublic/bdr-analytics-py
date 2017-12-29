@@ -1,0 +1,28 @@
+bdranalytics\.sklearn\.preprocessing\.tests package
+===================================================
+
+.. automodule:: bdranalytics.sklearn.preprocessing.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+bdranalytics\.sklearn\.preprocessing\.tests\.test\_encoding module
+------------------------------------------------------------------
+
+.. automodule:: bdranalytics.sklearn.preprocessing.tests.test_encoding
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.sklearn\.preprocessing\.tests\.test\_scaling module
+-----------------------------------------------------------------
+
+.. automodule:: bdranalytics.sklearn.preprocessing.tests.test_scaling
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

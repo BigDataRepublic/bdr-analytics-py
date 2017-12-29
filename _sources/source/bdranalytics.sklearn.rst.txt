@@ -1,0 +1,36 @@
+bdranalytics\.sklearn package
+=============================
+
+.. automodule:: bdranalytics.sklearn
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bdranalytics.sklearn.preprocessing
+    bdranalytics.sklearn.tests
+
+Submodules
+----------
+
+bdranalytics\.sklearn\.encoders module
+--------------------------------------
+
+.. automodule:: bdranalytics.sklearn.encoders
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.sklearn\.model\_selection module
+----------------------------------------------
+
+.. automodule:: bdranalytics.sklearn.model_selection
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

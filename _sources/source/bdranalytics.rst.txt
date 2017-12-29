@@ -1,0 +1,19 @@
+bdranalytics package
+====================
+
+.. automodule:: bdranalytics
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bdranalytics.images
+    bdranalytics.keras
+    bdranalytics.pdlearn
+    bdranalytics.plot
+    bdranalytics.sklearn
+

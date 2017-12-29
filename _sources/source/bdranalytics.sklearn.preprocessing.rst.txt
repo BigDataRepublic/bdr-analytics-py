@@ -1,0 +1,43 @@
+bdranalytics\.sklearn\.preprocessing package
+============================================
+
+.. automodule:: bdranalytics.sklearn.preprocessing
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bdranalytics.sklearn.preprocessing.tests
+
+Submodules
+----------
+
+bdranalytics\.sklearn\.preprocessing\.encoding module
+-----------------------------------------------------
+
+.. automodule:: bdranalytics.sklearn.preprocessing.encoding
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.sklearn\.preprocessing\.preprocessing module
+----------------------------------------------------------
+
+.. automodule:: bdranalytics.sklearn.preprocessing.preprocessing
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.sklearn\.preprocessing\.scaling module
+----------------------------------------------------
+
+.. automodule:: bdranalytics.sklearn.preprocessing.scaling
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

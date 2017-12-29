@@ -1,0 +1,20 @@
+bdranalytics\.sklearn\.tests package
+====================================
+
+.. automodule:: bdranalytics.sklearn.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+bdranalytics\.sklearn\.tests\.test\_model\_selection module
+-----------------------------------------------------------
+
+.. automodule:: bdranalytics.sklearn.tests.test_model_selection
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

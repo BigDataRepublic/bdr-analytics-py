@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.sklearn.preprocessing package &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="bdranalytics.sklearn package" href="bdranalytics.sklearn.html"/>
+        <link rel="next" title="bdranalytics.sklearn.preprocessing.tests package" href="bdranalytics.sklearn.preprocessing.tests.html"/>
+        <link rel="prev" title="bdranalytics.sklearn package" href="bdranalytics.sklearn.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.pdlearn.html">bdranalytics.pdlearn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bdranalytics.sklearn.html">bdranalytics.sklearn package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="bdranalytics.sklearn.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">bdranalytics.sklearn.preprocessing package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-bdranalytics.sklearn.preprocessing.encoding">bdranalytics.sklearn.preprocessing.encoding module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-bdranalytics.sklearn.preprocessing.preprocessing">bdranalytics.sklearn.preprocessing.preprocessing module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-bdranalytics.sklearn.preprocessing.scaling">bdranalytics.sklearn.preprocessing.scaling module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bdranalytics.sklearn.tests.html">bdranalytics.sklearn.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.html#module-bdranalytics.sklearn.encoders">bdranalytics.sklearn.encoders module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.html#module-bdranalytics.sklearn.model_selection">bdranalytics.sklearn.model_selection module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="bdranalytics.sklearn.html">bdranalytics.sklearn package</a> &raquo;</li>
+        
+      <li>bdranalytics.sklearn.preprocessing package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/bdranalytics.sklearn.preprocessing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-bdranalytics.sklearn.preprocessing">
+<span id="bdranalytics-sklearn-preprocessing-package"></span><h1>bdranalytics.sklearn.preprocessing package<a class="headerlink" href="#module-bdranalytics.sklearn.preprocessing" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.ScaledRegressor">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.</code><code class="descname">ScaledRegressor</code><span class="sig-paren">(</span><em>scaler</em>, <em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/scaling.html#ScaledRegressor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.ScaledRegressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.RegressorMixin</span></code></p>
+<p>Allows a regressor to work with a scaled target if it does not allow scaling itself.</p>
+<p>When fitting, the <cite>y</cite> will be transform using the <cite>scaler</cite>, before being passed to the <cite>model.fit</cite>.
+When predicting, the predicted y will be inverse transformed to obtain a y_hat in the original range of values.</p>
+<p>For example, this allows your regressor to predict manipulated targets (ie <cite>log(y)</cite>), without additional pre and
+postprocessing outside your sklearn pipeline</p>
+<dl class="docutils">
+<dt>scaler <span class="classifier-delimiter">:</span> <span class="classifier">TransformerMixin</span></dt>
+<dd>The transformer which will be applied on the target before it is passed to the <cite>model</cite></dd>
+<dt>estimator <span class="classifier-delimiter">:</span> <span class="classifier">RegressorMixin</span></dt>
+<dd>The regressor which will work in transformed target space</dd>
+</dl>
+<p>Examples
+&gt;&gt;&gt; from sklearn.linear_model import LinearRegression
+&gt;&gt;&gt; from sklearn.preprocessing import StandardScaler
+&gt;&gt;&gt; from sklearn.pipeline import Pipeline
+&gt;&gt;&gt; n_rows = 10
+&gt;&gt;&gt; X = np.random.rand(n_rows, 2)
+&gt;&gt;&gt; y = np.random.rand(n_rows)
+&gt;&gt;&gt; regressor = LinearRegression()
+&gt;&gt;&gt; scaler = StandardScaler()
+&gt;&gt;&gt; pipeline = Pipeline([(“predict”, ScaledRegressor(scaler, regressor))])
+&gt;&gt;&gt; y_hat = pipeline.fit(X, y).predict(X)</p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.ScaledRegressor.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/scaling.html#ScaledRegressor.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.ScaledRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.ScaledRegressor.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/scaling.html#ScaledRegressor.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.ScaledRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.</code><code class="descname">WeightOfEvidenceEncoder</code><span class="sig-paren">(</span><em>verbose=0</em>, <em>cols=None</em>, <em>return_df=True</em>, <em>smooth=0.5</em>, <em>fillna=0</em>, <em>dependent_variable_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#WeightOfEvidenceEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Feature-engineering class that transforms a high-capacity categorical value
+into Weigh of Evidence scores. Can be used in sklearn pipelines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>smooth</strong> – value for additive smoothing, to prevent divide by zero</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#WeightOfEvidenceEncoder.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#WeightOfEvidenceEncoder.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.StringIndexer">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.</code><code class="descname">StringIndexer</code><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#StringIndexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.StringIndexer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.StringIndexer.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#StringIndexer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.StringIndexer.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.StringIndexer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#StringIndexer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.StringIndexer.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.</code><code class="descname">LeaveOneOutEncoder</code><span class="sig-paren">(</span><em>with_stdevs=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>will be used during pipeline fit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html">bdranalytics.sklearn.preprocessing.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html#module-bdranalytics.sklearn.preprocessing.tests.test_encoding">bdranalytics.sklearn.preprocessing.tests.test_encoding module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html#module-bdranalytics.sklearn.preprocessing.tests.test_scaling">bdranalytics.sklearn.preprocessing.tests.test_scaling module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-bdranalytics.sklearn.preprocessing.encoding">
+<span id="bdranalytics-sklearn-preprocessing-encoding-module"></span><h2>bdranalytics.sklearn.preprocessing.encoding module<a class="headerlink" href="#module-bdranalytics.sklearn.preprocessing.encoding" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.encoding.</code><code class="descname">LeaveOneOutEncoder</code><span class="sig-paren">(</span><em>with_stdevs=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>will be used during pipeline fit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#LeaveOneOutEncoder.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.LeaveOneOutEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.StringIndexer">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.encoding.</code><code class="descname">StringIndexer</code><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#StringIndexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.StringIndexer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.StringIndexer.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#StringIndexer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.StringIndexer.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.StringIndexer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#StringIndexer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.StringIndexer.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.WeightOfEvidenceEncoder">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.encoding.</code><code class="descname">WeightOfEvidenceEncoder</code><span class="sig-paren">(</span><em>verbose=0</em>, <em>cols=None</em>, <em>return_df=True</em>, <em>smooth=0.5</em>, <em>fillna=0</em>, <em>dependent_variable_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#WeightOfEvidenceEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.WeightOfEvidenceEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Feature-engineering class that transforms a high-capacity categorical value
+into Weigh of Evidence scores. Can be used in sklearn pipelines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>smooth</strong> – value for additive smoothing, to prevent divide by zero</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.WeightOfEvidenceEncoder.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#WeightOfEvidenceEncoder.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.WeightOfEvidenceEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.encoding.WeightOfEvidenceEncoder.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/encoding.html#WeightOfEvidenceEncoder.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.encoding.WeightOfEvidenceEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-bdranalytics.sklearn.preprocessing.preprocessing">
+<span id="bdranalytics-sklearn-preprocessing-preprocessing-module"></span><h2>bdranalytics.sklearn.preprocessing.preprocessing module<a class="headerlink" href="#module-bdranalytics.sklearn.preprocessing.preprocessing" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.preprocessing.</code><code class="descname">ColumnSelector</code><span class="sig-paren">(</span><em>columns</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/preprocessing.html#ColumnSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/preprocessing.html#ColumnSelector.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/preprocessing.html#ColumnSelector.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-bdranalytics.sklearn.preprocessing.scaling">
+<span id="bdranalytics-sklearn-preprocessing-scaling-module"></span><h2>bdranalytics.sklearn.preprocessing.scaling module<a class="headerlink" href="#module-bdranalytics.sklearn.preprocessing.scaling" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bdranalytics.sklearn.preprocessing.scaling.ScaledRegressor">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.preprocessing.scaling.</code><code class="descname">ScaledRegressor</code><span class="sig-paren">(</span><em>scaler</em>, <em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/scaling.html#ScaledRegressor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.scaling.ScaledRegressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.RegressorMixin</span></code></p>
+<p>Allows a regressor to work with a scaled target if it does not allow scaling itself.</p>
+<p>When fitting, the <cite>y</cite> will be transform using the <cite>scaler</cite>, before being passed to the <cite>model.fit</cite>.
+When predicting, the predicted y will be inverse transformed to obtain a y_hat in the original range of values.</p>
+<p>For example, this allows your regressor to predict manipulated targets (ie <cite>log(y)</cite>), without additional pre and
+postprocessing outside your sklearn pipeline</p>
+<dl class="docutils">
+<dt>scaler <span class="classifier-delimiter">:</span> <span class="classifier">TransformerMixin</span></dt>
+<dd>The transformer which will be applied on the target before it is passed to the <cite>model</cite></dd>
+<dt>estimator <span class="classifier-delimiter">:</span> <span class="classifier">RegressorMixin</span></dt>
+<dd>The regressor which will work in transformed target space</dd>
+</dl>
+<p>Examples
+&gt;&gt;&gt; from sklearn.linear_model import LinearRegression
+&gt;&gt;&gt; from sklearn.preprocessing import StandardScaler
+&gt;&gt;&gt; from sklearn.pipeline import Pipeline
+&gt;&gt;&gt; n_rows = 10
+&gt;&gt;&gt; X = np.random.rand(n_rows, 2)
+&gt;&gt;&gt; y = np.random.rand(n_rows)
+&gt;&gt;&gt; regressor = LinearRegression()
+&gt;&gt;&gt; scaler = StandardScaler()
+&gt;&gt;&gt; pipeline = Pipeline([(“predict”, ScaledRegressor(scaler, regressor))])
+&gt;&gt;&gt; y_hat = pipeline.fit(X, y).predict(X)</p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.scaling.ScaledRegressor.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/scaling.html#ScaledRegressor.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.scaling.ScaledRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.preprocessing.scaling.ScaledRegressor.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/preprocessing/scaling.html#ScaledRegressor.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.preprocessing.scaling.ScaledRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bdranalytics.sklearn.preprocessing.tests.html" class="btn btn-neutral float-right" title="bdranalytics.sklearn.preprocessing.tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bdranalytics.sklearn.html" class="btn btn-neutral" title="bdranalytics.sklearn package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

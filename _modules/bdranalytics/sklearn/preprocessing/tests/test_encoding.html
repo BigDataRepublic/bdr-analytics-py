@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.sklearn.preprocessing.tests.test_encoding &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../../../../../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../../index.html"/> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/bdranalytics.pdlearn.html">bdranalytics.pdlearn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/bdranalytics.sklearn.html">bdranalytics.sklearn package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>bdranalytics.sklearn.preprocessing.tests.test_encoding</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bdranalytics.sklearn.preprocessing.tests.test_encoding</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">bdranalytics.sklearn.preprocessing</span> <span class="k">import</span> <span class="n">WeightOfEvidenceEncoder</span>
+
+
+<div class="viewcode-block" id="TestEncoding"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_encoding.TestEncoding">[docs]</a><span class="k">class</span> <span class="nc">TestEncoding</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestEncoding.verify_numeric"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_encoding.TestEncoding.verify_numeric">[docs]</a>    <span class="k">def</span> <span class="nf">verify_numeric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">X_test</span><span class="o">.</span><span class="n">dtypes</span><span class="p">:</span>
+            <span class="n">numeric</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                <span class="n">numeric</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">numeric</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestEncoding.create_dataset"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_encoding.TestEncoding.create_dataset">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_dataset</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a data set with some categorical variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="p">[[</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]),</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]),</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
+        <span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_rows</span><span class="p">)]</span>
+
+        <span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">,</span> <span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="s1">&#39;c5&#39;</span><span class="p">,</span> <span class="s1">&#39;c6&#39;</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,))</span>
+
+        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span></div>
+
+<div class="viewcode-block" id="TestEncoding.test_weight_of_evidence"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_encoding.TestEncoding.test_weight_of_evidence">[docs]</a>    <span class="k">def</span> <span class="nf">test_weight_of_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unit test for WeightOfEvidenceEncoder class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># generate some training data</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c3&#39;</span><span class="p">,</span> <span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="s1">&#39;c5&#39;</span><span class="p">,</span> <span class="s1">&#39;c6&#39;</span><span class="p">]</span>
+        <span class="n">n_rows</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="n">n_rows</span><span class="p">)</span>
+
+        <span class="c1"># independent data set to-be-transformed</span>
+        <span class="n">X_test</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="c1"># add unseen category to catch NaN filling behavior</span>
+        <span class="n">X_test</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Z&#39;</span>
+
+        <span class="c1"># data frame case</span>
+        <span class="n">enc</span> <span class="o">=</span> <span class="n">WeightOfEvidenceEncoder</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+        <span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verify_numeric</span><span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+        <span class="c1"># numpy array case</span>
+        <span class="n">enc_np</span> <span class="o">=</span> <span class="n">WeightOfEvidenceEncoder</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+        <span class="n">enc_np</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="n">output_array_enc_np</span> <span class="o">=</span> <span class="n">enc_np</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>  <span class="c1"># save for following tests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">output_array_enc_np</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span>
+
+        <span class="c1"># external dep var, DIFFERENT from y_train</span>
+        <span class="n">enc_ext</span> <span class="o">=</span> <span class="n">WeightOfEvidenceEncoder</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">dependent_variable_values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,)))</span>
+        <span class="n">enc_ext</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">output_array_enc_np</span><span class="p">,</span> <span class="n">enc_ext</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># external dep var, SAME y_train</span>
+        <span class="n">enc_ext</span> <span class="o">=</span> <span class="n">WeightOfEvidenceEncoder</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">dependent_variable_values</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="n">enc_ext</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">output_array_enc_np</span><span class="p">,</span> <span class="n">enc_ext</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

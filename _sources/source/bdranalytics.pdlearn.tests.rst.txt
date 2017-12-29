@@ -1,0 +1,28 @@
+bdranalytics\.pdlearn\.tests package
+====================================
+
+.. automodule:: bdranalytics.pdlearn.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+bdranalytics\.pdlearn\.tests\.test\_pipeline module
+---------------------------------------------------
+
+.. automodule:: bdranalytics.pdlearn.tests.test_pipeline
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.pdlearn\.tests\.test\_preprocessing module
+--------------------------------------------------------
+
+.. automodule:: bdranalytics.pdlearn.tests.test_preprocessing
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

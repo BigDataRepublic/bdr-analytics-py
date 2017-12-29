@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.sklearn package &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../index.html"/>
+        <link rel="next" title="bdranalytics.sklearn.preprocessing package" href="bdranalytics.sklearn.preprocessing.html"/>
+        <link rel="prev" title="bdranalytics.plot package" href="bdranalytics.plot.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.pdlearn.html">bdranalytics.pdlearn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">bdranalytics.sklearn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.html">bdranalytics.sklearn.preprocessing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bdranalytics.sklearn.tests.html">bdranalytics.sklearn.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-bdranalytics.sklearn.encoders">bdranalytics.sklearn.encoders module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-bdranalytics.sklearn.model_selection">bdranalytics.sklearn.model_selection module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>bdranalytics.sklearn package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/bdranalytics.sklearn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-bdranalytics.sklearn">
+<span id="bdranalytics-sklearn-package"></span><h1>bdranalytics.sklearn package<a class="headerlink" href="#module-bdranalytics.sklearn" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.html">bdranalytics.sklearn.preprocessing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html">bdranalytics.sklearn.preprocessing.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html#module-bdranalytics.sklearn.preprocessing.tests.test_encoding">bdranalytics.sklearn.preprocessing.tests.test_encoding module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.tests.html#module-bdranalytics.sklearn.preprocessing.tests.test_scaling">bdranalytics.sklearn.preprocessing.tests.test_scaling module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.html#module-bdranalytics.sklearn.preprocessing.encoding">bdranalytics.sklearn.preprocessing.encoding module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.html#module-bdranalytics.sklearn.preprocessing.preprocessing">bdranalytics.sklearn.preprocessing.preprocessing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.preprocessing.html#module-bdranalytics.sklearn.preprocessing.scaling">bdranalytics.sklearn.preprocessing.scaling module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.sklearn.tests.html">bdranalytics.sklearn.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.sklearn.tests.html#module-bdranalytics.sklearn.tests.test_model_selection">bdranalytics.sklearn.tests.test_model_selection module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-bdranalytics.sklearn.encoders">
+<span id="bdranalytics-sklearn-encoders-module"></span><h2>bdranalytics.sklearn.encoders module<a class="headerlink" href="#module-bdranalytics.sklearn.encoders" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bdranalytics.sklearn.encoders.ColumnSelector">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">ColumnSelector</code><span class="sig-paren">(</span><em>columns</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#ColumnSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.ColumnSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.ColumnSelector.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#ColumnSelector.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.ColumnSelector.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.ColumnSelector.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#ColumnSelector.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.ColumnSelector.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.encoders.LeaveOneOutEncoder">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">LeaveOneOutEncoder</code><span class="sig-paren">(</span><em>with_stdevs=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#LeaveOneOutEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.LeaveOneOutEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Leave one out transformation for high-capacity categorical variables.</p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.LeaveOneOutEncoder.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#LeaveOneOutEncoder.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.LeaveOneOutEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.LeaveOneOutEncoder.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#LeaveOneOutEncoder.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.LeaveOneOutEncoder.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>will be used during pipeline fit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.LeaveOneOutEncoder.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#LeaveOneOutEncoder.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.LeaveOneOutEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.encoders.StringIndexer">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">StringIndexer</code><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#StringIndexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.StringIndexer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.StringIndexer.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#StringIndexer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.StringIndexer.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.StringIndexer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#StringIndexer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.StringIndexer.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">WeightOfEvidenceEncoder</code><span class="sig-paren">(</span><em>verbose=0</em>, <em>cols=None</em>, <em>return_df=True</em>, <em>smooth=0.5</em>, <em>fillna=0</em>, <em>dependent_variable_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#WeightOfEvidenceEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Feature-engineering class that transforms a high-capacity categorical value
+into Weigh of Evidence scores. Can be used in sklearn pipelines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>smooth</strong> – value for additive smoothing, to prevent divide by zero</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#WeightOfEvidenceEncoder.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#WeightOfEvidenceEncoder.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-bdranalytics.sklearn.model_selection">
+<span id="bdranalytics-sklearn-model-selection-module"></span><h2>bdranalytics.sklearn.model_selection module<a class="headerlink" href="#module-bdranalytics.sklearn.model_selection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bdranalytics.sklearn.model_selection.GrowingWindow">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.model_selection.</code><code class="descname">GrowingWindow</code><span class="sig-paren">(</span><em>n_folds=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#GrowingWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.GrowingWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.NewBase</span></code></p>
+<p>Growing Window cross validator</p>
+<p>Provides train/test indices to split data in train/test sets.
+Divides the data in n_folds+1 slices.
+For split i [1..n_folds], slices [0..i} are train, slice i is test</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>n_folds <span class="classifier-delimiter">:</span> <span class="classifier">int, default=3</span></dt>
+<dd>Number of folds. Must be at least 1</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="bdranalytics.sklearn.model_selection.GrowingWindow.get_n_splits">
+<code class="descname">get_n_splits</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#GrowingWindow.get_n_splits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.GrowingWindow.get_n_splits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of splitting iterations in the cross-validator
+Parameters
+———-
+X : array-like, shape (n_samples, n_features)</p>
+<blockquote>
+<div>Training data, where n_samples is the number of samples
+and n_features is the number of features.</div></blockquote>
+<dl class="docutils">
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd>Always ignored, exists for compatibility.</dd>
+<dt>labels <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd>Always ignored, exists for compatibility.</dd>
+</dl>
+<dl class="docutils">
+<dt>n_splits <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>Returns the number of splitting iterations in the cross-validator.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.model_selection.GrowingWindow.split">
+<code class="descname">split</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#GrowingWindow.split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.GrowingWindow.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate indices to split data into training and test set.
+Parameters
+———-
+X : array-like, shape (n_samples, n_features)</p>
+<blockquote>
+<div>Training data, where n_samples is the number of samples
+and n_features is the number of features.</div></blockquote>
+<dl class="docutils">
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array-like, of length n_samples</span></dt>
+<dd>The target variable for supervised learning problems.
+ignored</dd>
+<dt>labels <span class="classifier-delimiter">:</span> <span class="classifier">array-like, with shape (n_samples,), optional</span></dt>
+<dd>Group labels for the samples used while splitting the dataset into
+train/test set.
+ignored</dd>
+</dl>
+<dl class="docutils">
+<dt>train <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd>The training set indices for that split.</dd>
+<dt>test <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd>The testing set indices for that split.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.sklearn.model_selection.IntervalGrowingWindow">
+<em class="property">class </em><code class="descclassname">bdranalytics.sklearn.model_selection.</code><code class="descname">IntervalGrowingWindow</code><span class="sig-paren">(</span><em>test_start_date</em>, <em>timestamps='index'</em>, <em>test_end_date=None</em>, <em>test_size=None</em>, <em>train_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#IntervalGrowingWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.IntervalGrowingWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.NewBase</span></code></p>
+<p>Growing Window cross-validator based on time intervals</p>
+<dl class="method">
+<dt id="bdranalytics.sklearn.model_selection.IntervalGrowingWindow.generate_intervals">
+<code class="descname">generate_intervals</code><span class="sig-paren">(</span><em>timestamps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#IntervalGrowingWindow.generate_intervals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.IntervalGrowingWindow.generate_intervals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.model_selection.IntervalGrowingWindow.get_n_splits">
+<code class="descname">get_n_splits</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#IntervalGrowingWindow.get_n_splits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.IntervalGrowingWindow.get_n_splits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.model_selection.IntervalGrowingWindow.get_timeseries">
+<code class="descname">get_timeseries</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#IntervalGrowingWindow.get_timeseries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.IntervalGrowingWindow.get_timeseries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the numpy array of timestamps for the given dataset</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.sklearn.model_selection.IntervalGrowingWindow.split">
+<code class="descname">split</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#IntervalGrowingWindow.split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.IntervalGrowingWindow.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate indices to split data into training and test sets based on time stamps</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bdranalytics.sklearn.preprocessing.html" class="btn btn-neutral float-right" title="bdranalytics.sklearn.preprocessing package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bdranalytics.plot.html" class="btn btn-neutral" title="bdranalytics.plot package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

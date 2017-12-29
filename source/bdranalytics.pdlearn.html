@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.pdlearn package &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../index.html"/>
+        <link rel="next" title="bdranalytics.pdlearn.tests package" href="bdranalytics.pdlearn.tests.html"/>
+        <link rel="prev" title="bdranalytics.keras.tests package" href="bdranalytics.keras.tests.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">bdranalytics.pdlearn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bdranalytics.pdlearn.tests.html">bdranalytics.pdlearn.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-bdranalytics.pdlearn.pipeline">bdranalytics.pdlearn.pipeline module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-bdranalytics.pdlearn.preprocessing">bdranalytics.pdlearn.preprocessing module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.sklearn.html">bdranalytics.sklearn package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>bdranalytics.pdlearn package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/bdranalytics.pdlearn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-bdranalytics.pdlearn">
+<span id="bdranalytics-pdlearn-package"></span><h1>bdranalytics.pdlearn package<a class="headerlink" href="#module-bdranalytics.pdlearn" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-bdranalytics.pdlearn" title="bdranalytics.pdlearn"><code class="xref py py-mod docutils literal"><span class="pre">bdranalytics.pdlearn</span></code></a> module contains adapters that allows you
+to put <code class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></code> instances into <code class="xref py py-mod docutils literal"><span class="pre">sklearn</span></code> without
+losing the column names.
+<code class="xref py py-mod docutils literal"><span class="pre">sklearn</span></code> already allows you to provide instances of <code class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></code>,
+but as it internally works with <code class="xref py py-class docutils literal"><span class="pre">numpy.array</span></code>, column names are lost during transformation.
+Here we provide adapters, which re-add the column names after the <code class="xref py py-mod docutils literal"><span class="pre">sklearn</span></code> modifications.</p>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bdranalytics.pdlearn.tests.html">bdranalytics.pdlearn.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.pdlearn.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.pdlearn.tests.html#module-bdranalytics.pdlearn.tests.test_pipeline">bdranalytics.pdlearn.tests.test_pipeline module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdranalytics.pdlearn.tests.html#module-bdranalytics.pdlearn.tests.test_preprocessing">bdranalytics.pdlearn.tests.test_preprocessing module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-bdranalytics.pdlearn.pipeline">
+<span id="bdranalytics-pdlearn-pipeline-module"></span><h2>bdranalytics.pdlearn.pipeline module<a class="headerlink" href="#module-bdranalytics.pdlearn.pipeline" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureChain">
+<em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.pipeline.</code><code class="descname">PdFeatureChain</code><span class="sig-paren">(</span><em>steps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Passes a data set through a pipeline / chain of transformers.
+The output of the first transformer is fed into the next transformer.</p>
+<p>Similar to sklearn Pipeline, but does not work with predictor in final step.</p>
+<dl class="method">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureChain.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureChain.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureChain.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureChain.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureChain.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureChain.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureChain.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureChain.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureChain.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureUnion">
+<em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.pipeline.</code><code class="descname">PdFeatureUnion</code><span class="sig-paren">(</span><em>transformer_list</em>, <em>n_jobs=1</em>, <em>transformer_weights=None</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureUnion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureUnion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Concatenates the result of multiple transformers</p>
+<dl class="method">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureUnion.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureUnion.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureUnion.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureUnion.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureUnion.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureUnion.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.pipeline.PdFeatureUnion.transformgen">
+<code class="descname">transformgen</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureUnion.transformgen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureUnion.transformgen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-bdranalytics.pdlearn.preprocessing">
+<span id="bdranalytics-pdlearn-preprocessing-module"></span><h2>bdranalytics.pdlearn.preprocessing module<a class="headerlink" href="#module-bdranalytics.pdlearn.preprocessing" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding">
+<em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">DateCyclicalEncoding</code><span class="sig-paren">(</span><em>date_columns, parts=['DAY', 'DAY_OF_WEEK', 'HOUR', 'MINUTE', 'MONTH', 'SECOND'], new_column_names=None, drop=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateCyclicalEncoding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Feature-engineering class that transforms date columns into cyclical numerical columns.
+The original date column will be removed.
+To be used by sklearn pipelines</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>date_columns</strong> – the column names of the date columns to be expanded in one hot encodings</li>
+<li><strong>new_column_names</strong> – the names to use as prefix for the generated column names</li>
+<li><strong>drop</strong> – whether or not to drop the original column</li>
+<li><strong>parts</strong> – the parts to extract from the date columns, and to then transform into one-hot encodings</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.all_to_cyclical_parts">
+<code class="descname">all_to_cyclical_parts</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateCyclicalEncoding.all_to_cyclical_parts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.all_to_cyclical_parts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateCyclicalEncoding.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateCyclicalEncoding.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.pdlearn.preprocessing.DateOneHotEncoding">
+<em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">DateOneHotEncoding</code><span class="sig-paren">(</span><em>date_columns, parts=['DAY', 'DAY_OF_WEEK', 'HOUR', 'MINUTE', 'MONTH', 'SECOND'], new_column_names=None, drop=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateOneHotEncoding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Feature-engineering class that transforms date columns into one hot encoding of the parts (day, hour, ..).
+The original date column will be removed.
+To be used by sklearn pipelines</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>date_columns</strong> – the column names of the date columns to be expanded in one hot encodings</li>
+<li><strong>new_column_names</strong> – the names to use as prefix for the generated column names</li>
+<li><strong>drop</strong> – whether or not to drop the original column</li>
+<li><strong>parts</strong> – the parts to extract from the date columns, and to then transform into one-hot encodings</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.all_to_parts">
+<code class="descname">all_to_parts</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateOneHotEncoding.all_to_parts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.all_to_parts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateOneHotEncoding.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateOneHotEncoding.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.transform_one_hots">
+<code class="descname">transform_one_hots</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateOneHotEncoding.transform_one_hots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.transform_one_hots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer">
+<em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">PdLagTransformer</code><span class="sig-paren">(</span><em>lag</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer.do_transform">
+<code class="descname">do_transform</code><span class="sig-paren">(</span><em>dataframe</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer.do_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer.do_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer">
+<em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">PdWindowTransformer</code><span class="sig-paren">(</span><em>func</em>, <em>**rolling_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer.do_transform">
+<code class="descname">do_transform</code><span class="sig-paren">(</span><em>dataframe</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer.do_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.do_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="bdranalytics.pdlearn.preprocessing.date_to_cyclical">
+<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">date_to_cyclical</code><span class="sig-paren">(</span><em>df, col_name, parts=['HOUR', 'DAY_OF_WEEK', 'MONTH', 'SECOND', 'DAY', 'MINUTE'], new_col_name_prefix=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#date_to_cyclical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.date_to_cyclical" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bdranalytics.pdlearn.preprocessing.date_to_dateparts">
+<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">date_to_dateparts</code><span class="sig-paren">(</span><em>df, col_name, parts=['HOUR', 'DAY_OF_WEEK', 'MONTH', 'SECOND', 'DAY', 'MINUTE'], new_col_name_prefix=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#date_to_dateparts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.date_to_dateparts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bdranalytics.pdlearn.preprocessing.format_colname">
+<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">format_colname</code><span class="sig-paren">(</span><em>prefix</em>, <em>suffix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#format_colname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.format_colname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bdranalytics.pdlearn.preprocessing.to_circular_variable">
+<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">to_circular_variable</code><span class="sig-paren">(</span><em>df</em>, <em>col_name</em>, <em>cardinality</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#to_circular_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.to_circular_variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bdranalytics.pdlearn.tests.html" class="btn btn-neutral float-right" title="bdranalytics.pdlearn.tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bdranalytics.keras.tests.html" class="btn btn-neutral" title="bdranalytics.keras.tests package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

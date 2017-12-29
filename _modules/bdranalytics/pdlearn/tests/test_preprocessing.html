@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.pdlearn.tests.test_preprocessing &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.pdlearn.html">bdranalytics.pdlearn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.sklearn.html">bdranalytics.sklearn package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>bdranalytics.pdlearn.tests.test_preprocessing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bdranalytics.pdlearn.tests.test_preprocessing</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="kn">from</span> <span class="nn">bdranalytics.pdlearn.preprocessing</span> <span class="k">import</span> <span class="n">DateCyclicalEncoding</span><span class="p">,</span> <span class="n">DateOneHotEncoding</span>
+<span class="kn">from</span> <span class="nn">bdranalytics.pdlearn.preprocessing</span> <span class="k">import</span> <span class="n">date_to_dateparts</span><span class="p">,</span> <span class="n">date_to_cyclical</span>
+
+
+<div class="viewcode-block" id="TestDatePartitioner"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_preprocessing.TestDatePartitioner">[docs]</a><span class="k">class</span> <span class="nc">TestDatePartitioner</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestDatePartitioner.test_date_to_dateparts"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_preprocessing.TestDatePartitioner.test_date_to_dateparts">[docs]</a>    <span class="k">def</span> <span class="nf">test_date_to_dateparts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-11&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-18&#39;</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;thedate&quot;</span><span class="p">])</span>
+        <span class="n">splitted_data</span> <span class="o">=</span> <span class="n">date_to_dateparts</span><span class="p">(</span><span class="n">orig_data</span><span class="p">,</span> <span class="s1">&#39;thedate&#39;</span><span class="p">,</span> <span class="n">new_col_name_prefix</span><span class="o">=</span><span class="s1">&#39;prefix&#39;</span><span class="p">)</span>
+
+        <span class="n">expected_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;prefix_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;DAY&quot;</span><span class="p">,</span> <span class="s2">&quot;DAY_OF_WEEK&quot;</span><span class="p">,</span> <span class="s2">&quot;HOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;MINUTE&quot;</span><span class="p">,</span> <span class="s2">&quot;MONTH&quot;</span><span class="p">,</span> <span class="s2">&quot;SECOND&quot;</span><span class="p">]]</span>
+        <span class="c1"># no additional columns</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">expected_columns</span><span class="p">)),</span> <span class="nb">list</span><span class="p">())</span>
+        <span class="c1"># no missing columns</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expected_columns</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)),</span> <span class="nb">list</span><span class="p">())</span>
+        <span class="n">monday</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">tuesday</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">expected_columns</span><span class="p">],</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="n">monday</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">expected_columns</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="n">tuesday</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="TestDatePartitioner.test_dateparts_to_circular"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_preprocessing.TestDatePartitioner.test_dateparts_to_circular">[docs]</a>    <span class="k">def</span> <span class="nf">test_dateparts_to_circular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-11&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-18&#39;</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;thedate&quot;</span><span class="p">])</span>
+        <span class="n">circular_data</span> <span class="o">=</span> <span class="n">date_to_cyclical</span><span class="p">(</span><span class="n">orig_data</span><span class="p">,</span> <span class="s1">&#39;thedate&#39;</span><span class="p">,</span> <span class="n">new_col_name_prefix</span><span class="o">=</span> <span class="s1">&#39;prefix&#39;</span><span class="p">)</span>
+
+        <span class="n">intermediate_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;prefix_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;DAY&quot;</span><span class="p">,</span> <span class="s2">&quot;DAY_OF_WEEK&quot;</span><span class="p">,</span> <span class="s2">&quot;HOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;MINUTE&quot;</span><span class="p">,</span> <span class="s2">&quot;MONTH&quot;</span><span class="p">,</span> <span class="s2">&quot;SECOND&quot;</span><span class="p">]]</span>
+        <span class="n">expected_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;COS&quot;</span><span class="p">,</span><span class="s2">&quot;SIN&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">intermediate_columns</span><span class="p">]</span>
+        <span class="c1"># no additional columns</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">expected_columns</span><span class="p">)),</span> <span class="nb">list</span><span class="p">())</span>
+        <span class="c1"># no missing columns</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expected_columns</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)),</span> <span class="nb">list</span><span class="p">())</span>
+        <span class="c1"># correct result compared to just splitting the columns</span>
+        <span class="n">splitted_data</span> <span class="o">=</span> <span class="n">date_to_dateparts</span><span class="p">(</span><span class="n">orig_data</span><span class="p">,</span> <span class="s1">&#39;thedate&#39;</span><span class="p">,</span> <span class="n">new_col_name_prefix</span><span class="o">=</span><span class="s1">&#39;prefix&#39;</span><span class="p">)</span>
+        <span class="n">sin_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;SIN&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">intermediate_columns</span><span class="p">]</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">sin_columns</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">intermediate_columns</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">60</span><span class="p">]))))</span>
+        <span class="n">cos_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;COS&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">intermediate_columns</span><span class="p">]</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">cos_columns</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">intermediate_columns</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">60</span><span class="p">]))))</span></div>
+
+<div class="viewcode-block" id="TestDatePartitioner.test_dateonehotencoding"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_preprocessing.TestDatePartitioner.test_dateonehotencoding">[docs]</a>    <span class="k">def</span> <span class="nf">test_dateonehotencoding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-11&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-18&#39;</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;thedate&quot;</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="n">onehot</span> <span class="o">=</span> <span class="n">DateOneHotEncoding</span><span class="p">([</span><span class="s1">&#39;thedate&#39;</span><span class="p">],</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="n">onehot</span></div>
+
+<div class="viewcode-block" id="TestDatePartitioner.test_datecyclicalencoding"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_preprocessing.TestDatePartitioner.test_datecyclicalencoding">[docs]</a>    <span class="k">def</span> <span class="nf">test_datecyclicalencoding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-11&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2011-07-18&#39;</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;thedate&quot;</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+        <span class="c1"># create splitted to also be able to calculate values</span>
+        <span class="n">splitted_data</span> <span class="o">=</span> <span class="n">date_to_dateparts</span><span class="p">(</span><span class="n">orig_data</span><span class="p">,</span> <span class="s1">&#39;thedate&#39;</span><span class="p">)</span>
+
+        <span class="n">circular_data</span> <span class="o">=</span> <span class="n">DateCyclicalEncoding</span><span class="p">([</span><span class="s1">&#39;thedate&#39;</span><span class="p">],</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">intermediate_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;thedate_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;DAY&quot;</span><span class="p">,</span> <span class="s2">&quot;DAY_OF_WEEK&quot;</span><span class="p">,</span> <span class="s2">&quot;HOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;MINUTE&quot;</span><span class="p">,</span> <span class="s2">&quot;MONTH&quot;</span><span class="p">,</span> <span class="s2">&quot;SECOND&quot;</span><span class="p">]]</span>
+        <span class="n">expected_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;COS&quot;</span><span class="p">,</span> <span class="s2">&quot;SIN&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">intermediate_columns</span><span class="p">]</span>
+        <span class="c1"># no additional columns</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">expected_columns</span><span class="p">)),</span> <span class="nb">list</span><span class="p">())</span>
+        <span class="c1"># no missing columns</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expected_columns</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)),</span> <span class="nb">list</span><span class="p">())</span>
+        <span class="n">sin_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;SIN&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">intermediate_columns</span><span class="p">]</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">sin_columns</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">intermediate_columns</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">60</span><span class="p">]))))</span>
+        <span class="n">cos_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;COS&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">intermediate_columns</span><span class="p">]</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">circular_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">cos_columns</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">splitted_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">intermediate_columns</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">60</span><span class="p">]))))</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

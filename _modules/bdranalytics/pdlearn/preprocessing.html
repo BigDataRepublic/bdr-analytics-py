@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.pdlearn.preprocessing &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/bdranalytics.pdlearn.html">bdranalytics.pdlearn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/bdranalytics.sklearn.html">bdranalytics.sklearn package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>bdranalytics.pdlearn.preprocessing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bdranalytics.pdlearn.preprocessing</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">OneHotEncoder</span>
+
+<span class="kn">from</span> <span class="nn">bdranalytics.sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StringIndexer</span>
+
+
+<div class="viewcode-block" id="format_colname"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.format_colname">[docs]</a><span class="k">def</span> <span class="nf">format_colname</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">suffix</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_</span><span class="si">{:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span></div>
+
+
+<span class="sd">&quot;&quot;&quot;A dictionary to get a date part cardinality given a general name&quot;&quot;&quot;</span>
+<span class="n">__date_part_cardinality</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;MONTH&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">&quot;DAY&quot;</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
+    <span class="s2">&quot;DAY_OF_WEEK&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">&quot;HOUR&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="s2">&quot;MINUTE&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s2">&quot;SECOND&quot;</span><span class="p">:</span> <span class="mi">60</span>
+<span class="p">}</span>
+
+<span class="sd">&quot;&quot;&quot;A dictionary to get a date part extractor given a general name&quot;&quot;&quot;</span>
+<span class="n">__date_part_funcs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;MONTH&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+    <span class="s2">&quot;DAY&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+    <span class="s2">&quot;DAY_OF_WEEK&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">dayofweek</span><span class="p">,</span>
+    <span class="s2">&quot;HOUR&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+    <span class="s2">&quot;MINUTE&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+    <span class="s2">&quot;SECOND&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">second</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="date_to_dateparts"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.date_to_dateparts">[docs]</a><span class="k">def</span> <span class="nf">date_to_dateparts</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">parts</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">new_col_name_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">new_col_name_prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">new_col_name_prefix</span> <span class="o">=</span> <span class="n">col_name</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">part</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> \
+            <span class="s2">&quot;part &#39;</span><span class="si">{}</span><span class="s2">&#39; is not known. Available are </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                            <span class="n">format_colname</span><span class="p">(</span><span class="n">new_col_name_prefix</span><span class="p">,</span> <span class="n">part</span><span class="p">):</span>
+                                <span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">part</span><span class="p">))</span>
+                            <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">}</span>
+                        <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="date_to_cyclical"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.date_to_cyclical">[docs]</a><span class="k">def</span> <span class="nf">date_to_cyclical</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">parts</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">new_col_name_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">new_col_name_prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">new_col_name_prefix</span> <span class="o">=</span> <span class="n">col_name</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">part</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> \
+            <span class="s2">&quot;part &#39;</span><span class="si">{}</span><span class="s2">&#39; is not known. Available are </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_colname</span><span class="p">(</span><span class="n">new_col_name_prefix</span><span class="p">,</span> <span class="n">part</span><span class="p">)</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">]</span>
+    <span class="n">names_sin</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_SIN&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+    <span class="n">names_cos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_COS&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">__date_part_funcs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">part</span><span class="p">))</span> <span class="o">/</span>
+              <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">__date_part_cardinality</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">part</span><span class="p">))</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">]</span>
+    <span class="n">values_sin</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+    <span class="n">values_cos</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">values_sin</span> <span class="o">+</span> <span class="n">values_cos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">names_sin</span> <span class="o">+</span> <span class="n">names_cos</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="to_circular_variable"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.to_circular_variable">[docs]</a><span class="k">def</span> <span class="nf">to_circular_variable</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="c1"># note that np.sin(df[col_name] / float(cardinalilty...)) gives different values, probably rounding</span>
+        <span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_SIN&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span> <span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">cardinality</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))),</span>
+        <span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_COS&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span> <span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">cardinality</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)))</span>
+    <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DateOneHotEncoding"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding">[docs]</a><span class="k">class</span> <span class="nc">DateOneHotEncoding</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Feature-engineering class that transforms date columns into one hot encoding of the parts (day, hour, ..).</span>
+<span class="sd">    The original date column will be removed.</span>
+<span class="sd">    To be used by sklearn pipelines</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_columns</span><span class="p">,</span> <span class="n">parts</span><span class="o">=</span><span class="nb">list</span><span class="p">([</span><span class="s2">&quot;DAY&quot;</span><span class="p">,</span> <span class="s2">&quot;DAY_OF_WEEK&quot;</span><span class="p">,</span> <span class="s2">&quot;HOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;MINUTE&quot;</span><span class="p">,</span> <span class="s2">&quot;MONTH&quot;</span><span class="p">,</span> <span class="s2">&quot;SECOND&quot;</span><span class="p">]),</span>
+                 <span class="n">new_column_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param date_columns: the column names of the date columns to be expanded in one hot encodings</span>
+<span class="sd">        :param new_column_names: the names to use as prefix for the generated column names</span>
+<span class="sd">        :param drop: whether or not to drop the original column</span>
+<span class="sd">        :param parts: the parts to extract from the date columns, and to then transform into one-hot encodings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="o">=</span> <span class="n">drop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parts</span> <span class="o">=</span> <span class="n">parts</span>
+        <span class="k">if</span> <span class="n">new_column_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span> <span class="o">=</span> <span class="n">date_columns</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span> <span class="o">=</span> <span class="n">new_column_names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span> <span class="o">=</span> <span class="n">date_columns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">one_hot_encoding_model</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span>
+                                                    <span class="c1"># , n_values=datepart_maxvalue</span>
+                                                    <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoding_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;labeler&#39;</span><span class="p">,</span> <span class="n">StringIndexer</span><span class="p">()),</span>
+            <span class="p">(</span><span class="s1">&#39;encoder&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">one_hot_encoding_model</span><span class="p">)</span>
+        <span class="p">])</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span><span class="p">)),</span> \
+            <span class="s2">&quot;length of new column names is not equal to given column names&quot;</span>
+
+<div class="viewcode-block" id="DateOneHotEncoding.all_to_parts"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.all_to_parts">[docs]</a>    <span class="k">def</span> <span class="nf">all_to_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">date_to_dateparts</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">old_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span>
+                 <span class="k">for</span> <span class="n">old_name</span><span class="p">,</span> <span class="n">new_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span><span class="p">)]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join_axes</span><span class="o">=</span><span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="DateOneHotEncoding.fit"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_to_parts</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoding_pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+        <span class="c1"># original column i is mapped to values in range resulting_indices[i] .. resulting_indices[i+1]</span>
+        <span class="n">resulting_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">one_hot_encoding_model</span><span class="o">.</span><span class="n">feature_indices_</span>
+        <span class="n">active_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">one_hot_encoding_model</span><span class="o">.</span><span class="n">active_features_</span>
+        <span class="n">new_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">resulting_indices</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parts</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">resulting_indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">resulting_indices</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+                <span class="n">new_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitted_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">active_features</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="DateOneHotEncoding.transform_one_hots"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.transform_one_hots">[docs]</a>    <span class="k">def</span> <span class="nf">transform_one_hots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">np_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding_pipeline</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_to_parts</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np_frame</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fitted_names</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DateOneHotEncoding.transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">new_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_one_hots</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">old_columns</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="k">else</span> <span class="n">X</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">old_columns</span><span class="p">,</span> <span class="n">new_columns</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join_axes</span><span class="o">=</span><span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">])</span></div></div>
+
+
+<div class="viewcode-block" id="DateCyclicalEncoding"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding">[docs]</a><span class="k">class</span> <span class="nc">DateCyclicalEncoding</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Feature-engineering class that transforms date columns into cyclical numerical columns.</span>
+<span class="sd">    The original date column will be removed.</span>
+<span class="sd">    To be used by sklearn pipelines</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_columns</span><span class="p">,</span> <span class="n">parts</span><span class="o">=</span><span class="nb">list</span><span class="p">([</span><span class="s2">&quot;DAY&quot;</span><span class="p">,</span> <span class="s2">&quot;DAY_OF_WEEK&quot;</span><span class="p">,</span> <span class="s2">&quot;HOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;MINUTE&quot;</span><span class="p">,</span> <span class="s2">&quot;MONTH&quot;</span><span class="p">,</span> <span class="s2">&quot;SECOND&quot;</span><span class="p">]),</span>
+                 <span class="n">new_column_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param date_columns: the column names of the date columns to be expanded in one hot encodings</span>
+<span class="sd">        :param new_column_names: the names to use as prefix for the generated column names</span>
+<span class="sd">        :param drop: whether or not to drop the original column</span>
+<span class="sd">        :param parts: the parts to extract from the date columns, and to then transform into one-hot encodings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parts</span> <span class="o">=</span> <span class="n">parts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="o">=</span> <span class="n">drop</span>
+        <span class="k">if</span> <span class="n">new_column_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span> <span class="o">=</span> <span class="n">date_columns</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span> <span class="o">=</span> <span class="n">new_column_names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span> <span class="o">=</span> <span class="n">date_columns</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span><span class="p">))</span>
+
+<div class="viewcode-block" id="DateCyclicalEncoding.all_to_cyclical_parts"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.all_to_cyclical_parts">[docs]</a>    <span class="k">def</span> <span class="nf">all_to_cyclical_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">date_to_cyclical</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">old_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span>
+                 <span class="k">for</span> <span class="n">old_name</span><span class="p">,</span> <span class="n">new_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_column_names</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join_axes</span><span class="o">=</span><span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DateCyclicalEncoding.fit"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="DateCyclicalEncoding.transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">new_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_to_cyclical_parts</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">old_columns</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="k">else</span> <span class="n">X</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">old_columns</span><span class="p">,</span> <span class="n">new_columns</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join_axes</span><span class="o">=</span><span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">])</span></div></div>
+
+
+<span class="c1"># like sklearn&#39;s transformers, but then on pandas DataFrame</span>
+<div class="viewcode-block" id="PdLagTransformer"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdLagTransformer">[docs]</a><span class="k">class</span> <span class="nc">PdLagTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lag</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lag</span> <span class="o">=</span> <span class="n">lag</span>
+
+<div class="viewcode-block" id="PdLagTransformer.fit"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="PdLagTransformer.do_transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdLagTransformer.do_transform">[docs]</a>    <span class="k">def</span> <span class="nf">do_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lag</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_lag</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lag</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="PdLagTransformer.transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdLagTransformer.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_transform</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PdLagTransformer.fit_transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PdWindowTransformer"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdWindowTransformer">[docs]</a><span class="k">class</span> <span class="nc">PdWindowTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">rolling_params</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rolling_params</span> <span class="o">=</span> <span class="n">rolling_params</span>
+
+<div class="viewcode-block" id="PdWindowTransformer.fit"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="PdWindowTransformer.do_transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.do_transform">[docs]</a>    <span class="k">def</span> <span class="nf">do_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">rolling_params</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rolling_params</span><span class="o">.</span><span class="n">items</span><span class="p">()]))))</span></div>
+
+<div class="viewcode-block" id="PdWindowTransformer.transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_transform</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PdWindowTransformer.fit_transform"><a class="viewcode-back" href="../../../source/bdranalytics.pdlearn.html#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

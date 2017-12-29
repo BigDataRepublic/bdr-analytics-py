@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.pdlearn.tests.test_pipeline &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.pdlearn.html">bdranalytics.pdlearn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.sklearn.html">bdranalytics.sklearn package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>bdranalytics.pdlearn.tests.test_pipeline</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bdranalytics.pdlearn.tests.test_pipeline</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">FeatureUnion</span><span class="p">,</span> <span class="n">Pipeline</span>
+
+<span class="kn">from</span> <span class="nn">bdranalytics.pdlearn.pipeline</span> <span class="k">import</span> <span class="n">PdFeatureUnion</span><span class="p">,</span> <span class="n">PdFeatureChain</span>
+<span class="kn">from</span> <span class="nn">bdranalytics.pdlearn.preprocessing</span> <span class="k">import</span> <span class="n">PdLagTransformer</span><span class="p">,</span> <span class="n">PdWindowTransformer</span>
+
+
+<div class="viewcode-block" id="TestLagTransformer"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_pipeline.TestLagTransformer">[docs]</a><span class="k">class</span> <span class="nc">TestLagTransformer</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestLagTransformer.test_lagtransformer"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_pipeline.TestLagTransformer.test_lagtransformer">[docs]</a>    <span class="k">def</span> <span class="nf">test_lagtransformer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">])</span>
+        <span class="n">lagged</span> <span class="o">=</span> <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">lagged</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;col1_lag1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2_lag1&quot;</span><span class="p">,</span> <span class="s2">&quot;col3_lag1&quot;</span><span class="p">])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">lagged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">orig_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">lagged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestLagTransformer.test_lagtransformer_on_numpy"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_pipeline.TestLagTransformer.test_lagtransformer_on_numpy">[docs]</a>    <span class="k">def</span> <span class="nf">test_lagtransformer_on_numpy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">lagged</span> <span class="o">=</span> <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">lagged</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;0_lag1&quot;</span><span class="p">,</span> <span class="s2">&quot;1_lag1&quot;</span><span class="p">,</span> <span class="s2">&quot;2_lag1&quot;</span><span class="p">])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">lagged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">orig_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">lagged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestLagTransformer.test_windowtransformer"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_pipeline.TestLagTransformer.test_windowtransformer">[docs]</a>    <span class="k">def</span> <span class="nf">test_windowtransformer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;col1_window2&quot;</span><span class="p">,</span> <span class="s2">&quot;col2_window2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3_window2&quot;</span><span class="p">])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">orig_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span> <span class="c1"># orig data is [ [14, 13, 12], [11, 10, 9],.., thus rolling max at row 1 should be values of row 0</span></div>
+
+<div class="viewcode-block" id="TestLagTransformer.test_windowtransformer_on_numpy"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_pipeline.TestLagTransformer.test_windowtransformer_on_numpy">[docs]</a>    <span class="k">def</span> <span class="nf">test_windowtransformer_on_numpy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;0_window2&quot;</span><span class="p">,</span> <span class="s2">&quot;1_window2&quot;</span><span class="p">,</span> <span class="s2">&quot;2_window2&quot;</span><span class="p">])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">orig_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span> <span class="c1"># orig data is [ [14, 13, 12], [11, 10, 9],.., thus rolling max at row 1 should be values of row 0</span></div>
+
+<div class="viewcode-block" id="TestLagTransformer.test_featureunion"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_pipeline.TestLagTransformer.test_featureunion">[docs]</a>    <span class="k">def</span> <span class="nf">test_featureunion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">PdFeatureUnion</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;lag&#39;</span><span class="p">,</span> <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+            <span class="p">(</span><span class="s1">&#39;window&#39;</span><span class="p">,</span> <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">))]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="s2">&quot;col1_lag1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2_lag1&quot;</span><span class="p">,</span> <span class="s2">&quot;col3_lag1&quot;</span><span class="p">,</span> <span class="s2">&quot;col1_window2&quot;</span><span class="p">,</span> <span class="s2">&quot;col2_window2&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;col3_window2&quot;</span><span class="p">])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span>
+            <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span>
+            <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="p">,</span>
+                                      <span class="n">FeatureUnion</span><span class="p">([</span>
+                                          <span class="p">(</span><span class="s2">&quot;lag&quot;</span><span class="p">,</span> <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+                                          <span class="p">(</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">))</span>
+                                      <span class="p">])</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestLagTransformer.test_featurechain"><a class="viewcode-back" href="../../../../source/bdranalytics.pdlearn.tests.html#bdranalytics.pdlearn.tests.test_pipeline.TestLagTransformer.test_featurechain">[docs]</a>    <span class="k">def</span> <span class="nf">test_featurechain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">orig_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">PdFeatureChain</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;lag&#39;</span><span class="p">,</span> <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+            <span class="p">(</span><span class="s1">&#39;window&#39;</span><span class="p">,</span> <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">))])</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="s2">&quot;col1_lag1_window2&quot;</span><span class="p">,</span> <span class="s2">&quot;col2_lag1_window2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3_lag1_window2&quot;</span><span class="p">])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span>
+            <span class="n">result</span><span class="p">,</span>
+            <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span>
+                <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="p">,</span>
+                                      <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+                                          <span class="p">(</span><span class="s2">&quot;lag&quot;</span><span class="p">,</span> <span class="n">PdLagTransformer</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+                                          <span class="p">(</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">PdWindowTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">window</span><span class="p">:</span> <span class="n">window</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">window</span> <span class="o">=</span> <span class="mi">2</span><span class="p">))</span>
+                                      <span class="p">])</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">orig_data</span><span class="p">))</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

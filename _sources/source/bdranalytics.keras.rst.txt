@@ -1,0 +1,43 @@
+bdranalytics\.keras package
+===========================
+
+.. automodule:: bdranalytics.keras
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bdranalytics.keras.tests
+
+Submodules
+----------
+
+bdranalytics\.keras\.callbacks module
+-------------------------------------
+
+.. automodule:: bdranalytics.keras.callbacks
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.keras\.generators module
+--------------------------------------
+
+.. automodule:: bdranalytics.keras.generators
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.keras\.layers module
+----------------------------------
+
+.. automodule:: bdranalytics.keras.layers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

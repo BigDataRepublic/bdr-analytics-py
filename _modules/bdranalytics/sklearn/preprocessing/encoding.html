@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bdranalytics.sklearn.preprocessing.encoding &mdash; bdr-analytics-py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> bdr-analytics-py
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.keras.html">bdranalytics.keras package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.pdlearn.html">bdranalytics.pdlearn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.plot.html">bdranalytics.plot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/bdranalytics.sklearn.html">bdranalytics.sklearn package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">bdr-analytics-py</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>bdranalytics.sklearn.preprocessing.encoding</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bdranalytics.sklearn.preprocessing.encoding</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">TransformerMixin</span>
+
+
+<div class="viewcode-block" id="WeightOfEvidenceEncoder"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder">[docs]</a><span class="k">class</span> <span class="nc">WeightOfEvidenceEncoder</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Feature-engineering class that transforms a high-capacity categorical value</span>
+<span class="sd">    into Weigh of Evidence scores. Can be used in sklearn pipelines.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">smooth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dependent_variable_values</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param smooth: value for additive smoothing, to prevent divide by zero</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># make sure cols is a list of strings</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_df</span> <span class="o">=</span> <span class="n">return_df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="n">cols</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">smooth</span> <span class="o">=</span> <span class="n">smooth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fillna</span> <span class="o">=</span> <span class="n">fillna</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dependent_variable_values</span> <span class="o">=</span> <span class="n">dependent_variable_values</span>
+
+<div class="viewcode-block" id="WeightOfEvidenceEncoder.fit"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Input should be an instance of pandas.DataFrame()&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependent_variable_values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependent_variable_values</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">y_col_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">y_col_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">get_totals</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">smooth</span><span class="p">)</span>
+            <span class="n">neg</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">total</span> <span class="o">-</span> <span class="n">pos</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">smooth</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pos</span><span class="p">,</span> <span class="n">neg</span>
+
+        <span class="c1"># get the totals per class</span>
+        <span class="n">total_positive</span><span class="p">,</span> <span class="n">total_negative</span> <span class="o">=</span> <span class="n">get_totals</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total positives </span><span class="si">{:.0f}</span><span class="s2">, total negatives </span><span class="si">{:.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_positive</span><span class="p">,</span> <span class="n">total_negative</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">compute_bucket_woe</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">bucket_positive</span><span class="p">,</span> <span class="n">bucket_negative</span> <span class="o">=</span> <span class="n">get_totals</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">bucket_positive</span> <span class="o">/</span> <span class="n">bucket_negative</span><span class="p">)</span>
+
+        <span class="c1"># compute WoE scores per bucket (category)</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;computing weight of evidence for column </span><span class="si">{:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+
+            <span class="n">stat</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">col</span><span class="p">)[</span><span class="n">y_col_index</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">compute_bucket_woe</span><span class="p">)</span>
+                          <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">total_negative</span> <span class="o">/</span> <span class="n">total_positive</span><span class="p">))</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat</span> <span class="o">=</span> <span class="n">stat</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="WeightOfEvidenceEncoder.transform"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.WeightOfEvidenceEncoder.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Input should be an instance of pandas.DataFrame()&#39;</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># join the WoE stats with the data</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;transforming categorical column </span><span class="si">{:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+
+            <span class="n">stat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stat</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+
+            <span class="n">ser</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># fill missing values with</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.0f}</span><span class="s2"> NaNs in transformed data&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ser</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2"> mean weight of evidence&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ser</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ser</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fillna</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_df</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">df</span>
+
+        <span class="k">return</span> <span class="n">out</span></div></div>
+
+
+<div class="viewcode-block" id="StringIndexer"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.StringIndexer">[docs]</a><span class="k">class</span> <span class="nc">StringIndexer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dictionaries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+<div class="viewcode-block" id="StringIndexer.fit"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.StringIndexer.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">categories</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dictionaries</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">categories</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">))))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringIndexer.transform"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.StringIndexer.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">column_array</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">dictionary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionaries</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+            <span class="n">na_value</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">transformed_column</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">na_value</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+            <span class="n">column_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transformed_column</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">column_array</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="LeaveOneOutEncoder"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder">[docs]</a><span class="k">class</span> <span class="nc">LeaveOneOutEncoder</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">with_stdevs</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">with_stdevs</span> <span class="o">=</span> <span class="n">with_stdevs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdevs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="LeaveOneOutEncoder.fit"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="LeaveOneOutEncoder.transform"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+            <span class="n">mean_col_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_MEAN&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">mean_col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span>
+                                         <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_stdevs</span><span class="p">:</span>
+                <span class="n">std_col_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_STD&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">std_col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdevs</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span>
+                                            <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="LeaveOneOutEncoder.fit_transform"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.LeaveOneOutEncoder.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;will be used during pipeline fit&quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">difference</span><span class="p">([</span><span class="s1">&#39;y&#39;</span><span class="p">]):</span>
+
+            <span class="n">mean_col_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_MEAN&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+            <span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">col</span><span class="p">)[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">mean_col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loo_means</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_stdevs</span><span class="p">:</span>
+                <span class="n">std_col_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">_STD&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stdevs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">std_col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loo_stdevs</span><span class="p">)</span>
+
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+    <span class="k">def</span> <span class="nf">_loo_means</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">loo_means</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">loo_means</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_loo_stdevs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">loo_means</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loo_means</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">sum_of_sq</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="n">loo_stdevs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">sum_of_sq</span> <span class="o">-</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">loo_means</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loo_stdevs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">loo_stdevs</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, BigData Republic.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

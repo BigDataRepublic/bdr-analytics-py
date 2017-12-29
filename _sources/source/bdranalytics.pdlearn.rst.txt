@@ -1,0 +1,35 @@
+bdranalytics\.pdlearn package
+=============================
+
+.. automodule:: bdranalytics.pdlearn
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bdranalytics.pdlearn.tests
+
+Submodules
+----------
+
+bdranalytics\.pdlearn\.pipeline module
+--------------------------------------
+
+.. automodule:: bdranalytics.pdlearn.pipeline
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+bdranalytics\.pdlearn\.preprocessing module
+-------------------------------------------
+
+.. automodule:: bdranalytics.pdlearn.preprocessing
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
