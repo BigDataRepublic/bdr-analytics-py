@@ -9,6 +9,9 @@ EMAIL=gerben.oostra@bigdatarepublic.nl
 
 set -e
 
+## Script is located in and initiated from ./doc/ folder.
+cd ..
+
 # Clone the gh-pages branch outside of the repo and cd into it.
 cd ..
 git clone -b gh-pages "https://$GH_TOKEN@github.com/$ORG/$REPO.git" gh-pages
