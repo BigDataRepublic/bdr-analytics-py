@@ -6,13 +6,6 @@ bdranalytics\.keras package
     :undoc-members:
     :show-inheritance:
 
-Subpackages
------------
-
-.. toctree::
-
-    bdranalytics.keras.tests
-
 Submodules
 ----------
 

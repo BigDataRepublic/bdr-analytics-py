@@ -6,13 +6,6 @@ bdranalytics\.sklearn\.preprocessing package
     :undoc-members:
     :show-inheritance:
 
-Subpackages
------------
-
-.. toctree::
-
-    bdranalytics.sklearn.preprocessing.tests
-
 Submodules
 ----------
 

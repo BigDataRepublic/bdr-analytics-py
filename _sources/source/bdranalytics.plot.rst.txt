@@ -6,13 +6,6 @@ bdranalytics\.plot package
     :undoc-members:
     :show-inheritance:
 
-Subpackages
------------
-
-.. toctree::
-
-    bdranalytics.plot.tests
-
 Submodules
 ----------
 

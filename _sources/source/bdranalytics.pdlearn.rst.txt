@@ -6,13 +6,6 @@ bdranalytics\.pdlearn package
     :undoc-members:
     :show-inheritance:
 
-Subpackages
------------
-
-.. toctree::
-
-    bdranalytics.pdlearn.tests
-
 Submodules
 ----------
 
