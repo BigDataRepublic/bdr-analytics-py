@@ -1,6 +1,8 @@
 # BigData Republic Analytics (python)
 Our analytics library to quickly get our data scientists up to speed, on the python platform
 
+User documentation can be found at https://bigdatarepublic.github.io/bdr-analytics-py/
+
 ## To use this library
 
 There are different ways to include this package in your environment:
