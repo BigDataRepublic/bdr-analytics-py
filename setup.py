@@ -18,6 +18,7 @@ setup(
     package_data={'bdranalytics': ['data/*.dat'],
                   'bdranalytics.images': ['bdr.gif']},
     description="Making data science workflows easier.",
+    python_requires='>3.5',
     install_requires=[
         "NumPy>=1.6.1",
         "SciPy>=0.9",
