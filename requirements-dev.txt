@@ -5,10 +5,7 @@ NumPy>=1.6.1
 SciPy>=0.9
 scikit-learn>=0.18
 pandas
-seaborn
 matplotlib
-pandas_profiling
-nose
 pytest
 pytest-runner
 sphinx

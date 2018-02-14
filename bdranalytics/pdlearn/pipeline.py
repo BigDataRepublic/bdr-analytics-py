@@ -28,7 +28,7 @@ class PdFeatureUnion(BaseEstimator, TransformerMixin):
             if transform is None:
                 pass
             Xt = transform.transform(X)
-            columns = Xt.columns if hasattr(Xt, "columns") else ["{}-{}".format(name, c) for c in xrange(Xt.shape[1])]
+            columns = Xt.columns if hasattr(Xt, "columns") else ["{}-{}".format(name, c) for c in range(Xt.shape[1])]
             Xt = pd.DataFrame(Xt, index=X.index, columns=columns)
             assert len(Xt) == len(X), "Transformer {} shouldn't change nr of rows. " \
                                       "Returned {} while original is {}".format(name, len(Xt), len(X))

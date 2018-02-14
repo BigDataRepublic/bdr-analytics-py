@@ -23,7 +23,9 @@ doc/source
 # OS X
 .DS_Store
 
-# Tensorflow
+# Tests
+.pytest_cache/
 
+# Tensorflow
 tensorboardlog
 notebooks/logs/
