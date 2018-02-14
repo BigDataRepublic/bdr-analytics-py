@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/BigDataRepublic/bdr-analytics-py.svg?branch=master)](https://travis-ci.org/BigDataRepublic/bdr-analytics-py)
+
 # BigData Republic Analytics (python)
 Our analytics library to quickly get our data scientists up to speed, on the python platform
 

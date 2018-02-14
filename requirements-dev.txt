@@ -10,5 +10,5 @@ nose
 pytest
 pytest-runner
 sphinx
-sphinx _rtd_theme
+sphinx_rtd_theme
 recommonmark
