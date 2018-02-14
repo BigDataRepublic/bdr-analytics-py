@@ -16,12 +16,15 @@ def params(request):
     yield
 
 
-@pytest.mark.usefixtures('params')
+
+@pytest.mark.usefixtures("params")
 class TestGenerators:
 
     def test_stratified_index_generator(self):
-        iterator = StratifiedIndexGenerator().flow(strata=self.y, batch_size=self.batch_size,
-                                                   strata_weights=self.strata_weights)
+        iterator = StratifiedIndexGenerator().flow(
+            strata=self.y, batch_size=self.batch_size,
+            strata_weights=self.strata_weights
+        )
         total, positives = 0, 0
 
         for i in range(100):
@@ -29,10 +32,13 @@ class TestGenerators:
             positives += self.y[indices].sum()
             total += len(indices)
 
-        np.testing.assert_almost_equal(np.array([positives / total]), np.array([0.2]))
+        np.testing.assert_almost_equal(
+            np.array([positives / total]), np.array([0.2])
+        )
 
     def test_data_generator(self):
-        iterator = DataGenerator().flow(self.X, self.y, strata=self.y, strata_weights=self.strata_weights)
+        iterator = DataGenerator().flow(
+            self.X, self.y, strata=self.y, strata_weights=self.strata_weights)
 
         total, positives = 0, 0
 
@@ -41,20 +47,25 @@ class TestGenerators:
             positives += y.sum()
             total += len(y)
 
-        np.testing.assert_almost_equal(np.array([positives / total]), np.array([0.2]))
+        np.testing.assert_almost_equal(
+            np.array([positives / total]), np.array([0.2])
+        )
 
         model = Sequential()
         model.add(Dense(units=1, input_shape=self.X.shape[1:]))
         model.compile(loss='mean_squared_error', optimizer='sgd')
-        model.fit_generator(iterator, steps_per_epoch=(len(self.X)/self.batch_size))
+        model.fit_generator(
+            iterator, steps_per_epoch=(len(self.X)/self.batch_size))
 
     def test_stratified_image_data_generator(self):
 
         iterator = ImageDataGenerator().flow(self.X_image, self.y)
 
-        iterator.index_generator = StratifiedIndexGenerator().flow(batch_size=self.batch_size,
-                                                                   strata=self.y,
-                                                                   strata_weights=self.strata_weights)
+        iterator.index_generator = StratifiedIndexGenerator().flow(
+            batch_size=self.batch_size,
+            strata=self.y,
+            strata_weights=self.strata_weights)
+
         total, positives = 0, 0
 
         for i in range(100):
@@ -62,4 +73,6 @@ class TestGenerators:
             positives += y.sum()
             total += len(y)
 
-        np.testing.assert_almost_equal(np.array([positives / total]), np.array([0.2]))
+        np.testing.assert_almost_equal(
+            np.array([positives / total]), np.array([0.2])
+        )

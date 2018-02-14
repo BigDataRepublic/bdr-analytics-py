@@ -1,7 +1,7 @@
 name: bdranalytics-dev
 # This environment is designed to work ON the bdranalytics module: it includes its dependencies, but not bdranalytics itself.
 dependencies:
-- python=2.7
+- python=3.6
 - cmake
 - boost
 - pkgconfig

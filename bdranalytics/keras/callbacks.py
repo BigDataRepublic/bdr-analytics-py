@@ -1,8 +1,7 @@
-from sklearn.metrics import roc_auc_score, average_precision_score, precision_score, recall_score
 from keras.callbacks import Callback
-from keras.models import Sequential, Model
-import numpy as np
-import os
+from keras.models import Sequential
+from sklearn.metrics import roc_auc_score, average_precision_score, \
+    precision_score, recall_score
 
 
 class EpochEvaluation(Callback):

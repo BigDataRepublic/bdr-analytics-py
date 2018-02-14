@@ -22,7 +22,7 @@ Note that this will download the sources to be able to install it. You can safel
 Add the following to your conda environment.yaml:
 
 ```
-- python=2.7
+- python=3.6
 - NumPy>=1.6.1
 - SciPy>=0.9
 - scikit-learn>=0.18
