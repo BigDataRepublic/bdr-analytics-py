@@ -36,4 +36,4 @@ if [ "$1" != "dry" ]; then
 fi
 
 # Move back into project root.
-cd bdr-analytics-py
+cd ../$REPO
