@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Push HTML files to gh-pages automatically.
 
+if [[ $TRAVIS_BRANCH != "master" ]]; then exit; fi
+
 # Fill this out with the correct org/repo
 ORG=BigDataRepublic
 REPO=bdr-analytics-py
 # This probably should match an email for one of your users.
-EMAIL=gerben.oostra@bigdatarepublic.nl
+EMAIL=info@bigdatarepublic.nl
 
 set -e
 
