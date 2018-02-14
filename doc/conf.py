@@ -6,8 +6,6 @@
 # encoding=utf8
 import sys
 import os
-reload(sys)
-sys.setdefaultencoding('utf8')
 
 # This file is execfile()d with the current directory set to its containing dir.
 #
