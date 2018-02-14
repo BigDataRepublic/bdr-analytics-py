@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bdranalytics.sklearn.tests.test_model_selection &mdash; bdr-analytics-py 0.1 documentation</title>
+  <title>bdranalytics.sklearn.tests.test_model_selection &mdash; bdr-analytics-py 0.2 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
 
   
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../index.html"/>
+    <link rel="top" title="bdr-analytics-py 0.2 documentation" href="../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -174,25 +174,25 @@
                      <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">))</span>
 
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,))</span>
-
-    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span></div>
+</div>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
 
 
 <div class="viewcode-block" id="TestGrowingWindow"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestGrowingWindow">[docs]</a><span class="k">class</span> <span class="nc">TestGrowingWindow</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-<div class="viewcode-block" id="TestGrowingWindow.test_n_splits"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestGrowingWindow.test_n_splits">[docs]</a>    <span class="k">def</span> <span class="nf">test_n_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="o">==</span> <span class="mi">4</span></div>
+<div class="viewcode-block" id="TestGrowingWindow.test_n_splits"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestGrowingWindow.test_n_splits">[docs]</a>    <span class="k">def</span> <span class="nf">test_n_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">assert</span> <span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="o">==</span> <span class="mi">4</span>
 
-<div class="viewcode-block" id="TestGrowingWindow.test_n_splits_returned"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestGrowingWindow.test_n_splits_returned">[docs]</a>    <span class="k">def</span> <span class="nf">test_n_splits_returned</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span> <span class="o">==</span> <span class="mi">4</span></div>
+<div class="viewcode-block" id="TestGrowingWindow.test_n_splits_returned"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestGrowingWindow.test_n_splits_returned">[docs]</a>    <span class="k">def</span> <span class="nf">test_n_splits_returned</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span> <span class="o">==</span> <span class="mi">4</span>
 
 <div class="viewcode-block" id="TestGrowingWindow.test_n_splits_testsize"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestGrowingWindow.test_n_splits_testsize">[docs]</a>    <span class="k">def</span> <span class="nf">test_n_splits_testsize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)):</span>
-            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span></div>
+        <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)):</span></div>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 
 <div class="viewcode-block" id="TestGrowingWindow.test_n_splits_testsize2"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestGrowingWindow.test_n_splits_testsize2">[docs]</a>    <span class="k">def</span> <span class="nf">test_n_splits_testsize2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">))):</span>
-            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span></div></div>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">GrowingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">))):</span></div></div>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
 
 
 <div class="viewcode-block" id="TestIntervalGrowingWindow"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestIntervalGrowingWindow">[docs]</a><span class="k">class</span> <span class="nc">TestIntervalGrowingWindow</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
@@ -205,8 +205,8 @@
             <span class="n">test_start_date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="n">test_end_date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="n">test_size</span><span class="o">=</span><span class="s1">&#39;7D&#39;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span></div>
+</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TestIntervalGrowingWindow.test_split_on_array"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestIntervalGrowingWindow.test_split_on_array">[docs]</a>    <span class="k">def</span> <span class="nf">test_split_on_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -219,8 +219,8 @@
             <span class="n">test_start_date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="n">test_end_date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="n">test_size</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">test_size_in_days</span><span class="p">))</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span></div>
+</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TestIntervalGrowingWindow.test_split_test_size"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestIntervalGrowingWindow.test_split_test_size">[docs]</a>    <span class="k">def</span> <span class="nf">test_split_test_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -233,8 +233,8 @@
             <span class="n">test_end_date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="n">test_size</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">test_size_in_days</span><span class="p">))</span>
 
-        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_size_in_days</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_size_in_days</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TestIntervalGrowingWindow.test_split_with_train_size"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestIntervalGrowingWindow.test_split_with_train_size">[docs]</a>    <span class="k">def</span> <span class="nf">test_split_with_train_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -248,8 +248,8 @@
             <span class="n">test_size</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
             <span class="n">train_size</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">train_size_in_days</span><span class="p">))</span>
 
-        <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span> <span class="o">==</span> <span class="n">train_size_in_days</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span> <span class="o">==</span> <span class="n">train_size_in_days</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TestIntervalGrowingWindow.test_n_splits"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.tests.html#bdranalytics.sklearn.tests.test_model_selection.TestIntervalGrowingWindow.test_n_splits">[docs]</a>    <span class="k">def</span> <span class="nf">test_n_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -259,8 +259,8 @@
             <span class="n">test_start_date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="n">test_end_date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="n">test_size</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span></div></div>
+</div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
 
 
 
@@ -301,7 +301,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'0.1',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bdranalytics.sklearn.preprocessing.tests.test_scaling &mdash; bdr-analytics-py 0.1 documentation</title>
+  <title>bdranalytics.sklearn.preprocessing.tests.test_scaling &mdash; bdr-analytics-py 0.2 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
 
   
         <link rel="search" title="Search" href="../../../../../search.html"/>
-    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../../index.html"/>
+    <link rel="top" title="bdr-analytics-py 0.2 documentation" href="../../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../../index.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -174,8 +174,8 @@
 <span class="sd">        Creates a data set with only numerical data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_rows</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span></div>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_rows</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
 
 <div class="viewcode-block" id="TestPreprocessing.test_dummy_pipeline"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_scaling.TestPreprocessing.test_dummy_pipeline">[docs]</a>    <span class="k">def</span> <span class="nf">test_dummy_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -185,8 +185,8 @@
         <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_regression_dataset</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
         <span class="n">predictor_constant</span> <span class="o">=</span> <span class="mi">3</span>
         <span class="n">predictor</span> <span class="o">=</span> <span class="n">DummyRegressor</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="n">predictor_constant</span><span class="p">)</span>
-        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span> <span class="n">predictor</span><span class="p">)])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">predictor_constant</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span></div>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span> <span class="n">predictor</span><span class="p">)])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+        <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">predictor_constant</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 
 <div class="viewcode-block" id="TestPreprocessing.test_scaled_target"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_scaling.TestPreprocessing.test_scaled_target">[docs]</a>    <span class="k">def</span> <span class="nf">test_scaled_target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_regression_dataset</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -194,8 +194,8 @@
         <span class="n">predictor_constant</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 0 will be multiplied by std , and then added to the mean</span>
         <span class="n">predictor</span> <span class="o">=</span> <span class="n">DummyRegressor</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="n">predictor_constant</span><span class="p">)</span>
         <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
-        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span> <span class="n">ScaledRegressor</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">predictor</span><span class="p">))])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">y_mean</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span></div>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span> <span class="n">ScaledRegressor</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">predictor</span><span class="p">))])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+        <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">y_mean</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 
 <div class="viewcode-block" id="TestPreprocessing.test_scaled_target_with_set_params"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_scaling.TestPreprocessing.test_scaled_target_with_set_params">[docs]</a>    <span class="k">def</span> <span class="nf">test_scaled_target_with_set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_regression_dataset</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -205,8 +205,8 @@
         <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
         <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span> <span class="n">ScaledRegressor</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">predictor</span><span class="p">))])</span>
         <span class="n">pipeline</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">predict__estimator__constant</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">y_mean</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span></div></div>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div></div>
+        <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">y_mean</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -247,7 +247,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../../',
-            VERSION:'0.1',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

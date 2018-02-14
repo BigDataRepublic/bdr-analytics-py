@@ -1,5 +1,5 @@
-bdranalytics\.pdlearn package
-=============================
+bdranalytics.pdlearn package
+============================
 
 .. automodule:: bdranalytics.pdlearn
     :members:
@@ -9,16 +9,16 @@ bdranalytics\.pdlearn package
 Submodules
 ----------
 
-bdranalytics\.pdlearn\.pipeline module
---------------------------------------
+bdranalytics.pdlearn.pipeline module
+------------------------------------
 
 .. automodule:: bdranalytics.pdlearn.pipeline
     :members:
     :undoc-members:
     :show-inheritance:
 
-bdranalytics\.pdlearn\.preprocessing module
--------------------------------------------
+bdranalytics.pdlearn.preprocessing module
+-----------------------------------------
 
 .. automodule:: bdranalytics.pdlearn.preprocessing
     :members:

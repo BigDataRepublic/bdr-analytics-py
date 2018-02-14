@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bdranalytics.sklearn.preprocessing.preprocessing &mdash; bdr-analytics-py 0.1 documentation</title>
+  <title>bdranalytics.sklearn.preprocessing.preprocessing &mdash; bdr-analytics-py 0.2 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
 
   
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../index.html"/>
+    <link rel="top" title="bdr-analytics-py 0.2 documentation" href="../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -164,15 +164,15 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
 
-<div class="viewcode-block" id="ColumnSelector.fit"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
+<div class="viewcode-block" id="ColumnSelector.fit"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span>
 
 <div class="viewcode-block" id="ColumnSelector.transform"><a class="viewcode-back" href="../../../../source/bdranalytics.sklearn.preprocessing.html#bdranalytics.sklearn.preprocessing.preprocessing.ColumnSelector.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find selected columns </span><span class="si">{:s}</span><span class="s2"> in available columns </span><span class="si">{:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
-            <span class="k">raise</span></div></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find selected columns </span><span class="si">{:s}</span><span class="s2"> in available columns </span><span class="si">{:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span></div></div>
+            <span class="k">raise</span>
 </pre></div>
 
            </div>
@@ -209,7 +209,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'0.1',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

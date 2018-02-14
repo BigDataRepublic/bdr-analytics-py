@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bdranalytics.sklearn.preprocessing.tests.test_encoding &mdash; bdr-analytics-py 0.1 documentation</title>
+  <title>bdranalytics.sklearn.preprocessing.tests.test_encoding &mdash; bdr-analytics-py 0.2 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
 
   
         <link rel="search" title="Search" href="../../../../../search.html"/>
-    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../../../index.html"/>
+    <link rel="top" title="bdr-analytics-py 0.2 documentation" href="../../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../../index.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -172,8 +172,8 @@
             <span class="n">numeric</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
                 <span class="n">numeric</span> <span class="o">=</span> <span class="kc">True</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">numeric</span><span class="p">)</span></div>
+</div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">numeric</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TestEncoding.create_dataset"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_encoding.TestEncoding.create_dataset">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">create_dataset</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -191,8 +191,8 @@
 
         <span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">,</span> <span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="s1">&#39;c5&#39;</span><span class="p">,</span> <span class="s1">&#39;c6&#39;</span><span class="p">])</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,))</span>
-
-        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span></div>
+</div>
+        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
 
 <div class="viewcode-block" id="TestEncoding.test_weight_of_evidence"><a class="viewcode-back" href="../../../../../source/bdranalytics.sklearn.preprocessing.tests.html#bdranalytics.sklearn.preprocessing.tests.test_encoding.TestEncoding.test_weight_of_evidence">[docs]</a>    <span class="k">def</span> <span class="nf">test_weight_of_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -229,8 +229,8 @@
         <span class="c1"># external dep var, SAME y_train</span>
         <span class="n">enc_ext</span> <span class="o">=</span> <span class="n">WeightOfEvidenceEncoder</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">dependent_variable_values</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
-        <span class="n">enc_ext</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">output_array_enc_np</span><span class="p">,</span> <span class="n">enc_ext</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">)</span></div></div>
+        <span class="n">enc_ext</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">output_array_enc_np</span><span class="p">,</span> <span class="n">enc_ext</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -271,7 +271,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../../',
-            VERSION:'0.1',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

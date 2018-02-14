@@ -1,5 +1,5 @@
-bdranalytics\.sklearn\.preprocessing package
-============================================
+bdranalytics.sklearn.preprocessing package
+==========================================
 
 .. automodule:: bdranalytics.sklearn.preprocessing
     :members:
@@ -9,24 +9,24 @@ bdranalytics\.sklearn\.preprocessing package
 Submodules
 ----------
 
-bdranalytics\.sklearn\.preprocessing\.encoding module
------------------------------------------------------
+bdranalytics.sklearn.preprocessing.encoding module
+--------------------------------------------------
 
 .. automodule:: bdranalytics.sklearn.preprocessing.encoding
     :members:
     :undoc-members:
     :show-inheritance:
 
-bdranalytics\.sklearn\.preprocessing\.preprocessing module
-----------------------------------------------------------
+bdranalytics.sklearn.preprocessing.preprocessing module
+-------------------------------------------------------
 
 .. automodule:: bdranalytics.sklearn.preprocessing.preprocessing
     :members:
     :undoc-members:
     :show-inheritance:
 
-bdranalytics\.sklearn\.preprocessing\.scaling module
-----------------------------------------------------
+bdranalytics.sklearn.preprocessing.scaling module
+-------------------------------------------------
 
 .. automodule:: bdranalytics.sklearn.preprocessing.scaling
     :members:

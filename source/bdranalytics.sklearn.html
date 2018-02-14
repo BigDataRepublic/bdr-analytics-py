@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bdranalytics.sklearn package &mdash; bdr-analytics-py 0.1 documentation</title>
+  <title>bdranalytics.sklearn package &mdash; bdr-analytics-py 0.2 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
 
   
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../index.html"/>
+    <link rel="top" title="bdr-analytics-py 0.2 documentation" href="../index.html"/>
         <link rel="next" title="bdranalytics.sklearn.preprocessing package" href="bdranalytics.sklearn.preprocessing.html"/>
         <link rel="prev" title="bdranalytics.plot package" href="bdranalytics.plot.html"/> 
 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -189,7 +189,7 @@
 <dl class="class">
 <dt id="bdranalytics.sklearn.encoders.ColumnSelector">
 <em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">ColumnSelector</code><span class="sig-paren">(</span><em>columns</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#ColumnSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.ColumnSelector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <dl class="method">
 <dt id="bdranalytics.sklearn.encoders.ColumnSelector.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#ColumnSelector.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.ColumnSelector.fit" title="Permalink to this definition">¶</a></dt>
@@ -205,7 +205,7 @@
 <dl class="class">
 <dt id="bdranalytics.sklearn.encoders.LeaveOneOutEncoder">
 <em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">LeaveOneOutEncoder</code><span class="sig-paren">(</span><em>with_stdevs=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#LeaveOneOutEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.LeaveOneOutEncoder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Leave one out transformation for high-capacity categorical variables.</p>
 <dl class="method">
 <dt id="bdranalytics.sklearn.encoders.LeaveOneOutEncoder.fit">
@@ -228,7 +228,7 @@
 <dl class="class">
 <dt id="bdranalytics.sklearn.encoders.StringIndexer">
 <em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">StringIndexer</code><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#StringIndexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.StringIndexer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <dl class="method">
 <dt id="bdranalytics.sklearn.encoders.StringIndexer.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#StringIndexer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.StringIndexer.fit" title="Permalink to this definition">¶</a></dt>
@@ -244,7 +244,7 @@
 <dl class="class">
 <dt id="bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder">
 <em class="property">class </em><code class="descclassname">bdranalytics.sklearn.encoders.</code><code class="descname">WeightOfEvidenceEncoder</code><span class="sig-paren">(</span><em>verbose=0</em>, <em>cols=None</em>, <em>return_df=True</em>, <em>smooth=0.5</em>, <em>fillna=0</em>, <em>dependent_variable_values=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/encoders.html#WeightOfEvidenceEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.encoders.WeightOfEvidenceEncoder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Feature-engineering class that transforms a high-capacity categorical value
 into Weigh of Evidence scores. Can be used in sklearn pipelines.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -273,7 +273,7 @@ into Weigh of Evidence scores. Can be used in sklearn pipelines.</p>
 <dl class="class">
 <dt id="bdranalytics.sklearn.model_selection.GrowingWindow">
 <em class="property">class </em><code class="descclassname">bdranalytics.sklearn.model_selection.</code><code class="descname">GrowingWindow</code><span class="sig-paren">(</span><em>n_folds=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#GrowingWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.GrowingWindow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.NewBase</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.NewBase</span></code></p>
 <p>Growing Window cross validator</p>
 <p>Provides train/test indices to split data in train/test sets.
 Divides the data in n_folds+1 slices.
@@ -340,7 +340,7 @@ ignored</dd>
 <dl class="class">
 <dt id="bdranalytics.sklearn.model_selection.IntervalGrowingWindow">
 <em class="property">class </em><code class="descclassname">bdranalytics.sklearn.model_selection.</code><code class="descname">IntervalGrowingWindow</code><span class="sig-paren">(</span><em>test_start_date</em>, <em>timestamps='index'</em>, <em>test_end_date=None</em>, <em>test_size=None</em>, <em>train_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/sklearn/model_selection.html#IntervalGrowingWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.sklearn.model_selection.IntervalGrowingWindow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.NewBase</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.NewBase</span></code></p>
 <p>Growing Window cross-validator based on time intervals</p>
 <dl class="method">
 <dt id="bdranalytics.sklearn.model_selection.IntervalGrowingWindow.generate_intervals">
@@ -413,7 +413,7 @@ ignored</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

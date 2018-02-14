@@ -1,5 +1,5 @@
-bdranalytics\.plot package
-==========================
+bdranalytics.plot package
+=========================
 
 .. automodule:: bdranalytics.plot
     :members:
@@ -9,8 +9,8 @@ bdranalytics\.plot package
 Submodules
 ----------
 
-bdranalytics\.plot\.classification module
------------------------------------------
+bdranalytics.plot.classification module
+---------------------------------------
 
 .. automodule:: bdranalytics.plot.classification
     :members:

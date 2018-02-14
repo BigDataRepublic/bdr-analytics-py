@@ -1,5 +1,5 @@
-bdranalytics\.keras\.tests package
-==================================
+bdranalytics.keras.tests package
+================================
 
 .. automodule:: bdranalytics.keras.tests
     :members:
@@ -9,8 +9,8 @@ bdranalytics\.keras\.tests package
 Submodules
 ----------
 
-bdranalytics\.keras\.tests\.test\_generators module
----------------------------------------------------
+bdranalytics.keras.tests.test\_generators module
+------------------------------------------------
 
 .. automodule:: bdranalytics.keras.tests.test_generators
     :members:

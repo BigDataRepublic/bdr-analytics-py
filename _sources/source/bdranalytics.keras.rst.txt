@@ -1,5 +1,5 @@
-bdranalytics\.keras package
-===========================
+bdranalytics.keras package
+==========================
 
 .. automodule:: bdranalytics.keras
     :members:
@@ -9,24 +9,24 @@ bdranalytics\.keras package
 Submodules
 ----------
 
-bdranalytics\.keras\.callbacks module
--------------------------------------
+bdranalytics.keras.callbacks module
+-----------------------------------
 
 .. automodule:: bdranalytics.keras.callbacks
     :members:
     :undoc-members:
     :show-inheritance:
 
-bdranalytics\.keras\.generators module
---------------------------------------
+bdranalytics.keras.generators module
+------------------------------------
 
 .. automodule:: bdranalytics.keras.generators
     :members:
     :undoc-members:
     :show-inheritance:
 
-bdranalytics\.keras\.layers module
-----------------------------------
+bdranalytics.keras.layers module
+--------------------------------
 
 .. automodule:: bdranalytics.keras.layers
     :members:

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bdranalytics.sklearn.model_selection &mdash; bdr-analytics-py 0.1 documentation</title>
+  <title>bdranalytics.sklearn.model_selection &mdash; bdr-analytics-py 0.2 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
 
   
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="bdr-analytics-py 0.2 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -234,8 +234,8 @@
             <span class="c1"># split percentage we have set above</span>
             <span class="n">n_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">n_sub</span> <span class="o">*</span> <span class="n">split</span><span class="p">))</span>
             <span class="n">train_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_train</span><span class="p">)</span>
-            <span class="n">test_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_train</span><span class="p">,</span> <span class="n">n_sub</span><span class="p">)</span>
-            <span class="k">yield</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span></div>
+            <span class="n">test_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_train</span><span class="p">,</span> <span class="n">n_sub</span><span class="p">)</span></div>
+            <span class="k">yield</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span>
 
 <div class="viewcode-block" id="GrowingWindow.get_n_splits"><a class="viewcode-back" href="../../../source/bdranalytics.sklearn.html#bdranalytics.sklearn.model_selection.GrowingWindow.get_n_splits">[docs]</a>    <span class="k">def</span> <span class="nf">get_n_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the number of splitting iterations in the cross-validator</span>
@@ -254,8 +254,8 @@
 <span class="sd">            Returns the number of splitting iterations in the cross-validator.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The X parameter should not be None&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_folds</span></div></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The X parameter should not be None&quot;</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_folds</span>
 
 
 <div class="viewcode-block" id="IntervalGrowingWindow"><a class="viewcode-back" href="../../../source/bdranalytics.sklearn.html#bdranalytics.sklearn.model_selection.IntervalGrowingWindow">[docs]</a><span class="k">class</span> <span class="nc">IntervalGrowingWindow</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">ABCMeta</span><span class="p">)):</span>
@@ -290,15 +290,15 @@
 
         <span class="c1"># convert to (start, end) tuples</span>
         <span class="n">intervals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">intervals_start</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">intervals_start</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
-
-        <span class="k">return</span> <span class="n">intervals</span></div>
+</div>
+        <span class="k">return</span> <span class="n">intervals</span>
 
 <div class="viewcode-block" id="IntervalGrowingWindow.get_timeseries"><a class="viewcode-back" href="../../../source/bdranalytics.sklearn.html#bdranalytics.sklearn.model_selection.IntervalGrowingWindow.get_timeseries">[docs]</a>    <span class="k">def</span> <span class="nf">get_timeseries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the numpy array of timestamps for the given dataset&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span> <span class="ow">is</span> <span class="s1">&#39;index&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span></div>
+        <span class="k">else</span><span class="p">:</span></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span>
 
 <div class="viewcode-block" id="IntervalGrowingWindow.split"><a class="viewcode-back" href="../../../source/bdranalytics.sklearn.html#bdranalytics.sklearn.model_selection.IntervalGrowingWindow.split">[docs]</a>    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate indices to split data into training and test sets based on time stamps&quot;&quot;&quot;</span>
@@ -337,8 +337,8 @@
             <span class="c1"># convert boolean to integer indices</span>
             <span class="n">train_index</span> <span class="o">=</span> <span class="n">index</span><span class="p">[</span><span class="n">train_interval_bool</span><span class="p">]</span>
             <span class="n">test_index</span> <span class="o">=</span> <span class="n">index</span><span class="p">[</span><span class="n">test_interval_bool</span><span class="p">]</span>
-
-            <span class="k">yield</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span></div>
+</div>
+            <span class="k">yield</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span>
 
 <div class="viewcode-block" id="IntervalGrowingWindow.get_n_splits"><a class="viewcode-back" href="../../../source/bdranalytics.sklearn.html#bdranalytics.sklearn.model_selection.IntervalGrowingWindow.get_n_splits">[docs]</a>    <span class="k">def</span> <span class="nf">get_n_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -348,8 +348,8 @@
         <span class="n">timestamps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_timeseries</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
         <span class="n">intervals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_intervals</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
 
-        <span class="c1"># compute number of folds</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span></div></div>
+        <span class="c1"># compute number of folds</span></div></div>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
 
 </pre></div>
 
@@ -387,7 +387,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

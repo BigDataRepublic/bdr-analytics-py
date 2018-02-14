@@ -1,5 +1,5 @@
-bdranalytics\.sklearn\.tests package
-====================================
+bdranalytics.sklearn.tests package
+==================================
 
 .. automodule:: bdranalytics.sklearn.tests
     :members:
@@ -9,8 +9,8 @@ bdranalytics\.sklearn\.tests package
 Submodules
 ----------
 
-bdranalytics\.sklearn\.tests\.test\_model\_selection module
------------------------------------------------------------
+bdranalytics.sklearn.tests.test\_model\_selection module
+--------------------------------------------------------
 
 .. automodule:: bdranalytics.sklearn.tests.test_model_selection
     :members:

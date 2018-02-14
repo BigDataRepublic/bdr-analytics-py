@@ -1,5 +1,5 @@
-bdranalytics\.sklearn package
-=============================
+bdranalytics.sklearn package
+============================
 
 .. automodule:: bdranalytics.sklearn
     :members:
@@ -16,16 +16,16 @@ Subpackages
 Submodules
 ----------
 
-bdranalytics\.sklearn\.encoders module
---------------------------------------
+bdranalytics.sklearn.encoders module
+------------------------------------
 
 .. automodule:: bdranalytics.sklearn.encoders
     :members:
     :undoc-members:
     :show-inheritance:
 
-bdranalytics\.sklearn\.model\_selection module
-----------------------------------------------
+bdranalytics.sklearn.model\_selection module
+--------------------------------------------
 
 .. automodule:: bdranalytics.sklearn.model_selection
     :members:

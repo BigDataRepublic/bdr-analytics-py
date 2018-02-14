@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bdranalytics.pdlearn package &mdash; bdr-analytics-py 0.1 documentation</title>
+  <title>bdranalytics.pdlearn package &mdash; bdr-analytics-py 0.2 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
 
   
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="bdr-analytics-py 0.1 documentation" href="../index.html"/>
+    <link rel="top" title="bdr-analytics-py 0.2 documentation" href="../index.html"/>
         <link rel="next" title="bdranalytics.plot package" href="bdranalytics.plot.html"/>
         <link rel="prev" title="bdranalytics.keras package" href="bdranalytics.keras.html"/> 
 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -163,12 +163,12 @@
             
   <div class="section" id="module-bdranalytics.pdlearn">
 <span id="bdranalytics-pdlearn-package"></span><h1>bdranalytics.pdlearn package<a class="headerlink" href="#module-bdranalytics.pdlearn" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference internal" href="#module-bdranalytics.pdlearn" title="bdranalytics.pdlearn"><code class="xref py py-mod docutils literal"><span class="pre">bdranalytics.pdlearn</span></code></a> module contains adapters that allows you
-to put <code class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></code> instances into <code class="xref py py-mod docutils literal"><span class="pre">sklearn</span></code> without
+<p>The <a class="reference internal" href="#module-bdranalytics.pdlearn" title="bdranalytics.pdlearn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdranalytics.pdlearn</span></code></a> module contains adapters that allows you
+to put <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> instances into <code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn</span></code> without
 losing the column names.
-<code class="xref py py-mod docutils literal"><span class="pre">sklearn</span></code> already allows you to provide instances of <code class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></code>,
-but as it internally works with <code class="xref py py-class docutils literal"><span class="pre">numpy.array</span></code>, column names are lost during transformation.
-Here we provide adapters, which re-add the column names after the <code class="xref py py-mod docutils literal"><span class="pre">sklearn</span></code> modifications.</p>
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn</span></code> already allows you to provide instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>,
+but as it internally works with <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.array</span></code>, column names are lost during transformation.
+Here we provide adapters, which re-add the column names after the <code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn</span></code> modifications.</p>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -177,7 +177,7 @@ Here we provide adapters, which re-add the column names after the <code class="x
 <dl class="class">
 <dt id="bdranalytics.pdlearn.pipeline.PdFeatureChain">
 <em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.pipeline.</code><code class="descname">PdFeatureChain</code><span class="sig-paren">(</span><em>steps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureChain" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Passes a data set through a pipeline / chain of transformers.
 The output of the first transformer is fed into the next transformer.</p>
 <p>Similar to sklearn Pipeline, but does not work with predictor in final step.</p>
@@ -189,7 +189,20 @@ The output of the first transformer is fed into the next transformer.</p>
 <dl class="method">
 <dt id="bdranalytics.pdlearn.pipeline.PdFeatureChain.fit_transform">
 <code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureChain.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureChain.fit_transform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples, n_features]</span></dt>
+<dd>Training set.</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples]</span></dt>
+<dd>Target values.</dd>
+</dl>
+<dl class="docutils">
+<dt>X_new <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples, n_features_new]</span></dt>
+<dd>Transformed array.</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="bdranalytics.pdlearn.pipeline.PdFeatureChain.transform">
@@ -201,7 +214,7 @@ The output of the first transformer is fed into the next transformer.</p>
 <dl class="class">
 <dt id="bdranalytics.pdlearn.pipeline.PdFeatureUnion">
 <em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.pipeline.</code><code class="descname">PdFeatureUnion</code><span class="sig-paren">(</span><em>transformer_list</em>, <em>n_jobs=1</em>, <em>transformer_weights=None</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/pipeline.html#PdFeatureUnion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.pipeline.PdFeatureUnion" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Concatenates the result of multiple transformers</p>
 <dl class="method">
 <dt id="bdranalytics.pdlearn.pipeline.PdFeatureUnion.fit">
@@ -226,7 +239,7 @@ The output of the first transformer is fed into the next transformer.</p>
 <dl class="class">
 <dt id="bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding">
 <em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">DateCyclicalEncoding</code><span class="sig-paren">(</span><em>date_columns, parts=['DAY', 'DAY_OF_WEEK', 'HOUR', 'MINUTE', 'MONTH', 'SECOND'], new_column_names=None, drop=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateCyclicalEncoding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateCyclicalEncoding" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Feature-engineering class that transforms date columns into cyclical numerical columns.
 The original date column will be removed.
 To be used by sklearn pipelines</p>
@@ -264,7 +277,7 @@ To be used by sklearn pipelines</p>
 <dl class="class">
 <dt id="bdranalytics.pdlearn.preprocessing.DateOneHotEncoding">
 <em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">DateOneHotEncoding</code><span class="sig-paren">(</span><em>date_columns, parts=['DAY', 'DAY_OF_WEEK', 'HOUR', 'MINUTE', 'MONTH', 'SECOND'], new_column_names=None, drop=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#DateOneHotEncoding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.DateOneHotEncoding" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Feature-engineering class that transforms date columns into one hot encoding of the parts (day, hour, ..).
 The original date column will be removed.
 To be used by sklearn pipelines</p>
@@ -307,7 +320,7 @@ To be used by sklearn pipelines</p>
 <dl class="class">
 <dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer">
 <em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">PdLagTransformer</code><span class="sig-paren">(</span><em>lag</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <dl class="method">
 <dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer.do_transform">
 <code class="descname">do_transform</code><span class="sig-paren">(</span><em>dataframe</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer.do_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer.do_transform" title="Permalink to this definition">¶</a></dt>
@@ -321,7 +334,20 @@ To be used by sklearn pipelines</p>
 <dl class="method">
 <dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit_transform">
 <code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdLagTransformer.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdLagTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples, n_features]</span></dt>
+<dd>Training set.</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples]</span></dt>
+<dd>Target values.</dd>
+</dl>
+<dl class="docutils">
+<dt>X_new <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples, n_features_new]</span></dt>
+<dd>Transformed array.</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="bdranalytics.pdlearn.preprocessing.PdLagTransformer.transform">
@@ -333,7 +359,7 @@ To be used by sklearn pipelines</p>
 <dl class="class">
 <dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer">
 <em class="property">class </em><code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">PdWindowTransformer</code><span class="sig-paren">(</span><em>func</em>, <em>**rolling_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <dl class="method">
 <dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer.do_transform">
 <code class="descname">do_transform</code><span class="sig-paren">(</span><em>dataframe</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer.do_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.do_transform" title="Permalink to this definition">¶</a></dt>
@@ -347,7 +373,20 @@ To be used by sklearn pipelines</p>
 <dl class="method">
 <dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit_transform">
 <code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#PdWindowTransformer.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.PdWindowTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples, n_features]</span></dt>
+<dd>Training set.</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples]</span></dt>
+<dd>Target values.</dd>
+</dl>
+<dl class="docutils">
+<dt>X_new <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of shape [n_samples, n_features_new]</span></dt>
+<dd>Transformed array.</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="bdranalytics.pdlearn.preprocessing.PdWindowTransformer.transform">
@@ -358,12 +397,12 @@ To be used by sklearn pipelines</p>
 
 <dl class="function">
 <dt id="bdranalytics.pdlearn.preprocessing.date_to_cyclical">
-<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">date_to_cyclical</code><span class="sig-paren">(</span><em>df, col_name, parts=['HOUR', 'DAY_OF_WEEK', 'MONTH', 'SECOND', 'DAY', 'MINUTE'], new_col_name_prefix=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#date_to_cyclical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.date_to_cyclical" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">date_to_cyclical</code><span class="sig-paren">(</span><em>df, col_name, parts=['MONTH', 'DAY', 'DAY_OF_WEEK', 'HOUR', 'MINUTE', 'SECOND'], new_col_name_prefix=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#date_to_cyclical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.date_to_cyclical" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="bdranalytics.pdlearn.preprocessing.date_to_dateparts">
-<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">date_to_dateparts</code><span class="sig-paren">(</span><em>df, col_name, parts=['HOUR', 'DAY_OF_WEEK', 'MONTH', 'SECOND', 'DAY', 'MINUTE'], new_col_name_prefix=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#date_to_dateparts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.date_to_dateparts" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bdranalytics.pdlearn.preprocessing.</code><code class="descname">date_to_dateparts</code><span class="sig-paren">(</span><em>df, col_name, parts=['MONTH', 'DAY', 'DAY_OF_WEEK', 'HOUR', 'MINUTE', 'SECOND'], new_col_name_prefix=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bdranalytics/pdlearn/preprocessing.html#date_to_dateparts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdranalytics.pdlearn.preprocessing.date_to_dateparts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -423,7 +462,7 @@ To be used by sklearn pipelines</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
