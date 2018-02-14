@@ -1,13 +1,13 @@
 language: python
 python:
-    - "3.6_with_system_site_packages"
+    - "3.6"
 before_install:
  - sudo apt-get update
  - sudo apt-get install -qq python-numpy python-scipy
 # command to install dependencies
 install: "pip install -r requirements-dev.txt"
 # command to run tests
-script: nosetests
+script: pytest
 script: cd doc && make html
 after_success:
   - ./push.sh

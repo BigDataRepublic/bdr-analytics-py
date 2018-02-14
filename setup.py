@@ -26,8 +26,6 @@ setup(
         "pandas",
         "matplotlib",
     ],
-    test_suite='nose.collector',
-    tests_require=['nose',
-                   "pytest",
-                   "pytest-runner"]
+    setup_requires=["pytest-runner"],
+    tests_require=["pytest"]
 )
