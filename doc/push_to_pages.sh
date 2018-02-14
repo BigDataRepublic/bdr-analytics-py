@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Push HTML files to gh-pages automatically.
 
-if [[ $TRAVIS_BRANCH != "master" ]]; then exit; fi
+if [[ $TRAVIS_BRANCH != "master" || $TRAVIS_PULL_REQUEST != false ]]; then exit; fi
 
 # Fill this out with the correct org/repo
 ORG=BigDataRepublic
