@@ -1,13 +1,17 @@
 language: python
 python:
-    - "3.6"
+- '3.6'
 before_install:
- - sudo apt-get update
- - sudo apt-get install -qq python-numpy python-scipy
-# command to install dependencies
-install: "pip install -r requirements-dev.txt"
-# command to run tests
-script: pytest
+- sudo apt-get update
+- sudo apt-get install -qq python-numpy python-scipy
+install: pip install -r requirements-dev.txt
 script: cd doc && make html
 after_success:
-  - ./push_to_pages.sh
+- "./push_to_pages.sh"
+deploy:
+  provider: pypi
+  user: bigdatarepublic
+  password:
+    secure: c8287YylQ5wz4WJMk6DrOlstCuDbao05LpKDF2mMzTRXjwOxNGatexq04frciizuupUkKP1ui9JdOYOEgFI0pYFffmXuqmiXkIK9MG9U4AJV3CH9URV81VmgGgsN1rbHcFGKvOrxelDSY6TqQYMaHt5JCGFcPUxpvkE76KAssmzL9wYavqDuHRKhjTcYiNqw22u7V1i3Cp/7zFzBHYz0BlkzzbkWPuphMnxiTsz+HE9bTqa7Jwj1pduyAuwdDSkAVcGUSjc3GZifzY5rD77vOuovgCCtD0aY9hj3YHV4oY6+4ErkbpJkuF9urkMQV1FPgoOb7YrjxBzXTnXZWzx2E4sXlzQYgXsLF5bI+5+qPwQXtInarFSH/QGyRhTppg9RT2ItX2rri+Do3biEunRtxd3pZSaZP7I2fSOYNxnvrcx8/qC1s8X8P6lLEKkb6hH3aRMeO8L2e/X0vu/4nVua09yW1e0QZzJN6GYUe8N+vA4OQNlL6NW2Mx6GvrKSlUI0l2jAVjvJk6N9HdGEjQeKzGqtqC7FHsg49sBzZRkqmVpV+UbJWHQ9B43jtg0dFE0lf/F4VdUMoD1A6GjZGMatV5NP5/Jb1gCWsU9vyPPxcDVa/N6GxAikjHyMIJM84NzNFjFJZOHK9aHOqz9B0tqS2ZfICbrRm4eRb8FgsqXcJaI=
+  on:
+    branch: master
