@@ -11,9 +11,7 @@ EMAIL=info@bigdatarepublic.nl
 
 set -e
 
-## Script is located in and initiated from ./doc/ folder.
-cd ..
-
+# Script is located in and initiated from project root.
 # Clone the gh-pages branch outside of the repo and cd into it.
 cd ..
 git clone -b gh-pages "https://$GH_TOKEN@github.com/$ORG/$REPO.git" gh-pages
@@ -36,3 +34,6 @@ if [ "$1" != "dry" ]; then
     # -q is very important, otherwise you leak your GH_TOKEN
     git push -q origin gh-pages
 fi
+
+# Move back into project root.
+cd bdr-analytics-py

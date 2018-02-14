@@ -5,9 +5,9 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install -qq python-numpy python-scipy
 install: pip install -r requirements-dev.txt
-script: cd doc && make html
+script: cd doc && make html && cd ..
 after_success:
-- "./push_to_pages.sh"
+- "doc/push_to_pages.sh"
 deploy:
   provider: pypi
   user: bigdatarepublic
