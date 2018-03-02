@@ -65,7 +65,8 @@ def plot_pr_curve(y_true, y_pred):
     precision, recall, thresholds = precision_recall_curve(y_true, y_pred,
                                                            pos_label=1)
 
-    average_precision = average_precision_score(y_true, y_pred, average="micro")
+    average_precision = average_precision_score(
+        y_true, y_pred, average="micro")
 
     baseline = sum(y_true) / len(y_true)
 

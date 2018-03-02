@@ -28,10 +28,12 @@ class PdFeatureUnion(BaseEstimator, TransformerMixin):
             if transform is None:
                 pass
             Xt = transform.transform(X)
-            columns = Xt.columns if hasattr(Xt, "columns") else ["{}-{}".format(name, c) for c in range(Xt.shape[1])]
+            columns = Xt.columns if hasattr(Xt, "columns") else [
+                "{}-{}".format(name, c) for c in range(Xt.shape[1])]
             Xt = pd.DataFrame(Xt, index=X.index, columns=columns)
             assert len(Xt) == len(X), "Transformer {} shouldn't change nr of rows. " \
-                                      "Returned {} while original is {}".format(name, len(Xt), len(X))
+                                      "Returned {} while original is {}".format(
+                                          name, len(Xt), len(X))
             yield Xt
 
     def _print_columns(self, xts):
@@ -74,9 +76,11 @@ class PdFeatureChain(BaseEstimator, TransformerMixin):
             elif hasattr(transform, "fit_transform"):
                 Xt = transform.fit_transform(Xt, y, **fit_params_steps[name])
             else:
-                Xt = transform.fit(Xt, y, **fit_params_steps[name]).transform(Xt)
+                Xt = transform.fit(
+                    Xt, y, **fit_params_steps[name]).transform(Xt)
             assert len(Xt) == len(X), "Transformer {} shouldn't change nr of rows. " \
-                                      "Returned {} while original is {}".format(name, len(Xt), len(X))
+                                      "Returned {} while original is {}".format(
+                                          name, len(Xt), len(X))
         return self
 
     def transform(self, X):
@@ -86,7 +90,8 @@ class PdFeatureChain(BaseEstimator, TransformerMixin):
                 Xt = pd.DataFrame(Xt)
                 Xt = transform.transform(Xt)
                 assert len(Xt) == len(X), "Transformer {} shouldn't change nr of rows. " \
-                                          "Returned {} while original is {}".format(name, len(Xt), len(X))
+                                          "Returned {} while original is {}".format(
+                                              name, len(Xt), len(X))
         return pd.DataFrame(Xt)
 
     def fit_transform(self, X, y=None, **fit_params):

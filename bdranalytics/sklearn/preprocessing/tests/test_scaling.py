@@ -26,7 +26,8 @@ class TestPreprocessing(unittest.TestCase):
         """
         X, y = self.create_regression_dataset(n_rows=20)
         predictor_constant = 3
-        predictor = DummyRegressor(strategy="constant", constant=predictor_constant)
+        predictor = DummyRegressor(
+            strategy="constant", constant=predictor_constant)
         y_hat = Pipeline([("predict", predictor)]).fit(X, y).predict(X)
         np.allclose(y_hat, np.repeat(predictor_constant, len(y)))
 
@@ -34,16 +35,19 @@ class TestPreprocessing(unittest.TestCase):
         X, y = self.create_regression_dataset(n_rows=20)
         y_mean = np.mean(y)
         predictor_constant = 0  # 0 will be multiplied by std , and then added to the mean
-        predictor = DummyRegressor(strategy="constant", constant=predictor_constant)
+        predictor = DummyRegressor(
+            strategy="constant", constant=predictor_constant)
         scaler = StandardScaler()
-        y_hat = Pipeline([("predict", ScaledRegressor(scaler, predictor))]).fit(X, y).predict(X)
+        y_hat = Pipeline([("predict", ScaledRegressor(scaler, predictor))]).fit(
+            X, y).predict(X)
         np.allclose(y_hat, np.repeat(y_mean, len(y)))
 
     def test_scaled_target_with_set_params(self):
         X, y = self.create_regression_dataset(n_rows=20)
         y_mean = np.mean(y)
         predictor_constant = 10  # 0 will be multiplied by std , and then added to the mean
-        predictor = DummyRegressor(strategy="constant", constant=predictor_constant)
+        predictor = DummyRegressor(
+            strategy="constant", constant=predictor_constant)
         scaler = StandardScaler()
         pipeline = Pipeline([("predict", ScaledRegressor(scaler, predictor))])
         pipeline.set_params(predict__estimator__constant=0)

@@ -6,6 +6,7 @@ class StratifiedIndexGenerator:
     """
     Stratified index generator.
     """
+
     def __init__(self, shuffle=True):
         self.shuffle = shuffle
 
@@ -55,7 +56,8 @@ class StratifiedIndexGenerator:
             for stratum_label in strata_labels:
 
                 # float indicating number of samples to draw from this stratum
-                n_samples_float = (batch_size * strata_weights[stratum_label]) - surplus[stratum_label]
+                n_samples_float = (
+                    batch_size * strata_weights[stratum_label]) - surplus[stratum_label]
 
                 # exception when reaching last stratum
                 if stratum_label == strata_labels[-1]:
@@ -96,6 +98,7 @@ class DataGenerator:
     Keras-API compatible data generator class for in-memory (X, y) samples.
     Comparable to keras.preprocessing.image.ImageDataGenerator
     """
+
     def __init__(self):
         pass
 
@@ -122,13 +125,15 @@ class DataIterator(Iterator):
     Data iterator stratification capability. Keras-API compatible.
     Comparable to keras.preprocessing.image.NumpyDataIterator
     """
+
     def __init__(self, X, y, strata=None, strata_weights=None, batch_size=128, shuffle=True, **kwargs):
         self.X = X
         self.y = y
         self.strata = strata
         self.strata_weights = strata_weights
 
-        super(DataIterator, self).__init__(batch_size=batch_size, shuffle=shuffle, **kwargs)
+        super(DataIterator, self).__init__(
+            batch_size=batch_size, shuffle=shuffle, **kwargs)
 
         if self.strata is not None:
             self.index_generator = StratifiedIndexGenerator(shuffle=shuffle).flow(batch_size=batch_size,

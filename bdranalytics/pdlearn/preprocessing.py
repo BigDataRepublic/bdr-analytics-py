@@ -37,12 +37,12 @@ def date_to_dateparts(df, col_name, parts=list(__date_part_funcs.keys()), new_co
         new_col_name_prefix = col_name
     for part in parts:
         assert part in list(__date_part_funcs.keys()), \
-            "part '{}' is not known. Available are {}".format(part, ", ".join(list(__date_part_funcs.keys())))
+            "part '{}' is not known. Available are {}".format(
+                part, ", ".join(list(__date_part_funcs.keys())))
     return pd.DataFrame({
-                            format_colname(new_col_name_prefix, part):
-                                df[col_name].apply(__date_part_funcs.get(part))
-                            for part in parts}
-                        , index=df.index)
+        format_colname(new_col_name_prefix, part):
+        df[col_name].apply(__date_part_funcs.get(part))
+        for part in parts}, index=df.index)
 
 
 def date_to_cyclical(df, col_name, parts=list(__date_part_funcs.keys()), new_col_name_prefix=None):
@@ -50,7 +50,8 @@ def date_to_cyclical(df, col_name, parts=list(__date_part_funcs.keys()), new_col
         new_col_name_prefix = col_name
     for part in parts:
         assert part in list(__date_part_funcs.keys()), \
-            "part '{}' is not known. Available are {}".format(part, ", ".join(list(__date_part_funcs.keys())))
+            "part '{}' is not known. Available are {}".format(
+                part, ", ".join(list(__date_part_funcs.keys())))
     names = [format_colname(new_col_name_prefix, part) for part in parts]
     names_sin = ["{:s}_SIN".format(name) for name in names]
     names_cos = ["{:s}_COS".format(name) for name in names]
@@ -128,7 +129,8 @@ class DateOneHotEncoding(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         new_columns = self.transform_one_hots(X)
-        old_columns = X.drop(self.date_columns, axis=1, inplace=False) if self.drop else X
+        old_columns = X.drop(self.date_columns, axis=1,
+                             inplace=False) if self.drop else X
 
         return pd.concat([old_columns, new_columns], axis=1, join_axes=[X.index])
 
@@ -167,7 +169,8 @@ class DateCyclicalEncoding(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         new_columns = self.all_to_cyclical_parts(X)
-        old_columns = X.drop(self.date_columns, axis=1, inplace=False) if self.drop else X
+        old_columns = X.drop(self.date_columns, axis=1,
+                             inplace=False) if self.drop else X
         return pd.concat([old_columns, new_columns], axis=1, join_axes=[X.index])
 
 
@@ -181,7 +184,7 @@ class PdLagTransformer(BaseEstimator, TransformerMixin):
 
     def do_transform(self, dataframe):
         return (dataframe.shift(self.lag)
-            .rename(columns=lambda c: "{}_lag{}".format(c, self.lag)))
+                .rename(columns=lambda c: "{}_lag{}".format(c, self.lag)))
 
     def transform(self, X):
         try:
@@ -203,8 +206,8 @@ class PdWindowTransformer(BaseEstimator, TransformerMixin):
 
     def do_transform(self, dataframe):
         return (self.func(dataframe.rolling(**self.rolling_params))
-            .rename(columns=lambda c: "{}_{}".format(c, "".join(
-            ["{}{}".format(k, v) for k, v in self.rolling_params.items()]))))
+                .rename(columns=lambda c: "{}_{}".format(c, "".join(
+                    ["{}{}".format(k, v) for k, v in self.rolling_params.items()]))))
 
     def transform(self, X):
         try:

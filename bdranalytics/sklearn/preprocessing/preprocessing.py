@@ -13,5 +13,6 @@ class ColumnSelector(BaseEstimator, TransformerMixin):
         try:
             return X[self.columns]
         except:
-            print("Could not find selected columns {:s} in available columns {:s}".format(self.columns, X.columns))
+            print("Could not find selected columns {:s} in available columns {:s}".format(
+                self.columns, X.columns))
             raise
