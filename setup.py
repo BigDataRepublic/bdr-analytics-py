@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='bdranalytics',
-    version='0.2',
+    version='0.3',
     license='Apache License 2.0',
     author='bigdatarepublic',
     author_email='info@bigdatarepublic.nl',
