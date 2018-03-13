@@ -59,20 +59,23 @@ class TestEncoding(unittest.TestCase):
         # numpy array case
         enc_np = WeightOfEvidenceEncoder(verbose=0, return_df=False, cols=cols)
         enc_np.fit(X_train, y_train)
-        output_array_enc_np = enc_np.transform(X_test)  # save for following tests
+        output_array_enc_np = enc_np.transform(
+            X_test)  # save for following tests
         self.assertTrue(isinstance(output_array_enc_np, np.ndarray))
 
         # external dep var, DIFFERENT from y_train
         enc_ext = WeightOfEvidenceEncoder(verbose=1, cols=cols, return_df=False,
                                           dependent_variable_values=np.random.randint(2, size=(n_rows,)))
         enc_ext.fit(X_train, y_train)
-        self.assertTrue(np.array_equal(output_array_enc_np, enc_ext.transform(X_test)) is False)
+        self.assertTrue(np.array_equal(output_array_enc_np,
+                                       enc_ext.transform(X_test)) is False)
 
         # external dep var, SAME y_train
         enc_ext = WeightOfEvidenceEncoder(verbose=1, cols=cols, return_df=False,
                                           dependent_variable_values=y_train)
         enc_ext.fit(X_train, y_train)
-        self.assertTrue(np.array_equal(output_array_enc_np, enc_ext.transform(X_test)) is True)
+        self.assertTrue(np.array_equal(output_array_enc_np,
+                                       enc_ext.transform(X_test)) is True)
 
 
 if __name__ == '__main__':

@@ -16,7 +16,6 @@ def params(request):
     yield
 
 
-
 @pytest.mark.usefixtures("params")
 class TestGenerators:
 

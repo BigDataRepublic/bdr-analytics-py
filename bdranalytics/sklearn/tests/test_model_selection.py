@@ -23,17 +23,18 @@ def create_time_series_data_set(start_date=pd.datetime(year=2000, month=1, day=1
 class TestGrowingWindow(unittest.TestCase):
 
     def test_n_splits(self):
-        assert GrowingWindow(4).get_n_splits(np.arange(15).reshape(3,5)) == 4
+        assert GrowingWindow(4).get_n_splits(np.arange(15).reshape(3, 5)) == 4
 
     def test_n_splits_returned(self):
-        assert len(list(GrowingWindow(4).split(np.arange(15).reshape(3,5), np.arange(3)))) == 4
+        assert len(list(GrowingWindow(4).split(
+            np.arange(15).reshape(3, 5), np.arange(3)))) == 4
 
     def test_n_splits_testsize(self):
-        for train, test in GrowingWindow(4).split(np.arange(15).reshape(5,3), np.arange(5)):
+        for train, test in GrowingWindow(4).split(np.arange(15).reshape(5, 3), np.arange(5)):
             assert len(test) == 1
 
     def test_n_splits_testsize2(self):
-        for i, (train, test) in zip(range(4), GrowingWindow(4).split(np.arange(15).reshape(5,3), np.arange(5))):
+        for i, (train, test) in zip(range(4), GrowingWindow(4).split(np.arange(15).reshape(5, 3), np.arange(5))):
             assert len(train) == i+1
 
 
@@ -103,7 +104,3 @@ class TestIntervalGrowingWindow(unittest.TestCase):
             test_size=pd.Timedelta(days=7))
 
         self.assertTrue(cv.get_n_splits(X) == 4)
-
-
-
-

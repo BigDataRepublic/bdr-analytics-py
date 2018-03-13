@@ -57,12 +57,12 @@ class TestDatePartitioner(unittest.TestCase):
                        intermediate_columns]
         np.testing.assert_array_equal(circular_data.loc[:, sin_columns], np.sin(
             splitted_data.loc[:, intermediate_columns] / (
-            2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))
+                2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))
         cos_columns = ["{}_{}".format(x, y) for y in ["COS"] for x in
                        intermediate_columns]
         np.testing.assert_array_equal(circular_data.loc[:, cos_columns], np.cos(
             splitted_data.loc[:, intermediate_columns] / (
-            2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))
+                2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))
 
     def test_dateonehotencoding(self):
         orig_data = pd.DataFrame(data=np.arange(
@@ -100,9 +100,9 @@ class TestDatePartitioner(unittest.TestCase):
                        intermediate_columns]
         np.testing.assert_array_equal(circular_data.loc[:, sin_columns], np.sin(
             splitted_data.loc[:, intermediate_columns] / (
-            2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))
+                2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))
         cos_columns = ["{}_{}".format(x, y) for y in ["COS"] for x in
                        intermediate_columns]
         np.testing.assert_array_equal(circular_data.loc[:, cos_columns], np.cos(
             splitted_data.loc[:, intermediate_columns] / (
-            2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))
+                2.0 * np.pi * np.array([31, 7, 24, 60, 12, 60]))))

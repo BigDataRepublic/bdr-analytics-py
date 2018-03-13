@@ -24,7 +24,6 @@ import os
 sys.path.insert(0, os.path.abspath('..'))
 
 
-
 # General configuration
 # ---------------------
 
@@ -72,9 +71,9 @@ author = u'Gerben Oostra, Benoit Descamps, Alexander Backus, Steven Reitsma, Tom
 import re
 ver_re = re.compile(r'version\s*=\s*\'([0-9a-z.]+)\'')
 version = [ver_re.search(line).group(1)
-        for line in open("../setup.py").readlines()
-        if ver_re.search(line)
-        ][0]
+           for line in open("../setup.py").readlines()
+           if ver_re.search(line)
+           ][0]
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -242,6 +241,6 @@ man_pages = [
 autoclass_content = "both"
 
 intersphinx_mapping = {
-        'http://docs.python.org/dev': None,
-        'http://docs.scipy.org/doc/numpy/': None
-        }
+    'http://docs.python.org/dev': None,
+    'http://docs.scipy.org/doc/numpy/': None
+}

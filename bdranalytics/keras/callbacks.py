@@ -12,7 +12,8 @@ class EpochEvaluation(Callback):
 
     def on_epoch_begin(self, epoch, logs={}):
         if epoch > 0:
-            print(" - ".join(["val_{:s}: {:.4f}".format(k, v) for k, v in self.metrics.items()]))
+            print(" - ".join(["val_{:s}: {:.4f}".format(k, v)
+                              for k, v in self.metrics.items()]))
 
     def on_epoch_end(self, epoch, logs={}):
         if isinstance(self.model, Sequential):
@@ -25,6 +26,7 @@ class EpochEvaluation(Callback):
 
         y_true = self.y_val
         self.metrics['roc_auc'] = roc_auc_score(y_true, y_pred)
-        self.metrics['pr_auc'] = average_precision_score(y_true, y_pred, average="micro")
+        self.metrics['pr_auc'] = average_precision_score(
+            y_true, y_pred, average="micro")
         self.metrics['recall'] = recall_score(y_true, y_pred_bin)
         self.metrics['precision'] = precision_score(y_true, y_pred_bin)

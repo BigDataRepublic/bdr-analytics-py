@@ -192,4 +192,3 @@ class IntervalGrowingWindow(with_metaclass(ABCMeta)):
 
         # compute number of folds
         return len(intervals)
-

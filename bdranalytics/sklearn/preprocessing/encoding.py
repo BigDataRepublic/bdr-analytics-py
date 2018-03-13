@@ -30,7 +30,8 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
     def fit(self, X, y):
 
         if not isinstance(X, pd.DataFrame):
-            raise TypeError('Input should be an instance of pandas.DataFrame()')
+            raise TypeError(
+                'Input should be an instance of pandas.DataFrame()')
 
         if self.dependent_variable_values is not None:
             y = self.dependent_variable_values
@@ -48,7 +49,8 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
         # get the totals per class
         total_positive, total_negative = get_totals(y)
         if self.verbose:
-            print("total positives {:.0f}, total negatives {:.0f}".format(total_positive, total_negative))
+            print("total positives {:.0f}, total negatives {:.0f}".format(
+                total_positive, total_negative))
 
         def compute_bucket_woe(x):
             bucket_positive, bucket_negative = get_totals(x)
@@ -59,7 +61,8 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
         for col in self.cols:
 
             if self.verbose:
-                print("computing weight of evidence for column {:s}".format(col))
+                print(
+                    "computing weight of evidence for column {:s}".format(col))
 
             stat[col] = ((df.groupby(col)[y_col_index].agg(compute_bucket_woe)
                           + np.log(total_negative / total_positive)).to_dict())
@@ -71,7 +74,8 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
 
         if not isinstance(X, pd.DataFrame):
-            raise TypeError('Input should be an instance of pandas.DataFrame()')
+            raise TypeError(
+                'Input should be an instance of pandas.DataFrame()')
 
         df = X.copy()
 
@@ -84,12 +88,13 @@ class WeightOfEvidenceEncoder(BaseEstimator, TransformerMixin):
             stat = pd.DataFrame.from_dict(self.stat[col], orient='index')
 
             ser = (pd.merge(df, stat, left_on=col, right_index=True, how='left')
-                .sort_index()
-                .reindex(df.index))[0]
+                   .sort_index()
+                   .reindex(df.index))[0]
 
             # fill missing values with
             if self.verbose:
-                print("{:.0f} NaNs in transformed data".format(ser.isnull().sum()))
+                print("{:.0f} NaNs in transformed data".format(
+                    ser.isnull().sum()))
                 print("{:.4f} mean weight of evidence".format(ser.mean()))
 
             df[col] = np.array(ser.fillna(self.fillna))
@@ -111,7 +116,8 @@ class StringIndexer(BaseEstimator, TransformerMixin):
         self.columns = X.columns.values
         for col in self.columns:
             categories = np.unique(X[col])
-            self.dictionaries[col] = dict(zip(categories, range(len(categories))))
+            self.dictionaries[col] = dict(
+                zip(categories, range(len(categories))))
         return self
 
     def transform(self, X):
@@ -119,7 +125,8 @@ class StringIndexer(BaseEstimator, TransformerMixin):
         for col in self.columns:
             dictionary = self.dictionaries[col]
             na_value = len(dictionary) + 1
-            transformed_column = X[col].apply(lambda x: dictionary.get(x, na_value)).astype(int)
+            transformed_column = X[col].apply(
+                lambda x: dictionary.get(x, na_value)).astype(int)
             column_array.append(transformed_column.values.reshape(-1, 1))
         return np.hstack(column_array)
 
@@ -183,7 +190,8 @@ class LeaveOneOutEncoder(BaseEstimator, TransformerMixin):
         if n > 1:
             loo_means = self._loo_means(s)
             sum_of_sq = n * s.std() ** 2
-            loo_stdevs = np.sqrt(abs((sum_of_sq - (s - s.mean()) * (s - loo_means))) / (n - 1))
+            loo_stdevs = np.sqrt(
+                abs((sum_of_sq - (s - s.mean()) * (s - loo_means))) / (n - 1))
         else:
             loo_stdevs = np.array([0])
 
