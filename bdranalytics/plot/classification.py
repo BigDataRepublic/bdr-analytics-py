@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
-# from imblearn.metrics import classification_report_imbalanced  # adds new dependecy!
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from sklearn.externals.joblib import Parallel, delayed
 from sklearn.metrics import (
     confusion_matrix,
     accuracy_score,
+    f1_score,
     roc_curve,
     auc,
     precision_recall_curve,
@@ -17,22 +18,22 @@ primary_color = plt.rcParams['axes.prop_cycle'].by_key()['color'][0]
 default_names = ('negative', 'positive')
 
 
-def plot_confusion_matrix(y_true, y_pred_bin, target_names=default_names):
-    confusion = pd.DataFrame(confusion_matrix(y_true, y_pred_bin),
-                             index=target_names, columns=target_names)
-    sns.heatmap(confusion, annot=True, fmt='d')
-    plt.xlabel('predicted label')
-    plt.ylabel('true label')
-    plt.title('Confusion matrix')
-    plt.show()
+def compute_parallel_metric(metric, y_true, y_pred):
+
+    thresholds = np.arange(0, 1, .02)
+
+    return Parallel(n_jobs=-1)(
+        delayed(metric)(
+            y_true,
+            y_pred > threshold
+        )
+        for threshold in thresholds
+    ), thresholds
 
 
 def plot_accuracy(y_true, y_pred):
-    thresholds = (np.arange(0, 100, 1) / 100.)
-    acc = list(map(lambda thresh:
-                   accuracy_score(y_true, list(map(lambda prob:
-                                                   prob > thresh, y_pred))),
-                   thresholds))
+    acc, thresholds = compute_parallel_metric(accuracy_score, y_true, y_pred)
+
     lower_baseline = sum(y_true) / len(y_true)
     upper_baseline = 1 - lower_baseline
 
@@ -44,6 +45,36 @@ def plot_accuracy(y_true, y_pred):
     plt.ylabel('accuracy')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.0])
+
+
+def plot_f1_score(y_true, y_pred):
+    f1s, thresholds = compute_parallel_metric(f1_score, y_true, y_pred)
+
+    plt.plot(thresholds, f1s)
+    plt.title('F1 score across thresholds')
+    plt.xlabel('classifier threshold')
+    plt.ylabel('F1 score')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.0])
+
+
+def plot_confusion_matrix(
+    y_true, y_pred_bin, target_names=default_names, normalize=False):
+
+    c = confusion_matrix(y_true, y_pred_bin)
+
+    if normalize:
+        c = c / c.sum()
+        fmt = '.3f'
+    else:
+        fmt = 'd'
+
+    confusion = pd.DataFrame(c, index=target_names, columns=target_names)
+    sns.heatmap(confusion, annot=True, fmt=fmt)
+    plt.xlabel('predicted label')
+    plt.ylabel('true label')
+    plt.title('Confusion matrix')
+    plt.show()
 
 
 def plot_roc_curve(y_true, y_pred):
@@ -141,13 +172,22 @@ def plot_benefits(y_true, y_pred, benefit_func=None, recalibrate=False,
 
 
 def subplot_evaluation_curves(y_true, y_pred, benefit_func=None,
-                              figsize=(12, 8)):
-    fig, axarr = plt.subplots(2, 2, figsize=figsize)
+                              figsize=(12, 12)):
+
+    fig, axarr = plt.subplots(3, 2, figsize=figsize)
     fig.subplots_adjust(hspace=0.4, wspace=0.3)
+
     plt.sca(axarr[0, 0])
     plot_roc_curve(y_true, y_pred)
+
     plt.sca(axarr[0, 1])
     plot_pr_curve(y_true, y_pred)
+
     plt.sca(axarr[1, 0])
     plot_accuracy(y_true, y_pred)
-    plot_benefits(y_true, y_pred, ax=axarr[1, 1], benefit_func=benefit_func)
+
+    plt.sca(axarr[1, 1])
+    plot_f1_score(y_true, y_pred)
+
+    plot_benefits(y_true, y_pred, ax=axarr[2, 0], benefit_func=benefit_func)
+    plt.show()
